@@ -1,0 +1,5 @@
+package vi-mode
+theme default
+theme fluffy
+theme pure
+theme sushi

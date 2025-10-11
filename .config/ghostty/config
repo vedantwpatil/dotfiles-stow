@@ -1,0 +1,28 @@
+# Font
+font-size = 14
+font-family = FiraCode Nerd Font Mono
+font-thicken = true 
+
+# Transparency
+background-opacity = 0.85
+alpha-blending = linear-corrected
+
+# Theme
+theme = kanagawa-paper-ink
+
+# Window
+window-decoration = true
+window-width = 120
+window-height = 35
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+
+# Interaction
+mouse-hide-while-typing = true
+shell-integration-features = no-cursor,sudo,title
+
+# Keybinds
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = cmd+comma=reload_config
