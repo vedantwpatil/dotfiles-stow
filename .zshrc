@@ -38,6 +38,7 @@ path_additions=(
     "$HOME/.spicetify"
     "$(brew --prefix qt@5)/bin"
     "/usr/local/opt/postgresql@15/bin"
+    "/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
 )
 
 # Add all paths at once (more efficient)

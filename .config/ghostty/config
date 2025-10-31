@@ -5,10 +5,11 @@ font-thicken = true
 
 # Transparency
 background-opacity = 0.85
+background-blur = true
 alpha-blending = linear-corrected
 
 # Theme
-theme = kanagawa-paper-ink
+theme = Catppuccin Macchiato
 
 # Window
 window-decoration = true

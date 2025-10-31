@@ -38,42 +38,66 @@
 --   end,
 -- }
 
+-- return {
+--   "rebelot/kanagawa.nvim",
+--
+--   lazy = false,
+--
+--   priority = 1000,
+--
+--   opts = {
+--     -- Keep the main editor background transparent
+--     transparent = true,
+--
+--     colors = {
+--       theme = {
+--         all = {
+--           ui = {
+--             -- This makes the gutter transparent as well
+--             bg_gutter = "none",
+--           },
+--         },
+--       },
+--     },
+--
+--     -- Modify the overrides function to set a solid float background
+--     overrides = function(colors)
+--       return {
+--         -- Set the background of floating windows to a dark color from the palette
+--         NormalFloat = { bg = colors.palette.sumiInk0 },
+--       }
+--     end,
+--   },
+--
+--   config = function(_, opts)
+--     -- Load the Kanagawa theme with the options specified in the `opts` table
+--     require("kanagawa").setup(opts)
+--
+--     -- Set the active colorscheme to the 'wave' variant of Kanagawa
+--     vim.cmd("colorscheme kanagawa-wave")
+--   end,
+-- }
+
 return {
-  "rebelot/kanagawa.nvim",
-
-  lazy = false,
-
-  priority = 1000,
-
-  opts = {
-    -- Keep the main editor background transparent
-    transparent = true,
-
-    colors = {
-      theme = {
-        all = {
-          ui = {
-            -- This makes the gutter transparent as well
-            bg_gutter = "none",
-          },
-        },
-      },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    opts = {
+      flavour = "macchiato",
+      transparent_background = true,
+      -- Add this section for float transparency
+      custom_highlights = function(colors)
+        return {
+          NormalFloat = { bg = colors.none },
+          FloatBorder = { bg = colors.none },
+        }
+      end,
     },
-
-    -- Modify the overrides function to set a solid float background
-    overrides = function(colors)
-      return {
-        -- Set the background of floating windows to a dark color from the palette
-        NormalFloat = { bg = colors.palette.sumiInk0 },
-      }
-    end,
   },
-
-  config = function(_, opts)
-    -- Load the Kanagawa theme with the options specified in the `opts` table
-    require("kanagawa").setup(opts)
-
-    -- Set the active colorscheme to the 'wave' variant of Kanagawa
-    vim.cmd("colorscheme kanagawa-wave")
-  end,
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin",
+    },
+  },
 }
