@@ -1,6 +1,7 @@
 # Font
 font-size = 14
-font-family = FiraCode Nerd Font Mono
+font-family = JetBrainsMono Nerd Font
+font-feature = ss02
 font-thicken = true 
 
 # Transparency

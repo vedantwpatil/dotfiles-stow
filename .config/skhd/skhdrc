@@ -83,6 +83,6 @@ alt - s : open -a /Applications/Spotify.app/Contents/MacOS/Spotify
 # alt - o: open -a /Applications/Orion.app/Contents/MacOS/Orion
 
 # Brave 
-# alt - b: open -A /Applications/Brave Browser.app/Contents/MacOS/Brave Browser
+alt - b: open -A /Applications/Brave Browser.app/Contents/MacOS/Brave Browser
 # Safari 
-alt - b: open -A /Applications/Safari.app/Contents/MacOS/Safari
+# alt - b: open -A /Applications/Safari.app/Contents/MacOS/Safari
