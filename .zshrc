@@ -1,12 +1,12 @@
 # ===== Fast Prompt Initialization =====
 # Powerlevel10k instant prompt (must stay at top)
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+#
 # ===== Oh My Zsh Configuration =====
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Essential plugins
 plugins=(
@@ -22,6 +22,7 @@ plugins=(
 )
 
 # ===== Environment Variables =====
+export BKMR_DB_URL="/Users/vedantpatil/.config/bkmr/bkmr.db"
 export LANG=en_US.UTF-8
 export OPENSSL_ROOT_DIR="$(brew --prefix openssl@3)"
 export EDITOR=nvim
@@ -79,10 +80,10 @@ eval "$(rbenv init -)"
 
 # EZA - better ls command configuration 
 
-alias ls='eza'
+alias ls='eza --icons --group-directories-first'
 
 # Alias to show all files, including hidden ones, in a long list format
-alias la='eza -la --icons=auto --git'
+alias la='eza -l --icons --git --header --time-style=relative --hyperlink --group-directories-first --all'
 
 # Alias for a tree view
 alias lt='eza --tree --icons=auto --level=2' # Shows a directory tree up to 2 levels deep 
@@ -90,10 +91,20 @@ alias lt='eza --tree --icons=auto --level=2' # Shows a directory tree up to 2 le
 # Clang Parameters for stricter guildines while writing C 
 alias clangs='clang -pedantic-errors -Wall'
 
+# Alias spotify player as spt 
+alias spt="spotify_player"
+
+# Searches my bookmarks and opens in the default browser 
+alias brave="bkmr search --fzf | xargs open"
+
+# If you insist on overriding 'rm', use a prompt or unique suffix
+alias rm='trash'
+# Allow bypassing to the original binary if needed
+alias realrm='/bin/rm'
 
 # ===== Theme Configuration =====
 # Load Powerlevel10k config
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+# [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # ===== Development Tools =====
 # NVM (lazy-loaded to improve startup time)
@@ -162,11 +173,13 @@ esac
 
 # ===== Optional Features (currently disabled) =====
 # Starship prompt (alternative to Powerlevel10k)
-# eval "$(starship init zsh)"
+eval "$(starship init zsh)"
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 
 fpath=(/Users/vedantpatil/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
+
 # End of Docker CLI completions
+
 eval "$(alias sketchybar="$HOME/.config/sketchybar/set-bar-mode.sh")"

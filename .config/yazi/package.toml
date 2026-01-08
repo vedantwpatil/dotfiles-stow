@@ -5,30 +5,30 @@ hash = "981acbe9b758b1af3a8154c932bb936d"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "eaf6920"
+rev = "03cdd4b"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "eaf6920"
-hash = "27ca02f49fd236b5cc7bf03c243859fe"
+rev = "03cdd4b"
+hash = "36a484acf6a0a0219c543ccb4cee218f"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "eaf6920"
-hash = "bcda8eeb3f4013bae156aecabfc745e8"
+rev = "03cdd4b"
+hash = "407d19bc4fb46eff5fa8ff8337644847"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "eaf6920"
+rev = "03cdd4b"
 hash = "ce67445ebb1bf3d97b8e44f50904b2c5"
 
 [[plugin.deps]]
 use = "ourongxing/fast-enter"
-rev = "738356f"
-hash = "b209b5db91df69bdc6a4656cb8276cd9"
+rev = "9fe77d8"
+hash = "7ac02a3fa73cd734ddf4ac85af4c0507"
 
 [[flavor.deps]]
 use = "dangooddd/kanagawa"
-rev = "a0b1d9d"
-hash = "abfb0b2371259b2c8adfc7b617c3d7e5"
+rev = "04985d1"
+hash = "c69a63981e254a3a06a11c2bf0e6af1d"

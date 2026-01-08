@@ -77,7 +77,6 @@
 --     vim.cmd("colorscheme kanagawa-wave")
 --   end,
 -- }
-
 return {
   {
     "catppuccin/nvim",
@@ -85,11 +84,14 @@ return {
     opts = {
       flavour = "macchiato",
       transparent_background = true,
-      -- Add this section for float transparency
       custom_highlights = function(colors)
         return {
+          -- Existing float transparency adjustments
           NormalFloat = { bg = colors.none },
           FloatBorder = { bg = colors.none },
+
+          LineNr = { fg = colors.lavender },
+          CursorLineNr = { fg = colors.mauve },
         }
       end,
     },
