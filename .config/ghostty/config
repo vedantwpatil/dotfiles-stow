@@ -1,7 +1,7 @@
 # Font
 font-size = 14
-font-family = JetBrainsMono Nerd Font
-font-feature = ss02
+font-family = IosevkaTerm Nerd Font Mono
+font-feature = +ss14 
 font-thicken = true 
 
 # Transparency
