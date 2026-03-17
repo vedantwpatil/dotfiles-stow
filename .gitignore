@@ -1,0 +1,16 @@
+# OAuth tokens and credentials
+.config/configstore/firebase-tools.json
+.config/spotify-tui/client.yml
+.config/spotify-tui/.spotify_token_cache.json
+.config/spotifyd/spotifyd.conf
+
+# General sensitive file patterns
+**/.spotify_token_cache.json
+**/*token_cache*
+**/*client_secret*
+.env
+.env.*
+*.pem
+*.key
+id_rsa
+id_ed25519
