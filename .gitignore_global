@@ -1,0 +1,14 @@
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+
+.AppleDouble
+.LSOverride
+
+.claude/
+.vscode/
+.idea/
+*.swp
+*~
+*.tmproj

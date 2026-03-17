@@ -1,0 +1,20 @@
+[user]
+	name = Vedant Patil
+	email = vedant.waman.patil@gmail.com
+[init]
+	defaultBranch = master
+[core]
+  editor = nvim -u ~/.config/nvim/init-git.lua
+	autocrlf = input
+	excludesfile = /Users/vedantpatil/.gitignore_global
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[branch]
+	autoSetupMerge = simple
+[push]
+	default = upstream
+[pull]
+	rebase = false
