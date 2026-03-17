@@ -1,3 +1,10 @@
+# Raycast extension node_modules
+.config/raycast/extensions/*/node_modules/
+
+# Database files
+.config/bkmr/bkmr.db
+.config/bkmr/bkmr_backup*.db
+
 # OAuth tokens and credentials
 .config/configstore/firebase-tools.json
 .config/spotify-tui/client.yml
