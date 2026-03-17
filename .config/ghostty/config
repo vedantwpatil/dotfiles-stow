@@ -5,12 +5,13 @@ font-feature = ss02
 font-thicken = true 
 
 # Transparency
-background-opacity = 0.85
+background-opacity = 0.80
 background-blur = true
-alpha-blending = linear-corrected
 
 # Theme
-theme = Catppuccin Macchiato
+# theme = Catppuccin Macchiato
+# theme = TokyoNight
+theme = kanagawa-paper-ink
 
 # Window
 window-decoration = true

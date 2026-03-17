@@ -5,6 +5,8 @@
 -- Scroll down and up faster while cetnering
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
+vim.opt.scrolloff = 8 -- Keeps 8 lines above/below cursor
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 local map = vim.keymap.set
 

@@ -1,42 +1,41 @@
--- return {
---   -- Change the plugin to the kanagawa-paper fork
---   "thesimonho/kanagawa-paper.nvim",
---
---   lazy = false,
---   priority = 1000,
---
---   opts = {
---     -- The main editor background remains transparent
---     transparent = true,
---
---     -- Your previous customization for the gutter background
---     colors = {
---       theme = {
---         ink = { -- Target the 'ink' theme specifically
---           ui = {
---             bg_gutter = "none",
---           },
---         },
---       },
---     },
---
---     -- The override for the sidebar will still work.
---     -- This sets the background to a color from the theme's palette.
---     overrides = function(colors)
---       return {
---         NormalFloat = { bg = colors.palette.sumiInk0 },
---       }
---     end,
---   },
---
---   config = function(_, opts)
---     -- Load the kanagawa-paper theme with your options
---     require("kanagawa-paper").setup(opts)
---
---     -- Set the active colorscheme to the 'ink' variant
---     vim.cmd("colorscheme kanagawa-paper-ink")
---   end,
--- }
+return {
+  "thesimonho/kanagawa-paper.nvim",
+
+  lazy = false,
+  priority = 1000,
+
+  opts = {
+    -- The main editor background remains transparent
+    transparent = true,
+
+    -- Your previous customization for the gutter background
+    colors = {
+      theme = {
+        ink = { -- Target the 'ink' theme specifically
+          ui = {
+            bg_gutter = "none",
+          },
+        },
+      },
+    },
+
+    -- The override for the sidebar will still work.
+    -- This sets the background to a color from the theme's palette.
+    overrides = function(colors)
+      return {
+        NormalFloat = { bg = colors.palette.sumiInk0 },
+      }
+    end,
+  },
+
+  config = function(_, opts)
+    -- Load the kanagawa-paper theme with your options
+    require("kanagawa-paper").setup(opts)
+
+    -- Set the active colorscheme to the 'ink' variant
+    vim.cmd("colorscheme kanagawa-paper-ink")
+  end,
+}
 
 -- return {
 --   "rebelot/kanagawa.nvim",
@@ -77,29 +76,30 @@
 --     vim.cmd("colorscheme kanagawa-wave")
 --   end,
 -- }
-return {
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    opts = {
-      flavour = "macchiato",
-      transparent_background = true,
-      custom_highlights = function(colors)
-        return {
-          -- Existing float transparency adjustments
-          NormalFloat = { bg = colors.none },
-          FloatBorder = { bg = colors.none },
 
-          LineNr = { fg = colors.lavender },
-          CursorLineNr = { fg = colors.mauve },
-        }
-      end,
-    },
-  },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
-    },
-  },
-}
+-- return {
+--   {
+--     "catppuccin/nvim",
+--     name = "catppuccin",
+--     opts = {
+--       flavour = "macchiato",
+--       transparent_background = true,
+--       custom_highlights = function(colors)
+--         return {
+--           -- Existing float transparency adjustments
+--           NormalFloat = { bg = colors.none },
+--           FloatBorder = { bg = colors.none },
+--
+--           LineNr = { fg = colors.lavender },
+--           CursorLineNr = { fg = colors.mauve },
+--         }
+--       end,
+--     },
+--   },
+--   {
+--     "LazyVim/LazyVim",
+--     opts = {
+--       colorscheme = "catppuccin",
+--     },
+--   },
+-- }
