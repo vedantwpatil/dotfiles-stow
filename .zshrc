@@ -371,14 +371,30 @@ alias zclean='zinit cclear && zinit delete --clean'
 # =============================================================================
 # 10. KEYBINDINGS
 # =============================================================================
-bindkey -e
 
-if [[ -n "${terminfo[kcuu1]}" ]]; then
-  bindkey "${terminfo[kcuu1]}" up-line-or-search
-fi
-if [[ -n "${terminfo[kcud1]}" ]]; then
-  bindkey "${terminfo[kcud1]}" down-line-or-search
-fi
+bindkey -v
+KEYTIMEOUT=1
+
+# Restore useful ctrl bindings
+bindkey '^R' history-incremental-search-backward
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+bindkey '^W' backward-kill-word
+bindkey '^U' backward-kill-line
+bindkey '^ ' forward-char
+
+# Fix backspace
+bindkey '^?' backward-delete-char
+
+# Arrow keys + j/k in both modes
+bindkey -M viins "${terminfo[kcuu1]}" up-line-or-search
+bindkey -M viins "${terminfo[kcud1]}" down-line-or-search
+bindkey -M viins '^P' up-line-or-search
+bindkey -M viins '^N' down-line-or-search
+bindkey -M vicmd "${terminfo[kcuu1]}" up-line-or-search
+bindkey -M vicmd "${terminfo[kcud1]}" down-line-or-search
+bindkey -M vicmd 'k'  up-line-or-search
+bindkey -M vicmd 'j'  down-line-or-search
 
 # =============================================================================
 # 11. Z-SHIFT SELF-MAINTENANCE
