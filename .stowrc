@@ -1,6 +1,6 @@
 --target=~
 --ignore=^\.git$
---ignore=^\.claude$
+--ignore=\.claude
 --ignore=README.md
 --ignore=^\.gitignore$
 --ignore=\.zshrc-e$
