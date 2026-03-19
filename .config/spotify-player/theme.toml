@@ -1,0 +1,35 @@
+[[themes]]
+name = "kanagawa-paper-ink"
+
+[themes.palette]
+background = "#1F1F28"
+foreground = "#DCD7BA"
+black = "#393836"
+blue = "#859fac"
+cyan = "#8ea49e"
+green = "#699469"
+magenta = "#a292a3"
+red = "#c4746e"
+white = "#C8C093"
+yellow = "#c4b28a"
+bright_black = "#727169"
+bright_blue = "#698a9b"
+bright_cyan = "#96ada7"
+bright_green = "#72a072"
+bright_magenta = "#b4a7b5"
+bright_red = "#cc928e"
+bright_white = "#d5cd9d"
+bright_yellow = "#d4c196"
+
+[themes.component_style]
+block_title = { fg = "Yellow" }
+border = { fg = "Blue" }
+playback_track = { fg = "Yellow", modifiers = ["Bold"] }
+playback_artists = { fg = "Cyan" }
+playback_album = { fg = "Magenta" }
+playback_metadata = { fg = "BrightBlack" }
+playback_progress_bar = { bg = "Blue", fg = "Yellow" }
+current_playing = { fg = "Yellow", modifiers = ["Bold"] }
+page_desc = { fg = "Cyan", modifiers = ["Bold"] }
+table_header = { fg = "Blue" }
+selection = { bg = "#363646", fg = "Yellow", modifiers = ["Bold"] }

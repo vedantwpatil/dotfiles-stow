@@ -58,10 +58,10 @@
 #
 # export SHADOW_COLOR=$BLACK
 
-# Kanagawa Theme
+# Kanagawa Paper Ink Theme
 
 # ===================================================================
-# Kanagawa Color Palette (Wave Theme)
+# Kanagawa Paper Ink Color Palette
 # ===================================================================
 
 # --- Main Palette ---
@@ -69,17 +69,19 @@ export KANAGAWA_FUJI_WHITE=0xffDCD7BA # Main text
 export KANAGAWA_OLD_WHITE=0xffC8C093  # Lighter text, branch names
 export KANAGAWA_SUMI_INK_1=0xff1F1F28 # Main background
 export KANAGAWA_SUMI_INK_2=0xff2A2A37 # Lighter background
-export KANAGAWA_SUMI_INK_3=0xff363646 # UI components, popups
+export KANAGAWA_SUMI_INK_3=0xff363646 # UI components, selection
 export KANAGAWA_SUMI_INK_0=0xff16161D # Darkest background, for shadows
 
-# --- Accent Colors ---
-export KANAGAWA_DRAGON_BLUE=0xff7FB4CA  # Blue
-export KANAGAWA_WAVE_AQUA=0xff7AA89F    # Teal/Cyan
-export KANAGAWA_SPRING_GREEN=0xff98BB6C # Green
-export KANAGAWA_RONIN_YELLOW=0xffFF9E3B # Yellow
-export KANAGAWA_AUTUMN_ORANGE=0xffFFA066# Orange
-export KANAGAWA_CARP_RED=0xffE67E80    # Red
-export KANAGAWA_SAKURA_PINK=0xffD27E99 # Pink/Magenta
+# --- Accent Colors (Paper Ink / Dragon palette) ---
+export KANAGAWA_DRAGON_YELLOW=0xffc4b28a # Primary accent (dragonYellow)
+export KANAGAWA_DRAGON_BLUE=0xff859fac   # Blue (dragonBlue2)
+export KANAGAWA_DRAGON_AQUA=0xff8ea49e  # Cyan (dragonAqua)
+export KANAGAWA_WAVE_AQUA=0xff6A9589    # Teal (waveAqua1)
+export KANAGAWA_DRAGON_GREEN=0xff699469 # Green (dragonGreen)
+export KANAGAWA_DRAGON_ORANGE=0xffb6927b# Orange (dragonOrange)
+export KANAGAWA_DRAGON_RED=0xffc4746e   # Red (dragonRed)
+export KANAGAWA_DRAGON_PINK=0xffa292a3  # Pink/Magenta (dragonPink)
+export KANAGAWA_DRAGON_VIOLET=0xff8992a7# Violet (dragonViolet)
 export KANAGAWA_FUJI_GRAY=0xff727169   # Grey, for dimmed text
 
 # ===================================================================
@@ -110,18 +112,19 @@ export OVERLAY2=0xff9399b2
 
 # --- Standard Accent Colors ---
 export BLUE=$KANAGAWA_DRAGON_BLUE
-export LAVENDER=$KANAGAWA_SAKURA_PINK # Mapping Lavender to Sakura Pink
-export SAPPHIRE=$KANAGAWA_DRAGON_BLUE # Mapping Sapphire to Dragon Blue
-export SKY=$KANAGAWA_WAVE_AQUA
+export LAVENDER=$KANAGAWA_DRAGON_PINK
+export SAPPHIRE=$KANAGAWA_DRAGON_BLUE
+export SKY=$KANAGAWA_DRAGON_AQUA
 export TEAL=$KANAGAWA_WAVE_AQUA
-export GREEN=$KANAGAWA_SPRING_GREEN
-export YELLOW=$KANAGAWA_RONIN_YELLOW
-export PEACH=$KANAGAWA_AUTUMN_ORANGE
-export MAROON=$KANAGAWA_CARP_RED
-export RED=$KANAGAWA_CARP_RED
-export MAUVE=$KANAGAWA_SAKURA_PINK
-export PINK=$KANAGAWA_SAKURA_PINK
-export ORANGE=$KANAGAWA_AUTUMN_ORANGE
+export GREEN=$KANAGAWA_DRAGON_GREEN
+export YELLOW=$KANAGAWA_DRAGON_YELLOW
+export PEACH=$KANAGAWA_DRAGON_ORANGE
+export MAROON=$KANAGAWA_DRAGON_RED
+export RED=$KANAGAWA_DRAGON_RED
+export MAUVE=$KANAGAWA_DRAGON_PINK
+export PINK=$KANAGAWA_DRAGON_PINK
+export ORANGE=$KANAGAWA_DRAGON_ORANGE
+export VIOLET=$KANAGAWA_DRAGON_VIOLET
 
 # --- System Colors ---
 export BLACK=$KANAGAWA_SUMI_INK_0
@@ -135,13 +138,15 @@ export TRANSPARENT=0x00000000
 # Provides a random color from the accent palette for dynamic items.
 
 export RANDOM_KANAGAWA_COLOR=(
+  "$KANAGAWA_DRAGON_YELLOW"
   "$KANAGAWA_DRAGON_BLUE"
+  "$KANAGAWA_DRAGON_AQUA"
   "$KANAGAWA_WAVE_AQUA"
-  "$KANAGAWA_SPRING_GREEN"
-  "$KANAGAWA_RONIN_YELLOW"
-  "$KANAGAWA_AUTUMN_ORANGE"
-  "$KANAGAWA_CARP_RED"
-  "$KANAGAWA_SAKURA_PINK"
+  "$KANAGAWA_DRAGON_GREEN"
+  "$KANAGAWA_DRAGON_ORANGE"
+  "$KANAGAWA_DRAGON_RED"
+  "$KANAGAWA_DRAGON_PINK"
+  "$KANAGAWA_DRAGON_VIOLET"
 )
 
 function getRandomKanagawaColor() {
@@ -165,7 +170,7 @@ export BACKGROUND_2=0x9054546D
 
 # Popup window colors
 export POPUP_BACKGROUND_COLOR=$KANAGAWA_SUMI_INK_2
-export POPUP_BORDER_COLOR=$KANAGAWA_DRAGON_BLUE # Using an accent for the border
+export POPUP_BORDER_COLOR=$KANAGAWA_DRAGON_YELLOW # Primary ink accent for border
 
 # Shadow color for popups and the bar
 export SHADOW_COLOR=$BLACK
