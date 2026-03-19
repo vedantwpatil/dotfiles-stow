@@ -9,41 +9,43 @@ $git_branch\
 $git_state\
 $git_status\
 $cmd_duration\
-$line_break $python$character"""
+$line_break\
+$python\
+$character"""
 
 [directory]
-style = "blue"
+style = "bold #949fb5"
 
 [character]
-success_symbol = "[❯](purple)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+success_symbol = "[❯](#8992a7)"
+error_symbol = "[❯](#c4746e)"
+vimcmd_symbol = "[❮](#8a9a7b)"
 
 [git_branch]
 format = "[$branch]($style)"
-style = "bright-black"
+style = "#c4b28a"
 
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
-style = "cyan"
-conflicted = "​"
-untracked = "​"
-modified = "​"
-staged = "​"
-renamed = "​"
-deleted = "​"
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](#b6927b) ($ahead_behind$stashed)]($style)"
+style = "#859fac"
+conflicted = ""
+untracked = ""
+modified = ""
+staged = ""
+renamed = ""
+deleted = ""
 stashed = "≡"
 
 [git_state]
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
-style = "bright-black"
+style = "#8ea49e"
 
 [cmd_duration]
 format = "[$duration]($style) "
-style = "yellow"
+style = "#b6927b"
 
 [python]
 format = "[$virtualenv]($style) "
-style = "bright-black"
+style = "#8a9a7b"
 detect_extensions = []
 detect_files = []
