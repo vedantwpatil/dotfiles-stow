@@ -13,6 +13,7 @@ autoload -Uz _zinit
 # =============================================================================
 # 2. ENVIRONMENT VARIABLES & PATH
 # =============================================================================
+export BKMR_DB_URL=/Users/vedantpatil/.config/bkmr/bkmr.db
 export EDITOR=nvim
 export VISUAL=nvim
 export LANG=en_US.UTF-8

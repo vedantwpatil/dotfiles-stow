@@ -5,7 +5,7 @@ font-feature = +ss14
 font-thicken = true 
 
 # Transparency
-background-opacity = 0.80
+background-opacity = 0.85
 background-blur = true
 
 # Theme

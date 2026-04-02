@@ -77,7 +77,7 @@ file_type:
 punctuation:            { foreground: "#54546D" }
 date:
   date_newer:           { foreground: "#7FB4CA" }
-  date_older:           { foreground: "#727169" }
+  date_older:           { foreground: "#859fAC" }
 inode:                  { foreground: "#727169" }
 blocks:                 { foreground: "#54546D" }
 header:                 { foreground: "#C8C093", is_bold: true }
