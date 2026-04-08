@@ -13,18 +13,17 @@ autoload -Uz _zinit
 # =============================================================================
 # 2. ENVIRONMENT VARIABLES & PATH
 # =============================================================================
-export BKMR_DB_URL=/Users/vedantpatil/.config/bkmr/bkmr.db
+export BKMR_DB_URL="$HOME/.config/bkmr/bkmr.db"
 export EDITOR=nvim
 export VISUAL=nvim
 export LANG=en_US.UTF-8
 export EZA_CONFIG_DIR="$HOME/.config/eza"
-export BKMR_DB_URL="$HOME/.config/bkmr/bkmr.db"
 export AWS_REGION=us-east-1
 export OPENSSL_ROOT_DIR="/opt/homebrew/opt/openssl@3"
 export CMAKE_PREFIX_PATH="/opt/homebrew/opt/qt@5"
 export NVM_DIR="$HOME/.nvm"
 
-typeset -U path
+typeset -U path fpath
 path=(
     "$HOME/.local/bin"
     "$HOME/.pixi/bin"
@@ -61,7 +60,9 @@ zinit wait lucid for \
     MichaelAquilina/zsh-you-should-use
 
 # --- BAT (cat replacement) ---
-zinit ice as"program" from"gh-r" mv"bat* -> bat" pick"bat/bat" wait lucid
+zinit ice as"program" from"gh-r" mv"bat* -> bat" pick"bat/bat" wait lucid \
+    atclone"./bat/bat --generate shell-completions zsh > _bat" \
+    atpull"%atclone"
 zinit load sharkdp/bat
 
 # --- EZA (ls replacement) ---
@@ -71,7 +72,9 @@ zinit ice wait lucid as"program" from"gh-r" pick"eza" \
 zinit load eza-community/eza
 
 # --- FD (find replacement) ---
-zinit ice as"program" from"gh-r" mv"fd* -> fd" pick"fd/fd" wait lucid
+zinit ice as"program" from"gh-r" mv"fd* -> fd" pick"fd/fd" wait lucid \
+    atclone"./fd/fd --gen-completions zsh > _fd" \
+    atpull"%atclone"
 zinit load sharkdp/fd
 
 # --- FZF (fuzzy finder) ---
@@ -83,7 +86,9 @@ zinit ice as"program" from"gh-r" wait lucid \
 zinit light junegunn/fzf
 
 # --- RIPGREP (grep replacement) ---
-zinit ice as"program" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg" wait lucid
+zinit ice as"program" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg" wait lucid \
+    atclone"./ripgrep/rg --generate complete-zsh > _rg" \
+    atpull"%atclone"
 zinit load BurntSushi/ripgrep
 
 # --- TLDR (tealdeer) ---
@@ -98,6 +103,9 @@ zinit ice as"program" from"gh-r" pick"zoxide" \
 zinit light ajeetdsouza/zoxide
 
 # --- Completions, Suggestions & Highlighting ---
+
+# Docker completions (must be in fpath before compinit runs below)
+fpath=($HOME/.docker/completions $fpath)
 
 # Load extra completions first (blockf prevents them overriding zinit's fpath)
 zinit wait lucid blockf atpull"zinit creinstall -q ." for \
@@ -147,13 +155,10 @@ rbenv() {
 # 6. SHELL INTEGRATIONS
 # =============================================================================
 
-# Docker completions (must be before compinit, which runs inside zinit above)
-fpath=($HOME/.docker/completions $fpath)
-
 # iTerm2
 [[ -e "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh"
 
-# Clipboard (macOS, Wayland, X11, WSL, Cygwin)
+# Clipboard (macOS early-exit, then Linux/WSL/Cygwin)
 () {
   if [[ $OSTYPE == darwin* ]]; then
     pbcopy()  { command pbcopy  "$@"; }
@@ -200,11 +205,11 @@ SAVEHIST=20000
 HISTFILE=~/.zsh_history
 setopt HIST_IGNORE_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_VERIFY
 setopt HIST_REDUCE_BLANKS
 setopt SHARE_HISTORY
-setopt APPEND_HISTORY
 setopt AUTO_CD
 
 # =============================================================================
@@ -320,7 +325,7 @@ alias grep='grep --color=auto'
 alias h='tldr'
 alias hup='tldr --update'
 
-help() { tldr "$@" || man "$@" }
+help() { tldr "$@" 2>/dev/null || man "$@" }
 
 # --- Personal ---
 alias rm='trash'
@@ -346,16 +351,20 @@ bks() {
 }
 
 ros_dev() {
-  if (( $# % 2 != 0 )); then
+  if (( $# < 2 )) || (( $# % 2 != 0 )); then
     echo "Usage: ros_dev <container_name> <project_path> ..."
     return 1
   fi
   while (( $# >= 2 )); do
-    ROS_DEV_CONTAINER_NAME=$1
+    local ROS_DEV_CONTAINER_NAME=$1
+    local ROS_DEV_PROJECT_PATH=$2
     local SCRIPT_DIR="$HOME/Documents/cs/research/ros2-docker-dev"
     shift 2
     if [ -d "$SCRIPT_DIR" ]; then
-        (cd "$SCRIPT_DIR" && docker-compose up -d --build)
+        (cd "$SCRIPT_DIR" && \
+         ROS_DEV_CONTAINER_NAME="$ROS_DEV_CONTAINER_NAME" \
+         ROS_DEV_PROJECT_PATH="$ROS_DEV_PROJECT_PATH" \
+         docker-compose up -d --build)
     fi
   done
 }
@@ -374,7 +383,7 @@ alias zclean='zinit cclear && zinit delete --clean'
 # =============================================================================
 
 bindkey -v
-KEYTIMEOUT=1
+KEYTIMEOUT=15
 
 # Restore useful ctrl bindings
 bindkey '^R' history-incremental-search-backward

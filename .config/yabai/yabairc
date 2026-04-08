@@ -66,4 +66,4 @@ yabai -m config external_bar all:46:0
 # Kanagawa theme
 borders active_color=0xffdcd7ba 
 inactive_color=0xff9e9b93
-width=2.0 &
+width=3.0 &
