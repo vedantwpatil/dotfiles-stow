@@ -13,33 +13,31 @@ autoload -Uz _zinit
 # =============================================================================
 # 2. ENVIRONMENT VARIABLES & PATH
 # =============================================================================
-export BKMR_DB_URL="$HOME/.config/bkmr/bkmr.db"
 export EDITOR=nvim
 export VISUAL=nvim
 export LANG=en_US.UTF-8
 export EZA_CONFIG_DIR="$HOME/.config/eza"
-export AWS_REGION=us-east-1
-export OPENSSL_ROOT_DIR="/opt/homebrew/opt/openssl@3"
-export CMAKE_PREFIX_PATH="/opt/homebrew/opt/qt@5"
-export NVM_DIR="$HOME/.nvm"
+export PYTHONPATH=~/.venv/common
+export PIP_CONFIG_FILE=/dev/null
 
-typeset -U path fpath
+typeset -U path
 path=(
     "$HOME/.local/bin"
-    "$HOME/.pixi/bin"
     "$HOME/go/bin"
-    "$HOME/.cabal/bin"
-    "$HOME/.ghcup/bin"
     "$HOME/.cargo/bin"
-    "$HOME/.spicetify"
-    "/opt/homebrew/opt/qt@5/bin"
-    "/usr/local/opt/postgresql@15/bin"
-    "/opt/homebrew/lib/pkgconfig"
+    "/opt/homebrew/share/google-cloud-sdk/bin"
     $path
 )
 
 # =============================================================================
-# 3. LOAD STARSHIP PROMPT (eager — must appear before turbo plugins)
+# 3. PYENV
+# =============================================================================
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - $SHELL)"
+
+# =============================================================================
+# 4. LOAD STARSHIP PROMPT (eager — must appear before turbo plugins)
 # =============================================================================
 zinit ice as"command" from"gh-r" \
           atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
@@ -48,21 +46,20 @@ zinit ice as"command" from"gh-r" \
 zinit load starship/starship
 
 # =============================================================================
-# 4. PLUGINS
+# 5. PLUGINS
 # =============================================================================
 
 # --- Core OMZ Utilities ---
 zinit wait lucid for \
     OMZP::extract \
     OMZP::sudo \
-    OMZP::tmux \
     OMZP::web-search \
+    OMZP::docker \
+    OMZP::docker-compose \
     MichaelAquilina/zsh-you-should-use
 
 # --- BAT (cat replacement) ---
-zinit ice as"program" from"gh-r" mv"bat* -> bat" pick"bat/bat" wait lucid \
-    atclone"./bat/bat --generate shell-completions zsh > _bat" \
-    atpull"%atclone"
+zinit ice as"program" from"gh-r" mv"bat* -> bat" pick"bat/bat" wait lucid
 zinit load sharkdp/bat
 
 # --- EZA (ls replacement) ---
@@ -72,9 +69,7 @@ zinit ice wait lucid as"program" from"gh-r" pick"eza" \
 zinit load eza-community/eza
 
 # --- FD (find replacement) ---
-zinit ice as"program" from"gh-r" mv"fd* -> fd" pick"fd/fd" wait lucid \
-    atclone"./fd/fd --gen-completions zsh > _fd" \
-    atpull"%atclone"
+zinit ice as"program" from"gh-r" mv"fd* -> fd" pick"fd/fd" wait lucid
 zinit load sharkdp/fd
 
 # --- FZF (fuzzy finder) ---
@@ -86,9 +81,7 @@ zinit ice as"program" from"gh-r" wait lucid \
 zinit light junegunn/fzf
 
 # --- RIPGREP (grep replacement) ---
-zinit ice as"program" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg" wait lucid \
-    atclone"./ripgrep/rg --generate complete-zsh > _rg" \
-    atpull"%atclone"
+zinit ice as"program" from"gh-r" mv"ripgrep* -> ripgrep" pick"ripgrep/rg" wait lucid
 zinit load BurntSushi/ripgrep
 
 # --- TLDR (tealdeer) ---
@@ -104,9 +97,6 @@ zinit light ajeetdsouza/zoxide
 
 # --- Completions, Suggestions & Highlighting ---
 
-# Docker completions (must be in fpath before compinit runs below)
-fpath=($HOME/.docker/completions $fpath)
-
 # Load extra completions first (blockf prevents them overriding zinit's fpath)
 zinit wait lucid blockf atpull"zinit creinstall -q ." for \
     zsh-users/zsh-completions
@@ -115,50 +105,50 @@ zinit wait lucid blockf atpull"zinit creinstall -q ." for \
 zinit wait lucid \
     atinit"zicompinit; zicdreplay" \
     atload'compdump="${ZSH_COMPDUMP:-${ZDOTDIR:-$HOME}/.zcompdump}";
-            [[ ! -s "${compdump}.zwc" || "$compdump" -nt "${compdump}.zwc" ]] &&
-            zcompile "$compdump" &!' \
+           [[ ! -s "${compdump}.zwc" || "$compdump" -nt "${compdump}.zwc" ]] &&
+           zcompile "$compdump" &!' \
     for Aloxaf/fzf-tab \
         zdharma-continuum/fast-syntax-highlighting \
     atload"_zsh_autosuggest_start" \
         zsh-users/zsh-autosuggestions
 
 # =============================================================================
-# 5. LAZY LOADERS
+# 6. LAZY LOADERS
 # =============================================================================
 
-# Conda — only initialized on first use
-conda() {
-    unfunction conda
-    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/miniconda3/bin:$PATH"
-    fi
-    conda "$@"
-}
-
-# NVM — only initialized on first use
-nvm() {
-    unfunction nvm
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-    nvm "$@"
-}
-
-# rbenv — only initialized on first use
-rbenv() {
-    unfunction rbenv
-    eval "$(command rbenv init -)"
-    rbenv "$@"
-}
+# # Conda — only initialized on first use
+# conda() {
+#     unfunction conda
+#     if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "$HOME/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="$HOME/miniconda3/bin:$PATH"
+#     fi
+#     conda "$@"
+# }
+#
+# # NVM — only initialized on first use
+# nvm() {
+#     unfunction nvm
+#     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+#     nvm "$@"
+# }
+#
+# # rbenv — only initialized on first use
+# rbenv() {
+#     unfunction rbenv
+#     eval "$(command rbenv init -)"
+#     rbenv "$@"
+# }
 
 # =============================================================================
-# 6. SHELL INTEGRATIONS
+# 7. SHELL INTEGRATIONS
 # =============================================================================
 
 # iTerm2
 [[ -e "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh"
 
-# Clipboard (macOS early-exit, then Linux/WSL/Cygwin)
+# Clipboard (macOS, Wayland, X11, WSL, Cygwin)
 () {
   if [[ $OSTYPE == darwin* ]]; then
     pbcopy()  { command pbcopy  "$@"; }
@@ -198,22 +188,22 @@ rbenv() {
 }
 
 # =============================================================================
-# 7. HISTORY
+# 8. HISTORY
 # =============================================================================
 HISTSIZE=20000
 SAVEHIST=20000
 HISTFILE=~/.zsh_history
 setopt HIST_IGNORE_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_VERIFY
 setopt HIST_REDUCE_BLANKS
 setopt SHARE_HISTORY
+setopt APPEND_HISTORY
 setopt AUTO_CD
 
 # =============================================================================
-# 8. COMPLETION STYLING
+# 9. COMPLETION STYLING
 # =============================================================================
 
 # Case-insensitive matching
@@ -236,7 +226,7 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:*' fzf-flags --bind 'ctrl-j:preview-down' --bind 'ctrl-k:preview-up'
 
 # =============================================================================
-# 9. ALIASES & FUNCTIONS
+# 10. ALIASES & FUNCTIONS
 # =============================================================================
 
 # --- Navigation ---
@@ -325,7 +315,7 @@ alias grep='grep --color=auto'
 alias h='tldr'
 alias hup='tldr --update'
 
-help() { tldr "$@" 2>/dev/null || man "$@" }
+help() { tldr "$@" || man "$@" }
 
 # --- Personal ---
 alias rm='trash'
@@ -350,25 +340,6 @@ bks() {
     --bind "ctrl-d:execute(echo {1} | xargs bkmr delete)+reload($cmd)"
 }
 
-ros_dev() {
-  if (( $# < 2 )) || (( $# % 2 != 0 )); then
-    echo "Usage: ros_dev <container_name> <project_path> ..."
-    return 1
-  fi
-  while (( $# >= 2 )); do
-    local ROS_DEV_CONTAINER_NAME=$1
-    local ROS_DEV_PROJECT_PATH=$2
-    local SCRIPT_DIR="$HOME/Documents/cs/research/ros2-docker-dev"
-    shift 2
-    if [ -d "$SCRIPT_DIR" ]; then
-        (cd "$SCRIPT_DIR" && \
-         ROS_DEV_CONTAINER_NAME="$ROS_DEV_CONTAINER_NAME" \
-         ROS_DEV_PROJECT_PATH="$ROS_DEV_PROJECT_PATH" \
-         docker-compose up -d --build)
-    fi
-  done
-}
-
 # --- Zinit Maintenance ---
 alias zini='zinit'
 alias zup='zinit self-update && zinit update --parallel && zinit cclear && tldr --update'
@@ -378,12 +349,16 @@ alias zclean='zinit cclear && zinit delete --clean'
 (( ${+aliases[zpl]} )) && unalias zpl
 (( ${+aliases[zplg]} )) && unalias zplg
 
+# --- Python --- 
+alias venv='python3 -m venv .venv'
+alias venv-on='source .venv/bin/activate'
+
 # =============================================================================
-# 10. KEYBINDINGS
+# 11. KEYBINDINGS
 # =============================================================================
 
 bindkey -v
-KEYTIMEOUT=15
+KEYTIMEOUT=1
 
 # Restore useful ctrl bindings
 bindkey '^R' history-incremental-search-backward
@@ -407,7 +382,7 @@ bindkey -M vicmd 'k'  up-line-or-search
 bindkey -M vicmd 'j'  down-line-or-search
 
 # =============================================================================
-# 11. Z-SHIFT SELF-MAINTENANCE
+# 12. Z-SHIFT SELF-MAINTENANCE
 # =============================================================================
 zshift-update() {
     local RED='\033[0;31m'
@@ -475,7 +450,7 @@ zshift-update() {
 alias zsu='zshift-update'
 
 # =============================================================================
-# 12. BYTE-COMPILATION & LOCAL CUSTOMIZATIONS
+# 13. BYTE-COMPILATION & LOCAL CUSTOMIZATIONS
 # =============================================================================
 ZSHRC_DIR="${ZDOTDIR:-$HOME}"
 
@@ -492,3 +467,18 @@ if [[ -f "$ZSHRC_DIR/.zshrc.local" ]]; then
     auto_compile "$ZSHRC_DIR/.zshrc.local"
     source "$ZSHRC_DIR/.zshrc.local"
 fi
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/vpatil/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+function set_uv_token() {
+    local token=$(gcloud auth print-access-token)
+    export UV_INDEX_URL="https://oauth2accesstoken:${token}@us-east1-python.pkg.dev/rental-ds/r15-ds-python/simple/"
+    echo "UV_INDEX_URL set for GAR (us-east1)!"
+}
+alias uv-token="set_uv_token"
+
