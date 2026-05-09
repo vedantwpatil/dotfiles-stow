@@ -1,8 +1,9 @@
 # Font
 font-size = 14
-font-family = IosevkaTerm Nerd Font Mono
-font-feature = +ss14 
-font-thicken = true 
+font-family = Maple Mono NF
+font-feature = +liga
+font-feature = +calt
+# font-thicken = true 
 
 # Transparency
 background-opacity = 0.85
