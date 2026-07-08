@@ -31,12 +31,6 @@ return {
   },
 
   {
-    "webhooked/kanso.nvim",
-    lazy = false,
-    priority = 1000,
-  },
-
-  {
     "nvim-mini/mini.icons",
     opts = {
       style = "glyph", -- cleaner than "ascii", uses actual nerd font glyphs

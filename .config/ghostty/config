@@ -1,12 +1,13 @@
 # Font
 font-size = 14
-font-family = IosevkaTerm Nerd Font Mono
-font-feature = +ss14 
-font-thicken = true 
+font-family = Maple Mono NF
+font-feature = +liga
+font-feature = +calt
+font-thicken = true
 
 # Transparency
-background-opacity = 0.85
-background-blur = true
+background-opacity = 0.88
+background-blur = macos-glass-regular
 
 # Theme
 # theme = Catppuccin Macchiato
@@ -17,6 +18,14 @@ theme = kanagawa-paper-ink
 window-decoration = true
 window-width = 120
 window-height = 35
+macos-titlebar-style = hidden
+window-padding-x = 12
+window-padding-y = 8
+window-padding-balance = true
+
+# Legibility
+minimum-contrast = 1.1
+adjust-cell-height = 8%
 
 # Cursor
 cursor-style = block

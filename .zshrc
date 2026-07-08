@@ -55,7 +55,6 @@ zinit load starship/starship
 zinit wait lucid for \
     OMZP::extract \
     OMZP::sudo \
-    OMZP::tmux \
     OMZP::web-search \
     MichaelAquilina/zsh-you-should-use
 
@@ -129,10 +128,10 @@ zinit wait lucid \
 # Conda — only initialized on first use
 conda() {
     unfunction conda
-    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="$HOME/miniconda3/bin:$PATH"
+        export PATH="$HOME/miniforge3/bin:$PATH"
     fi
     conda "$@"
 }
@@ -304,7 +303,6 @@ gopen() {
 
 # --- Disk ---
 alias df='df -h'
-alias du='du -h -d 1'
 
 # --- Eza (ls replacement) ---
 if [[ -n "${commands[eza]}" ]]; then
@@ -321,9 +319,14 @@ fi
 # --- Modern Toolset ---
 alias cat='bat -p --paging=never'
 alias catp='bat'
-alias grep='grep --color=auto'
 alias h='tldr'
 alias hup='tldr --update'
+alias du='dust'
+alias top='btm'
+alias htop='btm'
+alias watch='viddy'
+alias bench='hyperfine'
+# rg, procs, gping, choose, delta — use directly; aliasing breaks scripts
 
 help() { tldr "$@" 2>/dev/null || man "$@" }
 
@@ -492,3 +495,7 @@ if [[ -f "$ZSHRC_DIR/.zshrc.local" ]]; then
     auto_compile "$ZSHRC_DIR/.zshrc.local"
     source "$ZSHRC_DIR/.zshrc.local"
 fi
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/vedantpatil/.local/bin:$PATH"

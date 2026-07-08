@@ -1,4 +1,8 @@
 return {
+  {
+    "neovim/nvim-lspconfig",
+    opts = { inlay_hints = { enabled = false } },
+  },
   { "akinsho/bufferline.nvim", enabled = false },
   { "folke/flash.nvim", enabled = false },
   { "lervag/vimtex", ft = { "tex", "bib" } },
@@ -55,22 +59,6 @@ return {
   },
 
   {
-    "SmiteshP/nvim-navic",
-    lazy = true,
-    opts = {
-      lsp = {
-        auto_attach = true,
-      },
-      highlight = true,
-      separator = "  ",
-      depth_limit = 4,
-      depth_limit_indicator = "…",
-      safe_output = true,
-      lazy_update_context = true,
-    },
-  },
-
-  {
     "nvim-lualine/lualine.nvim",
     enabled = true,
     opts = function(_, opts)
@@ -79,8 +67,6 @@ return {
       opts.options.component_separators = ""
       opts.options.section_separators = ""
       -- globalstatus = true is already handled by LazyVim by default
-
-      local navic = require("nvim-navic")
 
       opts.sections = {
         lualine_a = {
@@ -100,14 +86,6 @@ return {
             "filename",
             path = 1,
             symbols = { modified = " ●", readonly = " [RO]", unnamed = "" },
-          },
-          {
-            function()
-              return navic.get_location()
-            end,
-            cond = function()
-              return navic.is_available()
-            end,
           },
         },
         lualine_x = {

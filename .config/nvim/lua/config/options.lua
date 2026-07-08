@@ -4,3 +4,4 @@
 vim.opt.smoothscroll = false
 vim.opt.wrap = true
 vim.g.snacks_animate = false
+vim.lsp.inlay_hint.enable(false)

@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Kanagawa Paper Ink",
+  "description": "Kanagawa Paper Ink dark theme for Helium",
+  "version": "1.1",
+  "theme": {
+    "colors": {
+      "frame": [22, 22, 29],
+      "frame_inactive": [31, 31, 40],
+      "frame_incognito": [15, 15, 20],
+      "frame_incognito_inactive": [24, 24, 31],
+      "tab_background_text": [114, 113, 105],
+      "tab_background_text_inactive": [84, 84, 109],
+      "tab_background_text_incognito": [114, 113, 105],
+      "tab_background_text_incognito_inactive": [84, 84, 109],
+      "tab_text": [220, 215, 186],
+      "toolbar": [31, 31, 40],
+      "toolbar_text": [220, 215, 186],
+      "toolbar_button_icon": [196, 178, 138],
+      "ntp_background": [22, 22, 29],
+      "ntp_text": [220, 215, 186],
+      "ntp_link": [133, 159, 172],
+      "ntp_header": [42, 42, 55],
+      "button_background": [42, 42, 55],
+      "omnibox_background": [42, 42, 55],
+      "omnibox_text": [220, 215, 186],
+      "bookmark_text": [220, 215, 186]
+    },
+    "tints": {},
+    "properties": {}
+  }
+}

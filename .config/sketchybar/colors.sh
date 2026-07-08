@@ -102,13 +102,13 @@ export SUBTEXT1=$KANAGAWA_FUJI_GRAY
 
 # --- UI Surfaces ---
 export SURFACE0=$KANAGAWA_SUMI_INK_3
-export SURFACE1=0xff4F4F60 # A slightly lighter custom mix for surfaces
+export SURFACE1=0xff435965 # dragonBlue5
 export SURFACE2=0xff54546D
 
 # --- Overlays ---
-export OVERLAY0=0xff6c7086 # Using existing values from Catppuccin that fit well
-export OVERLAY1=0xff7f849c
-export OVERLAY2=0xff9399b2
+export OVERLAY0=0xff7a8382 # dragonGray3
+export OVERLAY1=0xff9e9b93 # dragonGray2
+export OVERLAY2=0xffa6a69c # dragonGray
 
 # --- Standard Accent Colors ---
 export BLUE=$KANAGAWA_DRAGON_BLUE
