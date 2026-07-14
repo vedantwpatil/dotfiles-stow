@@ -6,7 +6,6 @@ return {
   { "akinsho/bufferline.nvim", enabled = false },
   { "folke/flash.nvim", enabled = false },
   { "lervag/vimtex", ft = { "tex", "bib" } },
-  { "mrcjkb/neotest-haskell", ft = "haskell" },
   { "folke/noice.nvim", enabled = true },
   {
     "nvim-neo-tree/neo-tree.nvim",
