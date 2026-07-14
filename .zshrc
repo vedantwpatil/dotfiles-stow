@@ -34,7 +34,9 @@ path=(
 # =============================================================================
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - $SHELL)"
+if command -v pyenv >/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
 
 # =============================================================================
 # 4. LOAD STARSHIP PROMPT (eager — must appear before turbo plugins)
@@ -468,17 +470,5 @@ if [[ -f "$ZSHRC_DIR/.zshrc.local" ]]; then
     source "$ZSHRC_DIR/.zshrc.local"
 fi
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/vpatil/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-
-function set_uv_token() {
-    local token=$(gcloud auth print-access-token)
-    export UV_INDEX_URL="https://oauth2accesstoken:${token}@us-east1-python.pkg.dev/rental-ds/r15-ds-python/simple/"
-    echo "UV_INDEX_URL set for GAR (us-east1)!"
-}
-alias uv-token="set_uv_token"
 
