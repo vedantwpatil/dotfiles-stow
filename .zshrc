@@ -13,6 +13,8 @@ autoload -Uz _zinit
 # =============================================================================
 # 2. ENVIRONMENT VARIABLES & PATH
 # =============================================================================
+export CLAUDE_CODE_AUTO_COMPACT_WINDOW=100000
+export CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=60
 export BKMR_DB_URL="$HOME/.config/bkmr/bkmr.db"
 export EDITOR=nvim
 export VISUAL=nvim
@@ -21,15 +23,12 @@ export EZA_CONFIG_DIR="$HOME/.config/eza"
 export AWS_REGION=us-east-1
 export OPENSSL_ROOT_DIR="/opt/homebrew/opt/openssl@3"
 export CMAKE_PREFIX_PATH="/opt/homebrew/opt/qt@5"
-export NVM_DIR="$HOME/.nvm"
 
 typeset -U path fpath
 path=(
     "$HOME/.local/bin"
     "$HOME/.pixi/bin"
     "$HOME/go/bin"
-    "$HOME/.cabal/bin"
-    "$HOME/.ghcup/bin"
     "$HOME/.cargo/bin"
     "$HOME/.spicetify"
     "/opt/homebrew/opt/qt@5/bin"
@@ -136,19 +135,11 @@ conda() {
     conda "$@"
 }
 
-# NVM — only initialized on first use
-nvm() {
-    unfunction nvm
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-    nvm "$@"
-}
-
-# rbenv — only initialized on first use
-rbenv() {
-    unfunction rbenv
-    eval "$(command rbenv init -)"
-    rbenv "$@"
-}
+# mise — polyglot version manager (node/ruby/python/go...). Replaces nvm+rbenv.
+# Per-project .tool-versions / mise.toml auto-switch on cd. `mise use -g node@lts`.
+if (( $+commands[mise] )); then
+    eval "$(mise activate zsh)"
+fi
 
 # =============================================================================
 # 6. SHELL INTEGRATIONS
@@ -408,6 +399,14 @@ bindkey -M vicmd "${terminfo[kcuu1]}" up-line-or-search
 bindkey -M vicmd "${terminfo[kcud1]}" down-line-or-search
 bindkey -M vicmd 'k'  up-line-or-search
 bindkey -M vicmd 'j'  down-line-or-search
+
+# =============================================================================
+# 10b. ATUIN — SQLite shell history, fuzzy Ctrl-R (must load AFTER ^R bind above)
+# =============================================================================
+# --disable-up-arrow keeps the j/k + arrow up-line-or-search bindings above.
+if (( $+commands[atuin] )); then
+    eval "$(atuin init zsh --disable-up-arrow)"
+fi
 
 # =============================================================================
 # 11. Z-SHIFT SELF-MAINTENANCE
