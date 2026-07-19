@@ -13,8 +13,6 @@ autoload -Uz _zinit
 # =============================================================================
 # 2. ENVIRONMENT VARIABLES & PATH
 # =============================================================================
-export CLAUDE_CODE_AUTO_COMPACT_WINDOW=100000
-export CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=60
 export BKMR_DB_URL="$HOME/.config/bkmr/bkmr.db"
 export EDITOR=nvim
 export VISUAL=nvim
