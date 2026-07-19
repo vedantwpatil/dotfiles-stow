@@ -6,10 +6,7 @@ vim.opt.wrap = true
 vim.g.snacks_animate = false
 vim.lsp.inlay_hint.enable(false)
 
--- keep more context on screen while scrolling
-vim.opt.scrolloff = 2
--- show a column at 80 characters as a guide for long lines
-vim.opt.colorcolumn = "80"
+vim.opt.scrolloff = 8
 -- more useful diffs: ignore whitespace, use a smarter diff algorithm
 vim.opt.diffopt:append("iwhite")
 vim.opt.diffopt:append("algorithm:histogram")
