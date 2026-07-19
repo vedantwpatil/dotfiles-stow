@@ -3,6 +3,24 @@ return {
     "neovim/nvim-lspconfig",
     opts = { inlay_hints = { enabled = false } },
   },
+  {
+    -- LazyVim's lang.rust extra runs rust_analyzer through rustaceanvim,
+    -- not plain nvim-lspconfig, so rust-analyzer settings go here
+    "mrcjkb/rustaceanvim",
+    opts = {
+      server = {
+        default_settings = {
+          ["rust-analyzer"] = {
+            cargo = { features = "all" },
+            checkOnSave = { enable = true },
+            check = { command = "clippy" },
+            imports = { group = { enable = false } },
+            completion = { postfix = { enable = false } },
+          },
+        },
+      },
+    },
+  },
   { "akinsho/bufferline.nvim", enabled = false },
   { "folke/flash.nvim", enabled = false },
   { "lervag/vimtex", ft = { "tex", "bib" } },
