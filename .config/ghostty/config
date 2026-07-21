@@ -16,6 +16,7 @@ theme = kanagawa-paper-ink
 
 # Window
 window-decoration = true
+unfocused-split-opacity = 0.85
 window-width = 120
 window-height = 35
 macos-titlebar-style = hidden

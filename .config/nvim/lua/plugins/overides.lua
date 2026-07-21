@@ -72,6 +72,9 @@ return {
           },
         },
       },
+      indent = { enabled = false },
+      scope = { enabled = false },
+      image = { enabled = true },
     },
   },
 
