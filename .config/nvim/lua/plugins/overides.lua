@@ -125,4 +125,18 @@ return {
       }
     end,
   },
+
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters = {
+        ["markdownlint-cli2"] = {
+          args = { "--disable", "MD013", "--" },
+        },
+        ["markdownlint"] = {
+          args = { "--disable", "MD013", "--" },
+        },
+      },
+    },
+  },
 }
