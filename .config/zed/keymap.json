@@ -1,0 +1,13 @@
+// Zed keymap
+//
+// Mirrors nvim/lua/config/keymaps.lua (LazyVim custom keymaps section).
+[
+  {
+    // vim.keymap.set("n", "<C-d>", "<C-d>zz") / "<C-u>" — scroll and re-center
+    "context": "vim_mode == normal",
+    "bindings": {
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"],
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"]
+    }
+  }
+]

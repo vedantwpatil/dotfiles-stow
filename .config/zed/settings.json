@@ -1,0 +1,94 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "cli_default_open_behavior": "existing_window",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+    "anthropic_retention": false
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "vim_mode": true,
+  "base_keymap": "VSCode",
+  "minimap": {
+    "show": "always"
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  },
+  "agent_servers": {
+    "claude-acp": {
+      "default_config_options": {
+        "mode": "auto"
+      },
+      "type": "registry"
+    }
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  // Closest match to kanagawa-paper-ink (exact fork not ported to Zed).
+  // Needs "Kanagawa Themes" extension installed. Swap to "Kanagawa Wave" if
+  // Dragon reads too flat once you see it.
+  "theme": "Ayu Dark",
+
+  // --- mirrors nvim/lua/config/options.lua ---
+  // hybrid line numbers (number + relativenumber in nvim)
+  "relative_line_numbers": "enabled",
+  // vim.opt.scrolloff = 8
+  "vertical_scroll_margin": 8,
+  // vim.opt.wrap = true
+  "soft_wrap": "editor_width",
+  // vim.opt.listchars tab/trail markers
+  "show_whitespaces": "boundary",
+  // vim.lsp.inlay_hint.enable(false) — already Zed's default, set explicitly for parity
+  "inlay_hints": {
+    "enabled": false
+  },
+
+  // --- mirrors nvim/lua/plugins/overides.lua ---
+  // snacks.indent disabled
+  "indent_guides": {
+    "enabled": false
+  },
+  // bufferline.nvim disabled — single filename shown in statusline instead of a tab strip
+  "tab_bar": {
+    "show": false
+  },
+
+  // rust-analyzer settings from rustaceanvim opts in overides.lua
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "cargo": {
+          "features": "all"
+        },
+        "checkOnSave": {
+          "enable": true
+        },
+        "check": {
+          "command": "clippy"
+        },
+        "imports": {
+          "group": {
+            "enable": false
+          }
+        },
+        "completion": {
+          "postfix": {
+            "enable": false
+          }
+        }
+      }
+    }
+  },
+}
