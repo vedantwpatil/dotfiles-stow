@@ -21,3 +21,6 @@
 *.key
 id_rsa
 id_ed25519
+
+# Docs used to monitor claude and manage claude context
+docs/** 

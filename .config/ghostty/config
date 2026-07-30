@@ -3,10 +3,10 @@ font-size = 14
 font-family = Maple Mono NF
 font-feature = +liga
 font-feature = +calt
-font-thicken = true
+# font-thicken = true
 
 # Transparency
-background-opacity = 0.88
+background-opacity = 0.72
 background-blur = macos-glass-regular
 
 # Theme
@@ -23,6 +23,7 @@ macos-titlebar-style = hidden
 window-padding-x = 12
 window-padding-y = 8
 window-padding-balance = true
+window-colorspace = display-p3
 
 # Legibility
 minimum-contrast = 1.1
@@ -38,4 +39,3 @@ shell-integration-features = no-cursor,sudo,title
 
 # Keybinds
 keybind = global:cmd+grave_accent=toggle_quick_terminal
-keybind = cmd+comma=reload_config

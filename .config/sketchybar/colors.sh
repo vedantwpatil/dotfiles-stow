@@ -78,10 +78,10 @@ export KANAGAWA_DRAGON_BLUE=0xff859fac   # Blue (dragonBlue2)
 export KANAGAWA_DRAGON_AQUA=0xff8ea49e  # Cyan (dragonAqua)
 export KANAGAWA_WAVE_AQUA=0xff6A9589    # Teal (waveAqua1)
 export KANAGAWA_DRAGON_GREEN=0xff699469 # Green (dragonGreen)
-export KANAGAWA_DRAGON_ORANGE=0xffb6927b# Orange (dragonOrange)
+export KANAGAWA_DRAGON_ORANGE=0xffb6927b # Orange (dragonOrange)
 export KANAGAWA_DRAGON_RED=0xffc4746e   # Red (dragonRed)
 export KANAGAWA_DRAGON_PINK=0xffa292a3  # Pink/Magenta (dragonPink)
-export KANAGAWA_DRAGON_VIOLET=0xff8992a7# Violet (dragonViolet)
+export KANAGAWA_DRAGON_VIOLET=0xff8992a7 # Violet (dragonViolet)
 export KANAGAWA_FUJI_GRAY=0xff727169   # Grey, for dimmed text
 
 # ===================================================================
