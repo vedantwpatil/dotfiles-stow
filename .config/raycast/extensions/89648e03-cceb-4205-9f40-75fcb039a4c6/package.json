@@ -880,6 +880,29 @@
         ]
       },
       "confirmation": false
+    },
+    {
+      "name": "get-pull-request-diff",
+      "title": "Get Pull Request Diff",
+      "description": "Get the files changed in a pull request along with their patches",
+      "input": {
+        "type": "object",
+        "properties": {
+          "repository": {
+            "type": "string",
+            "description": "Repository containing the pull request. Format: `owner/repo`. Use `search-repositories` to get the full name of repository in format of `owner/repo`. Always use only `owner/repo` format for repo, never use just `repo`"
+          },
+          "pullRequestNumber": {
+            "type": "number",
+            "description": "The number of the pull request as displayed on GitHub, for example `123` for `#123`. Use `search-pull-requests` to find it when the user doesn't provide a number."
+          }
+        },
+        "required": [
+          "repository",
+          "pullRequestNumber"
+        ]
+      },
+      "confirmation": false
     }
   ],
   "ai": {
@@ -935,6 +958,45 @@
             }
           ]
         }
+      },
+      {
+        "input": "@github show me the diff of PR #123 in raycast/extensions",
+        "mocks": {
+          "get-pull-request-diff": {
+            "files": [
+              {
+                "filename": "extensions/github/src/components/PullRequestDiff.tsx",
+                "status": "added",
+                "additions": 120,
+                "deletions": 0,
+                "patch": "@@ -0,0 +1,3 @@\n+export default function PullRequestDiff() {\n+  return null;\n+}",
+                "patchTruncated": false
+              },
+              {
+                "filename": "extensions/github/CHANGELOG.md",
+                "status": "modified",
+                "additions": 4,
+                "deletions": 0,
+                "patch": "@@ -1,5 +1,9 @@\n # GitHub Changelog\n \n+## [View pull request diffs]\n+",
+                "patchTruncated": false
+              }
+            ],
+            "truncated": false
+          }
+        },
+        "expected": [
+          {
+            "callsTool": {
+              "name": "get-pull-request-diff",
+              "arguments": {
+                "repository": {
+                  "includes": "raycast/extensions"
+                },
+                "pullRequestNumber": 123
+              }
+            }
+          }
+        ]
       },
       {
         "input": "@github close the eslint issue in frontend repo",
