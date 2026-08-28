@@ -157,8 +157,8 @@ function getRandomKanagawaColor() {
 # General Bar and Item Colors
 # ===================================================================
 
-# Main bar color with transparency (0xa0 = 63% opacity)
-export BAR_COLOR=0xa01F1F28
+# Main bar color with transparency (0x8c = 55% opacity)
+export BAR_COLOR=0x8c1F1F28
 
 # Default icon and label colors
 export ICON_COLOR=$WHITE

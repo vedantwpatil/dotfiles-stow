@@ -97,6 +97,9 @@ cleanup = true
 # "Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
 # "Custom command using interactive shell (unix)" = "-i vim_upgrade"
 # "Pip Batch Update" = "pip list --outdated --format=json | jq -r '.[].name' | xargs -r pip install -U"
+"Cleanup Old Simulators" = "/usr/bin/xcrun simctl delete unavailable"
+"NPM Cache Clean" = "/opt/homebrew/bin/npm cache clean --force"
+"PNPM Store Prune" = "/opt/homebrew/bin/pnpm store prune"
 
 
 [python]
