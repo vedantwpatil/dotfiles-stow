@@ -21,7 +21,7 @@ gui:
     defaultFgColor:
       - "#DCD7BA"
     searchingActiveBorderColor:
-      - "#E6C384"
+      - "#C4B28A"
   authorColors:
     "*": "#A292A3"
   nerdFontsVersion: "3"

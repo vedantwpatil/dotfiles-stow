@@ -1,0 +1,2392 @@
+/* ==UserStyle==
+@name YouTube Kanagawa Paper Ink
+@namespace github.com/vedantpatil/dotfiles/userstyles/kanagawa-paper-ink/styles/youtube
+@version 2026.09.27
+@description Soothing pastel theme for YouTube
+@author Vedant Patil (derived from Catppuccin/userstyles, MIT)
+@license MIT
+
+@preprocessor less
+@var select accentColor "Accent" ["red:Red", "orange:Orange", "yellow:Yellow", "green:Green", "teal:Teal", "cyan:Cyan", "blue:Blue", "purple:Purple*", "pink:Pink", "brown:Brown", "gray:Gray"]
+
+@var checkbox logo "Enable YouTube logo" 1
+@var checkbox oled "Enable black bars" 0
+@var checkbox sponsorBlock "Enable SponsorBlock segments" 1
+==/UserStyle== */
+
+/*
+ * Kanagawa Paper Ink - shared LESS role library for catppuccin/userstyles sites.
+ * Palette, derived colors, base24 terminal slots, and semantic roles mirror
+ * ~/.config/nvim/lua/kanagawa-paper-ink-extended.lua 1:1 (M.palette, M.derived,
+ * M.base24, M.roles). Keep both in sync by hand when that theme changes.
+ * Icon-recolor filter() approximations in .hues-filters() carry over from the
+ * prior catppuccin-shaped bridge (mocha row) since target hex is unchanged for
+ * 10 of 11 hues; approximation, not exact - see upstream catppuccin/userstyles
+ * lib/std. @brown has no prior equivalent and reuses @orange's filter as the
+ * nearest match.
+ * See ../../LICENSE.
+ */
+
+#lib {
+  .palette() {
+    @palette-autumnGreen: #76946a;
+    @palette-autumnRed: #c34043;
+    @palette-autumnYellow: #dca561;
+    @palette-boatYellow1: #938056;
+    @palette-boatYellow2: #c0a36e;
+    @palette-canvasAqua1: #7b958e;
+    @palette-canvasAsh1: #637263;
+    @palette-canvasBlue1: #809ba7;
+    @palette-canvasBlue2: #6b8998;
+    @palette-canvasBlue3: #577888;
+    @palette-canvasBlue4: #516e7d;
+    @palette-canvasBlue5: #3a515e;
+    @palette-canvasCyan1: #4a905d;
+    @palette-canvasGray1: #aeaea6;
+    @palette-canvasGray2: #8e8a80;
+    @palette-canvasGray3: #73787d;
+    @palette-canvasGreen1: #7e9579;
+    @palette-canvasGreen2: #7a8c6a;
+    @palette-canvasGreen3: #9ba98e;
+    @palette-canvasOrange1: #b28d77;
+    @palette-canvasOrange2: #a8826a;
+    @palette-canvasPink1: #9e7e98;
+    @palette-canvasPink2: #c1b4c1;
+    @palette-canvasPink3: #d4cdd4;
+    @palette-canvasRed1: #c27672;
+    @palette-canvasTeal1: #7e8faf;
+    @palette-canvasViolet1: #7880a5;
+    @palette-canvasViolet2: #9ba1bf;
+    @palette-canvasWhite1: #cbc8bc;
+    @palette-canvasWhite2: #d1cfc5;
+    @palette-canvasWhite3: #d8d8d2;
+    @palette-canvasWhite4: #e1e1de;
+    @palette-canvasWhite5: #e6e6e3;
+    @palette-canvasWhite6: #ecece8;
+    @palette-canvasYellow1: #a7956a;
+    @palette-canvasYellow2: #b4a88a;
+    @palette-carpYellow: #e6c384;
+    @palette-crystalBlue: #7e9cd8;
+    @palette-dragonAqua: #8ea49e;
+    @palette-dragonAsh: #737c73;
+    @palette-dragonBlack0: #0d0c0c;
+    @palette-dragonBlack1: #12120f;
+    @palette-dragonBlack2: #1d1c19;
+    @palette-dragonBlack3: #181616;
+    @palette-dragonBlack4: #282727;
+    @palette-dragonBlack5: #393836;
+    @palette-dragonBlack6: #625e5a;
+    @palette-dragonBlue: #658594;
+    @palette-dragonBlue2: #859fac;
+    @palette-dragonBlue3: #708e9e;
+    @palette-dragonBlue4: #5d7a88;
+    @palette-dragonBlue5: #435965;
+    @palette-dragonGray: #a6a69c;
+    @palette-dragonGray2: #9e9b93;
+    @palette-dragonGray3: #7a8382;
+    @palette-dragonGreen: #699469;
+    @palette-dragonGreen2: #8a9a7b;
+    @palette-dragonGreen3: #717e67;
+    @palette-dragonOrange: #b6927b;
+    @palette-dragonOrange2: #9d7665;
+    @palette-dragonPink: #a292a3;
+    @palette-dragonRed: #c4746e;
+    @palette-dragonTeal: #949fb5;
+    @palette-dragonViolet: #8992a7;
+    @palette-dragonWhite: #c5c9c5;
+    @palette-dragonYellow: #c4b28a;
+    @palette-fujiGray: #727169;
+    @palette-fujiWhite: #dcd7ba;
+    @palette-katanaGray: #717c7c;
+    @palette-lightBlue: #a3d4d5;
+    @palette-lotusAqua: #597b75;
+    @palette-lotusAqua2: #5e857a;
+    @palette-lotusBlue1: #c7d7e0;
+    @palette-lotusBlue2: #b5cbd2;
+    @palette-lotusBlue3: #9fb5c9;
+    @palette-lotusBlue4: #4d699b;
+    @palette-lotusBlue5: #5d57a3;
+    @palette-lotusCyan: #d7e3d8;
+    @palette-lotusGray: #dcd7ba;
+    @palette-lotusGray2: #716e61;
+    @palette-lotusGray3: #8a8980;
+    @palette-lotusGreen: #6f894e;
+    @palette-lotusGreen2: #6e915f;
+    @palette-lotusGreen3: #b7d0ae;
+    @palette-lotusInk0: #3d3d5e;
+    @palette-lotusInk1: #545464;
+    @palette-lotusInk2: #43436c;
+    @palette-lotusOrange: #cc6d00;
+    @palette-lotusOrange2: #e98a00;
+    @palette-lotusPink: #b35b79;
+    @palette-lotusRed: #c84053;
+    @palette-lotusRed2: #d7474b;
+    @palette-lotusRed3: #e82424;
+    @palette-lotusRed4: #d9a594;
+    @palette-lotusTeal1: #4e8ca2;
+    @palette-lotusTeal2: #6693bf;
+    @palette-lotusTeal3: #5a7785;
+    @palette-lotusViolet1: #a09cac;
+    @palette-lotusViolet2: #766b90;
+    @palette-lotusViolet3: #c9cbd1;
+    @palette-lotusViolet4: #624c83;
+    @palette-lotusWhite0: #d5cea3;
+    @palette-lotusWhite1: #dcd5ac;
+    @palette-lotusWhite2: #e5ddb0;
+    @palette-lotusWhite3: #f2ecbc;
+    @palette-lotusWhite4: #e7dba0;
+    @palette-lotusWhite5: #e4d794;
+    @palette-lotusYellow: #77713f;
+    @palette-lotusYellow2: #836f4a;
+    @palette-lotusYellow3: #de9800;
+    @palette-lotusYellow4: #f9d791;
+    @palette-oldWhite: #c8c093;
+    @palette-oniViolet: #957fb8;
+    @palette-oniViolet2: #b8b4d0;
+    @palette-peachRed: #ff5d62;
+    @palette-roninYellow: #ff9e3b;
+    @palette-sakuraPink: #d27e99;
+    @palette-samuraiRed: #e82424;
+    @palette-springBlue: #7fb4ca;
+    @palette-springGreen: #98bb6c;
+    @palette-springViolet1: #938aa9;
+    @palette-springViolet2: #9cabca;
+    @palette-sumiInk0: #16161d;
+    @palette-sumiInk1: #181820;
+    @palette-sumiInk2: #1a1a22;
+    @palette-sumiInk3: #1f1f28;
+    @palette-sumiInk4: #2a2a37;
+    @palette-sumiInk5: #363646;
+    @palette-sumiInk6: #54546d;
+    @palette-sumiInkn1: #0f0f15;
+    @palette-surimiOrange: #ffa066;
+    @palette-waveAqua1: #6a9589;
+    @palette-waveAqua2: #7aa89f;
+    @palette-waveBlue1: #223249;
+    @palette-waveBlue2: #2d4f67;
+    @palette-waveRed: #e46876;
+    @palette-winterBlue: #252535;
+    @palette-winterGreen: #2b3328;
+    @palette-winterRed: #43242b;
+    @palette-winterYellow: #49443c;
+  }
+
+  .derived() {
+    @derived-dragonGreenTint: #2c3732; // dragonGreen blended 90% toward sumiInk3 (ink)
+    @derived-dragonRedTint: #452f33; // dragonRed blended 90% toward sumiInk3 (ink)
+    @derived-dragonYellowTint: #45403a; // dragonYellow blended 90% toward sumiInk3 (ink)
+    @derived-dragonBlueTint: #2b333c; // dragonBlue blended 90% toward sumiInk3 (ink)
+    @derived-dragonGreenMist: #2a3331; // dragonGreen blended 92% toward sumiInk3 (ink)
+    @derived-dragonRedMist: #3f2c31; // dragonRed blended 92% toward sumiInk3 (ink)
+    @derived-dragonYellowMist: #3f3a37; // dragonYellow blended 92% toward sumiInk3 (ink)
+    @derived-dragonBlueMist: #293039; // dragonBlue blended 92% toward sumiInk3 (ink)
+    @derived-dragonAquaMist: #32373b; // dragonAqua blended 92% toward sumiInk3 (ink)
+    @derived-dragonBlack5Bright: #aca9a4; // dragonBlack5 brightened 0.6 (HSLuv L) (ink)
+    @derived-dragonRedBright: #cc928e; // dragonRed brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonGreenBright: #72a072; // dragonGreen brightened 0.1 (HSLuv L) (ink)
+    @derived-dragonYellowBright: #d4c196; // dragonYellow brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonBlue5Bright: #698a9b; // dragonBlue5 brightened 0.3 (HSLuv L) (ink)
+    @derived-dragonPinkBright: #b4a7b5; // dragonPink brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonAquaBright: #96ada7; // dragonAqua brightened 0.1 (HSLuv L) (ink)
+    @derived-oldWhiteBright: #d5cd9d; // oldWhite brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonRedShade: #522c2a; // dragonRed darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonPinkShade: #413941; // dragonPink darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonBlueShade: #27363d; // dragonBlue darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonOrange2Shade: #412f27; // dragonOrange2 darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonGreenShade: #283b28; // dragonGreen darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonAshShade: #2e322e; // dragonAsh darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonGreen3Wash: #4b5348; // dragonGreen3 blended 60% toward sumiInk3 (ink)
+    @derived-dragonBlue5Wash: #313d47; // dragonBlue5 blended 60% toward sumiInk3 (ink)
+    @derived-dragonOrange2Wash: #664e47; // dragonOrange2 blended 60% toward sumiInk3 (ink)
+    @derived-dragonRedLift: #c8837e; // dragonRed brightened 0.1 (HSLuv L) (ink)
+    @derived-dragonGreenEmph: #394c3d; // dragonGreen blended 77% toward sumiInk3
+    @derived-dragonRedEmph: #623e3f; // dragonRed blended 77% toward sumiInk3
+    @derived-dragonYellowEmph: #625a4b; // dragonYellow blended 77% toward sumiInk3
+    @derived-dragonBlueEmph: #38454f; // dragonBlue blended 77% toward sumiInk3
+    @derived-springViolet1Emph: #4c4858; // springViolet1 blended 77% toward sumiInk3
+    @derived-springViolet1Mist: #33313d; // springViolet1 blended 92% toward sumiInk3
+    @derived-fujiWhiteBright: #e8e3c5; // fujiWhite brightened 0.3 (HSLuv L)
+    @derived-dragonBlue2Bright: #96b3c1; // dragonBlue2 brightened 0.2 (HSLuv L)
+    @derived-sumiInk6Bright: #6b6b83; // sumiInk6 brightened 0.15 (HSLuv L)
+    @derived-sumiInk45: #30303f; // sumiInk5 blended 50% toward sumiInk4
+    @derived-sumiInkn1Scrim: #0f0f1599; // sumiInkn1 at 60% opacity
+    @derived-sumiInkn1Shadow: #0f0f1580; // sumiInkn1 at 50% opacity
+    @derived-dragonBlack5Dim: #2f2e2c; // dragonBlack5 darkened 0.2 (HSLuv L)
+    @derived-dragonRedDim: #9d5a55; // dragonRed darkened 0.2 (HSLuv L)
+    @derived-dragonGreenDim: #527552; // dragonGreen darkened 0.2 (HSLuv L)
+    @derived-dragonYellowDim: #9a8b6b; // dragonYellow darkened 0.2 (HSLuv L)
+    @derived-dragonBlue5Dim: #354751; // dragonBlue5 darkened 0.2 (HSLuv L)
+    @derived-dragonPinkDim: #817282; // dragonPink darkened 0.2 (HSLuv L)
+    @derived-dragonAquaDim: #6f817c; // dragonAqua darkened 0.2 (HSLuv L)
+    @derived-oldWhiteDim: #9d9672; // oldWhite darkened 0.2 (HSLuv L)
+    @derived-dragonOrangeVivid: #be7f46; // dragonOrange saturate 0.6, brighten -0.075
+    @derived-waveAqua1Vivid: #37a28b; // waveAqua1 saturate 0.75, brighten 0.05
+    @derived-oniVioletVivid: #987cc2; // oniViolet saturate 0.15
+    @derived-dragonYellowVivid: #aa8f41; // dragonYellow saturate 0.65, brighten -0.175
+    @derived-sakuraPinkVivid: #ce6c8d; // sakuraPink brighten -0.075
+    @derived-dragonGreenVivid: #528b52; // dragonGreen saturate 0.25, brighten -0.075
+    @derived-crystalBlueVivid: #6b8fd3; // crystalBlue brighten -0.075
+    @derived-dragonRedVivid: #c8726b; // dragonRed saturate 0.05
+    @derived-seqBlue1: #39527f; // crystalBlue hue at OKLCH L 0.44 / C 0.08
+    @derived-seqBlue2: #46669c; // crystalBlue hue at OKLCH L 0.51 / C 0.095
+    @derived-seqBlue3: #547aba; // crystalBlue hue at OKLCH L 0.58 / C 0.108
+    @derived-seqBlue4: #678fd4; // crystalBlue hue at OKLCH L 0.65 / C 0.113
+    @derived-seqBlue5: #86a4e1; // crystalBlue hue at OKLCH L 0.72 / C 0.096
+    @derived-seqBlue6: #a6bae9; // crystalBlue hue at OKLCH L 0.79 / C 0.07
+    @derived-seqBlue7: #c4d1ef; // crystalBlue hue at OKLCH L 0.86 / C 0.044
+    @derived-divRed1: #794d4b; // dragonRed hue at OKLCH L 0.47 / C 0.06
+    @derived-divBlue1: #495b7d; // crystalBlue hue at OKLCH L 0.47 / C 0.06
+    @derived-divRed2: #a8635d; // dragonRed hue at OKLCH L 0.575 / C 0.09
+    @derived-divBlue2: #5d78ae; // crystalBlue hue at OKLCH L 0.575 / C 0.09
+    @derived-divRed3: #d67b73; // dragonRed hue at OKLCH L 0.68 / C 0.115
+    @derived-divBlue3: #7098df; // crystalBlue hue at OKLCH L 0.68 / C 0.115
+  }
+
+  .base24() {
+    @base00: #1f1f28; // sumiInk3: default background
+    @base01: #2a2a37; // sumiInk4: lighter background (status bars)
+    @base02: #363646; // sumiInk5: selection background
+    @base03: #727169; // fujiGray: comments, invisibles
+    @base04: #9e9b93; // dragonGray2: dark foreground (status bars)
+    @base05: #dcd7ba; // fujiWhite: default foreground
+    @base06: #c8c093; // oldWhite: light foreground
+    @base07: #e1e1de; // canvasWhite4: light background (kanagawa-paper canvas)
+    @base08: #c4746e; // dragonRed: variables, tags, deleted
+    @base09: #b6927b; // dragonOrange: numbers, constants, booleans
+    @base0A: #c4b28a; // dragonYellow: classes, search, bold
+    @base0B: #8a9a7b; // dragonGreen2: strings, inserted
+    @base0C: #8ea49e; // dragonAqua: support, regex, escapes
+    @base0D: #859fac; // dragonBlue2: functions, headings
+    @base0E: #a292a3; // dragonPink: keywords, changed
+    @base0F: #9d7665; // dragonOrange2: deprecated, embedded tags
+    @base10: #16161d; // sumiInk0: darker background
+    @base11: #0f0f15; // sumiInkn1: darkest background
+    @base12: #cc928e; // dragonRedBright: bright red
+    @base13: #d4c196; // dragonYellowBright: bright yellow
+    @base14: #72a072; // dragonGreenBright: bright green
+    @base15: #96ada7; // dragonAquaBright: bright cyan
+    @base16: #96b3c1; // dragonBlue2Bright: bright blue
+    @base17: #b4a7b5; // dragonPinkBright: bright magenta
+  }
+
+  .roles() {
+    @surface-bg_m4: #0f0f15;
+    @surface-bg_m3: #16161d;
+    @surface-bg_m2: #181820;
+    @surface-bg_m1: #1a1a22;
+    @surface-bg: #1f1f28;
+    @surface-bg_p1: #2a2a37;
+    @surface-bg_p2: #363646;
+    @surface-bg_p3: #54546d;
+    @surface-overlay: #0f0f1599;
+    @surface-shadow: #0f0f1580;
+    @text-fg_bright: #e8e3c5;
+    @text-fg: #dcd7ba;
+    @text-fg_float: #c8c093;
+    @text-fg_dim: #9e9b93;
+    @text-fg_muted: #727169;
+    @text-fg_subtle: #54546d;
+    @text-fg_dimmer: #393836;
+    @text-on_accent: #1f1f28;
+    @text-fg_reverse: #1d1c19;
+    @text-fg_dark: #181616;
+    @text-link: #938aa9;
+    @text-link_visited: #a292a3;
+    @text-placeholder: #727169;
+    @text-disabled: #54546d;
+    @border-border: #625e5a;
+    @border-border_float: #363646;
+    @border-border_focus: #c4b28a;
+    @border-border_search: #938aa9;
+    @border-win_separator: #8992a7;
+    @border-indent: #363646;
+    @border-indent_scope: #8992a7;
+    @border-ruler: #2a2a37;
+    @state-cursorline: #2a2a37;
+    @state-cursorline_alt: #363646;
+    @state-selection: #363646;
+    @state-selection_inactive: #30303f;
+    @state-hover: #2a2a37;
+    @state-active: #363646;
+    @state-reference: #363646;
+    @state-search: #938aa9;
+    @state-search_current: #938aa9;
+    @state-search_other: #4c4858;
+    @state-substitute: #c4746e;
+    @state-match_paren: #c4b28a;
+    @state-mark: #7aa89f;
+    @state-yank: #54546d;
+    @state-paste: #c8837e;
+    @state-jump_label: #c4746e;
+    @state-jump_label_2: #b6927b;
+    @state-jump_backdrop: #727169;
+    @state-scrollbar: #363646;
+    @state-scrollbar_thumb: #54546d;
+    @state-scrollbar_thumb_hover: #6b6b83;
+    @state-fold_bg: #181820;
+    @state-fold_fg: #8ea49e;
+    @modes-normal: #c4b28a;
+    @modes-insert: #c4746e;
+    @modes-visual: #938aa9;
+    @modes-replace: #c4746e;
+    @modes-command: #c4b28a;
+    @modes-terminal: #699469;
+    @modes-select: #a292a3;
+    @modes-pending: #b6927b;
+    @modes-cursor: #c4b28a;
+    @modes-cursor_text: #1f1f28;
+    @modes-cursor_insert: #c4746e;
+    @modes-cursor_visual: #938aa9;
+    @accent-primary: #c4b28a;
+    @accent-primary_hover: #d4c196;
+    @accent-secondary: #c4746e;
+    @accent-tertiary: #938aa9;
+    @accent-accent1: #658594;
+    @accent-accent2: #b6927b;
+    @accent-accent3: #6a9589;
+    @accent-accent4: #7a8382;
+    @accent-accent5: #c4746e;
+    @accent-invert: #2a2a37;
+    @chrome-statusline_bg: #2a2a37;
+    @chrome-statusline_fg: #9e9b93;
+    @chrome-statusline_section_bg: #363646;
+    @chrome-statusline_inactive_bg: #0f0f15;
+    @chrome-statusline_inactive_fg: #9e9b93;
+    @chrome-statusline_debug_bg: #b6927b;
+    @chrome-tabline_bg: #16161d;
+    @chrome-tab_active_bg: #1f1f28;
+    @chrome-tab_active_fg: #c5c9c5;
+    @chrome-tab_inactive_bg: #16161d;
+    @chrome-tab_inactive_fg: #393836;
+    @chrome-tab_alternate_fg: #a292a3;
+    @chrome-tab_indicator: #658594;
+    @chrome-tab_modified: #c4b28a;
+    @chrome-tab_close: #c4746e;
+    @chrome-float_bg: #2a2a37;
+    @chrome-float_fg: #c8c093;
+    @chrome-float_border: #363646;
+    @chrome-float_title: #8ea49e;
+    @chrome-float_footer: #54546d;
+    @chrome-pmenu_bg: #2a2a37;
+    @chrome-pmenu_fg: #dcd7ba;
+    @chrome-pmenu_sel_bg: #363646;
+    @chrome-pmenu_match: #859fac;
+    @chrome-pmenu_kind: #7a8382;
+    @chrome-pmenu_extra: #8ea49e;
+    @chrome-pmenu_thumb: #54546d;
+    @chrome-sidebar_bg: #2a2a37;
+    @chrome-sidebar_fg: #c8c093;
+    @chrome-line_nr: #54546d;
+    @chrome-line_nr_current: #c4b28a;
+    @chrome-gutter_bg: transparent;
+    @chrome-nontext: #54546d;
+    @chrome-whitespace: #54546d;
+    @chrome-special_key: #8ea49e;
+    @chrome-winbar_fg: #393836;
+    @chrome-title: #8ea49e;
+    @chrome-header1: #8992a7;
+    @chrome-header2: #b6927b;
+    @chrome-msg_fg: #9e9b93;
+    @chrome-more_msg: #658594;
+    @chrome-mode_msg: #c4b28a;
+    @chrome-error_msg: #c4746e;
+    @chrome-warning_msg: #c4b28a;
+    @controls-button_bg: #c4b28a;
+    @controls-button_fg: #1f1f28;
+    @controls-button_hover_bg: #d4c196;
+    @controls-button_secondary_bg: #363646;
+    @controls-button_secondary_fg: #dcd7ba;
+    @controls-button_secondary_hover_bg: #54546d;
+    @controls-button_danger_bg: #c4746e;
+    @controls-input_bg: #2a2a37;
+    @controls-input_fg: #dcd7ba;
+    @controls-input_border: #363646;
+    @controls-input_border_focus: #c4b28a;
+    @controls-input_placeholder: #727169;
+    @controls-toggle_on: #c4b28a;
+    @controls-toggle_off: #54546d;
+    @controls-badge_bg: #363646;
+    @controls-badge_fg: #dcd7ba;
+    @controls-badge_accent_bg: #c4b28a;
+    @controls-progress: #c4b28a;
+    @controls-progress_track: #363646;
+    @controls-kbd_bg: #2a2a37;
+    @controls-kbd_border: #54546d;
+    @controls-kbd_fg: #dcd7ba;
+    @syntax-variable: #dcd7ba;
+    @syntax-comment: #727169;
+    @syntax-docstring: #717e67;
+    @syntax-string: #8a9a7b;
+    @syntax-character: #8a9a7b;
+    @syntax-number: #a292a3;
+    @syntax-float: #a292a3;
+    @syntax-boolean: #b6927b;
+    @syntax-constant: #b6927b;
+    @syntax-constant_builtin: #c4b28a;
+    @syntax-identifier: #c4b28a;
+    @syntax-property: #c4b28a;
+    @syntax-member: #c4746e;
+    @syntax-parameter: #a6a69c;
+    @syntax-variable_builtin: #b6927b;
+    @syntax-global: #b6927b;
+    @syntax-function: #859fac;
+    @syntax-method: #859fac;
+    @syntax-function_builtin: #c4b28a;
+    @syntax-constructor: #8ea49e;
+    @syntax-macro: #c4746e;
+    @syntax-type: #8ea49e;
+    @syntax-type_builtin: #c4b28a;
+    @syntax-type_parameter: #8ea49e;
+    @syntax-enum_member: #b6927b;
+    @syntax-namespace: #a292a3;
+    @syntax-attribute: #c4b28a;
+    @syntax-keyword: #a292a3;
+    @syntax-keyword_import: #c4746e;
+    @syntax-keyword_operator: #c4746e;
+    @syntax-statement: #8992a7;
+    @syntax-label: #8992a7;
+    @syntax-preproc: #c4746e;
+    @syntax-operator: #c4746e;
+    @syntax-punctuation: #9e9b93;
+    @syntax-punctuation_special: #c4746e;
+    @syntax-regex: #c4746e;
+    @syntax-escape: #c4746e;
+    @syntax-symbol: #c4746e;
+    @syntax-lifetime: #c4746e;
+    @syntax-string_special: #c4b28a;
+    @syntax-url: #938aa9;
+    @syntax-tag: #c4b28a;
+    @syntax-tag_attribute: #c4b28a;
+    @syntax-tag_delimiter: #9e9b93;
+    @syntax-special1: #c4b28a;
+    @syntax-special2: #c4746e;
+    @syntax-special3: #938aa9;
+    @syntax-deprecated: #717c7c;
+    @syntax-unused: #727169;
+    @syntax-inlay_hint: #9e9b93;
+    @syntax-code_lens: #727169;
+    @syntax-ghost_text: #727169;
+    @syntax-active_parameter: #c4746e;
+    @diag-error: #c4746e;
+    @diag-warning: #c4b28a;
+    @diag-info: #658594;
+    @diag-hint: #8ea49e;
+    @diag-ok: #699469;
+    @diag-error_bg: #3f2c31;
+    @diag-warning_bg: #3f3a37;
+    @diag-info_bg: #293039;
+    @diag-hint_bg: #32373b;
+    @diag-ok_bg: #2a3331;
+    @diag-spell_bad: #c4746e;
+    @diag-spell_cap: #c4b28a;
+    @diag-spell_local: #c4b28a;
+    @diag-spell_rare: #c4b28a;
+    @diff-add: #699469;
+    @diff-delete: #c4746e;
+    @diff-change: #c4b28a;
+    @diff-text: #658594;
+    @diff-add_bg: #2c3732;
+    @diff-delete_bg: #452f33;
+    @diff-change_bg: #45403a;
+    @diff-text_bg: #2b333c;
+    @diff-add_emph: #394c3d;
+    @diff-delete_emph: #623e3f;
+    @diff-change_emph: #625a4b;
+    @diff-text_emph: #38454f;
+    @diff-conflict_ours: #717e67;
+    @diff-conflict_theirs: #435965;
+    @diff-conflict_ancestor: #9d7665;
+    @diff-conflict_ours_bg: #4b5348;
+    @diff-conflict_theirs_bg: #313d47;
+    @diff-conflict_ancestor_bg: #664e47;
+    @diff-file_header: #8ea49e;
+    @diff-hunk_header: #8992a7;
+    @git-added: #699469;
+    @git-modified: #c4b28a;
+    @git-deleted: #c4746e;
+    @git-untracked: #7aa89f;
+    @git-renamed: #658594;
+    @git-conflicted: #c4746e;
+    @git-ignored: #727169;
+    @git-submodule: #8992a7;
+    @git-sign_add: #699469;
+    @git-sign_change: #c4b28a;
+    @git-sign_delete: #c4746e;
+    @git-commit_hash: #c4b28a;
+    @git-head: #8ea49e;
+    @git-branch_local: #699469;
+    @git-branch_remote: #c4746e;
+    @git-tag: #b6927b;
+    @git-stash: #a292a3;
+    @git-author: #859fac;
+    @git-date: #727169;
+    @git-blame: #727169;
+    @git-graph: transparent;
+    @terminal-black: #393836;
+    @terminal-red: #c4746e;
+    @terminal-green: #699469;
+    @terminal-yellow: #c4b28a;
+    @terminal-blue: #435965;
+    @terminal-magenta: #a292a3;
+    @terminal-cyan: #8ea49e;
+    @terminal-white: #c8c093;
+    @terminal-bright_black: #aca9a4;
+    @terminal-bright_red: #cc928e;
+    @terminal-bright_green: #72a072;
+    @terminal-bright_yellow: #d4c196;
+    @terminal-bright_blue: #698a9b;
+    @terminal-bright_magenta: #b4a7b5;
+    @terminal-bright_cyan: #96ada7;
+    @terminal-bright_white: #d5cd9d;
+    @terminal-dim_black: #2f2e2c;
+    @terminal-dim_red: #9d5a55;
+    @terminal-dim_green: #527552;
+    @terminal-dim_yellow: #9a8b6b;
+    @terminal-dim_blue: #354751;
+    @terminal-dim_magenta: #817282;
+    @terminal-dim_cyan: #6f817c;
+    @terminal-dim_white: #9d9672;
+    @terminal-color16: #b6927b;
+    @terminal-color17: #c4746e;
+    @terminal-background: #1f1f28;
+    @terminal-foreground: #dcd7ba;
+    @terminal-cursor: #c4b28a;
+    @terminal-cursor_text: #1f1f28;
+    @terminal-selection_bg: #363646;
+    @terminal-selection_fg: #9e9b93;
+    @terminal-url: #938aa9;
+    @terminal-split: #8992a7;
+    @terminal-tab_bar_bg: #2a2a37;
+    @terminal-tab_active_bg: #1f1f28;
+    @terminal-tab_active_fg: #c4b28a;
+    @terminal-tab_inactive_bg: #2a2a37;
+    @terminal-tab_inactive_fg: #9e9b93;
+    @terminal-border_active: #c4b28a;
+    @terminal-border_inactive: #625e5a;
+    @terminal-border_bell: #c4746e;
+    @terminal-search_match_bg: #4c4858;
+    @terminal-search_focused_bg: #938aa9;
+    @terminal-hint_start_bg: #c4746e;
+    @terminal-hint_end_bg: #363646;
+    @terminal-footer_bg: #2a2a37;
+    @terminal-footer_fg: #9e9b93;
+    @terminal-vi_cursor: #938aa9;
+    @terminal-visual_bell: #363646;
+    @terminal-scrollbar_thumb: #54546d;
+    @terminal-compose_cursor: #b6927b;
+    @terminal-mark1: #7aa89f;
+    @terminal-mark2: #a292a3;
+    @terminal-mark3: #b6927b;
+    @rainbow-rainbow1: #c4746e;
+    @rainbow-rainbow2: #a292a3;
+    @rainbow-rainbow3: #658594;
+    @rainbow-rainbow4: #9d7665;
+    @rainbow-rainbow5: #699469;
+    @rainbow-rainbow6: #737c73;
+    @rainbow-rainbow7: #949fb5;
+    @markup-h1: #c4746e;
+    @markup-h2: #a292a3;
+    @markup-h3: #658594;
+    @markup-h4: #9d7665;
+    @markup-h5: #699469;
+    @markup-h6: #737c73;
+    @markup-h1_bg: #522c2a;
+    @markup-h2_bg: #413941;
+    @markup-h3_bg: #27363d;
+    @markup-h4_bg: #412f27;
+    @markup-h5_bg: #283b28;
+    @markup-h6_bg: #2e322e;
+    @markup-link_text: #938aa9;
+    @markup-link_url: #938aa9;
+    @markup-code: #8a9a7b;
+    @markup-code_bg: #2a2a37;
+    @markup-quote: #9e9b93;
+    @markup-quote_bar: #54546d;
+    @markup-list_marker: #c4b28a;
+    @markup-checkbox_done: #699469;
+    @markup-checkbox_todo: #9e9b93;
+    @markup-table_border: #54546d;
+    @markup-table_header: #8992a7;
+    @markup-rule: #54546d;
+    @markup-math: #b6927b;
+    @markup-environment: #a292a3;
+    @markup-highlight_bg: #49443c;
+    @markup-footnote: #938aa9;
+    @markup-note: #658594;
+    @markup-note_bg: #293039;
+    @markup-tip: #699469;
+    @markup-tip_bg: #2a3331;
+    @markup-important: #938aa9;
+    @markup-important_bg: #33313d;
+    @markup-warning: #c4b28a;
+    @markup-warning_bg: #3f3a37;
+    @markup-caution: #c4746e;
+    @markup-caution_bg: #3f2c31;
+    @tags-todo: #658594;
+    @tags-fix: #c4746e;
+    @tags-hack: #c4b28a;
+    @tags-note: #8ea49e;
+    @tags-perf: #957fb8;
+    @tags-test: #a292a3;
+    @debug-breakpoint: #c4746e;
+    @debug-breakpoint_condition: #b6927b;
+    @debug-breakpoint_rejected: #727169;
+    @debug-logpoint: #658594;
+    @debug-stopped: #c4b28a;
+    @debug-stopped_line_bg: #49443c;
+    @debug-continue: #8a9a7b;
+    @debug-stop: #c4746e;
+    @debug-step: #c4b28a;
+    @debug-modified_value: #c4b28a;
+    @debug-value: #c4b28a;
+    @debug-source: #c4746e;
+    @debug-unavailable: #727169;
+    @test-passed: #699469;
+    @test-failed: #c4746e;
+    @test-running: #c4b28a;
+    @test-skipped: #8ea49e;
+    @test-queued: #658594;
+    @test-unknown: #717c7c;
+    @test-marked: #c4b28a;
+    @test-adapter: #938aa9;
+    @log-error: #c4746e;
+    @log-warn: #c4b28a;
+    @log-info: #658594;
+    @log-debug: #7a8382;
+    @log-trace: #a292a3;
+    @log-success: #699469;
+    @kinds-Text: #dcd7ba;
+    @kinds-Method: #859fac;
+    @kinds-Function: #859fac;
+    @kinds-Constructor: #8ea49e;
+    @kinds-Field: #c4746e;
+    @kinds-Variable: #dcd7ba;
+    @kinds-Class: #8ea49e;
+    @kinds-Interface: #8ea49e;
+    @kinds-Module: #a292a3;
+    @kinds-Property: #c4b28a;
+    @kinds-Unit: #a292a3;
+    @kinds-Value: #8a9a7b;
+    @kinds-Enum: #8ea49e;
+    @kinds-Keyword: #a292a3;
+    @kinds-Snippet: #c4b28a;
+    @kinds-Color: #c4b28a;
+    @kinds-File: #859fac;
+    @kinds-Reference: #c4b28a;
+    @kinds-Folder: #859fac;
+    @kinds-EnumMember: #b6927b;
+    @kinds-Constant: #b6927b;
+    @kinds-Struct: #8ea49e;
+    @kinds-Event: #8ea49e;
+    @kinds-Operator: #c4746e;
+    @kinds-TypeParameter: #8ea49e;
+    @kinds-Namespace: #a292a3;
+    @kinds-Package: #a292a3;
+    @kinds-Object: #8ea49e;
+    @kinds-Array: #9e9b93;
+    @kinds-Key: #c4b28a;
+    @kinds-String: #8a9a7b;
+    @kinds-Number: #a292a3;
+    @kinds-Boolean: #b6927b;
+    @kinds-Null: #c4b28a;
+    @kinds-AI: #8a9a7b;
+    @files-directory: #859fac;
+    @files-directory_open: #658594;
+    @files-root: #c4746e;
+    @files-file: #dcd7ba;
+    @files-file_opened: #8ea49e;
+    @files-file_modified: #c4b28a;
+    @files-symlink: #8ea49e;
+    @files-symlink_broken: #c4746e;
+    @files-hidden: #727169;
+    @files-special_file: #c4b28a;
+    @files-executable: #cc928e;
+    @files-source: #699469;
+    @files-build_tooling: #72a072;
+    @files-config: #c4b28a;
+    @files-document: #c4b28a;
+    @files-office: #8ea49e;
+    @files-media: #a292a3;
+    @files-archive: #96ada7;
+    @files-unimportant: #54546d;
+    @prompt-prompt_ok: #699469;
+    @prompt-prompt_err: #c4746e;
+    @prompt-path: #859fac;
+    @prompt-git_branch: #a292a3;
+    @prompt-git_status: #c4b28a;
+    @prompt-duration: #b6927b;
+    @prompt-user: #8ea49e;
+    @prompt-root: #c4746e;
+    @prompt-host: #949fb5;
+    @prompt-context: #938aa9;
+    @prompt-jobs: #658594;
+    @prompt-time: #727169;
+    @hues-red: #c4746e;
+    @hues-orange: #b6927b;
+    @hues-yellow: #c4b28a;
+    @hues-green: #699469;
+    @hues-teal: #7aa89f;
+    @hues-cyan: #8ea49e;
+    @hues-blue: #859fac;
+    @hues-purple: #938aa9;
+    @hues-pink: #a292a3;
+    @hues-brown: #9d7665;
+    @hues-gray: #9e9b93;
+    @charts-series1: #be7f46;
+    @charts-series2: #37a28b;
+    @charts-series3: #987cc2;
+    @charts-series4: #aa8f41;
+    @charts-series5: #ce6c8d;
+    @charts-series6: #528b52;
+    @charts-series7: #6b8fd3;
+    @charts-series8: #c8726b;
+    @charts-seq1: #39527f;
+    @charts-seq2: #46669c;
+    @charts-seq3: #547aba;
+    @charts-seq4: #678fd4;
+    @charts-seq5: #86a4e1;
+    @charts-seq6: #a6bae9;
+    @charts-seq7: #c4d1ef;
+    @charts-div_neg3: #d67b73;
+    @charts-div_neg2: #a8635d;
+    @charts-div_neg1: #794d4b;
+    @charts-div_mid: #393836;
+    @charts-div_pos1: #495b7d;
+    @charts-div_pos2: #5d78ae;
+    @charts-div_pos3: #7098df;
+    @charts-good: #699469;
+    @charts-warning: #c4b28a;
+    @charts-serious: #b6927b;
+    @charts-critical: #c4746e;
+    @charts-surface: #1f1f28;
+    @charts-grid: #363646;
+    @charts-axis: #54546d;
+    @charts-label: #9e9b93;
+    @charts-title: #dcd7ba;
+    @charts-tooltip_bg: #2a2a37;
+    @charts-tooltip_border: #363646;
+  }
+
+  .hues() {
+    @hues: {
+      @red: #c4746e;
+      @orange: #b6927b;
+      @yellow: #c4b28a;
+      @green: #699469;
+      @teal: #7aa89f;
+      @cyan: #8ea49e;
+      @blue: #859fac;
+      @purple: #938aa9;
+      @pink: #a292a3;
+      @brown: #9d7665;
+      @gray: #9e9b93;
+    };
+  }
+
+  .hues-filters() {
+    @hues-filters: {
+      @red: brightness(0) saturate(100%) invert(61%) sepia(33%) saturate(540%) hue-rotate(293deg) brightness(101%) contrast(90%);
+      @orange: brightness(0) saturate(100%) invert(73%) sepia(36%) saturate(519%) hue-rotate(332deg) brightness(100%) contrast(93%);
+      @yellow: brightness(0) saturate(100%) invert(85%) sepia(27%) saturate(512%) hue-rotate(336deg) brightness(108%) contrast(96%);
+      @green: brightness(0) saturate(100%) invert(86%) sepia(22%) saturate(538%) hue-rotate(63deg) brightness(97%) contrast(88%);
+      @teal: brightness(0) saturate(100%) invert(90%) sepia(24%) saturate(532%) hue-rotate(105deg) brightness(95%) contrast(85%);
+      @cyan: brightness(0) saturate(100%) invert(81%) sepia(27%) saturate(522%) hue-rotate(141deg) brightness(99%) contrast(86%);
+      @blue: brightness(0) saturate(100%) invert(57%) sepia(66%) saturate(1020%) hue-rotate(195deg) brightness(115%) contrast(96%);
+      @purple: brightness(0) saturate(100%) invert(63%) sepia(71%) saturate(1021%) hue-rotate(208deg) brightness(110%) contrast(94%);
+      @pink: brightness(0) saturate(100%) invert(76%) sepia(28%) saturate(508%) hue-rotate(290deg) brightness(112%) contrast(92%);
+      @brown: brightness(0) saturate(100%) invert(73%) sepia(36%) saturate(519%) hue-rotate(332deg) brightness(100%) contrast(93%); // approximation, borrows @orange's filter
+      @gray: brightness(0) saturate(100%) invert(79%) sepia(13%) saturate(517%) hue-rotate(191deg) brightness(93%) contrast(71%);
+    };
+  }
+
+  // Resolves the user's @accentColor choice (see @var select above)
+  // against .hues() / .hues-filters(). Requires @accentColor in scope.
+  .accent() {
+    .hues();
+    .hues-filters();
+    @accent: @hues[@@accentColor];
+    @accent-filter: @hues-filters[@@accentColor];
+  }
+
+  // color-scheme + selection/placeholder defaults. Call after .roles() and .accent().
+  .defaults() {
+    color-scheme: dark;
+
+    ::selection {
+      background-color: fade(@accent, 30%);
+    }
+
+    input,
+    textarea {
+      &::placeholder {
+        color: @text-placeholder !important;
+      }
+    }
+  }
+
+  .rgbify(@color) {
+    @rgb: red(@color), green(@color), blue(@color);
+  }
+
+  .hslify(@color) {
+    @raw: e(
+      %("%s, %s%, %s%", hue(@color), saturation(@color), lightness(@color))
+    );
+  }
+}
+
+@-moz-document domain("youtube.com") {
+  :root {
+    #kanagawa();
+  }
+
+  #kanagawa() {
+    #lib.palette();
+    #lib.derived();
+    #lib.base24();
+    #lib.roles();
+    #lib.accent();
+    #lib.defaults();
+
+    // No curated hue matches @text-fg's/@text-fg_float's hex; filter chains carried over
+    // verbatim from the prior catppuccin-shaped bridge (mocha row) since hex is unchanged.
+    @text-filter: brightness(0) saturate(100%) invert(75%) sepia(82%) saturate(1008%) hue-rotate(189deg) brightness(120%) contrast(90%);
+    @subtext1-filter: brightness(0) saturate(100%) invert(81%) sepia(11%) saturate(522%) hue-rotate(191deg) brightness(100%) contrast(81%);
+
+    @white: @text-fg;
+    @black: @surface-bg;
+
+    color: @text-fg;
+    background: @surface-bg;
+
+    #--variables() {
+      &,
+      [dark],
+      [system-icons],
+      [darker-dark-theme],
+      &[dark],
+      &[system-icons],
+      &[darker-dark-theme] {
+        --efyt-control-bar-background-color: @surface-bg_m1;
+        --dimmer-text: @text-fg;
+
+        /* Newest Variables */
+        --yt-sys-color-baseline--base-background: @surface-bg;
+        --yt-sys-color-baseline--menu-background: @surface-bg_m1;
+        --yt-sys-color-baseline--raised-background: @surface-bg_p1;
+        --yt-sys-color-baseline--additive-background: @surface-bg_p1;
+        --yt-sys-color-baseline--wordmark-text: @text-fg;
+        --yt-sys-color-baseline--text-primary: @text-fg;
+        --yt-sys-color-baseline--text-secondary: @hues-gray;
+        --yt-sys-color-baseline--call-to-action: @accent;
+        --yt-sys-color-baseline--suggested-action: mix(@accent, @surface-bg, 30%);
+        --yt-sys-color-baseline--outline: @surface-bg_p1;
+        --yt-sys-color-baseline--outline-opaque: @surface-bg_p2;
+        --yt-sys-color-baseline--outline-inverse-opaque: @border-border;
+        --yt-sys-color-baseline--overlay-background-medium-light: fade(
+          @black,
+          60%
+        );
+        --yt-sys-color-baseline--overlay-background-heavy: fade(@black, 80%);
+        --yt-sys-color-baseline--overlay-background-solid: @surface-bg_m3;
+        --yt-sys-color-baseline--overlay-text-primary: @text-fg;
+
+        --yt-spec-white-1: @text-fg;
+        --yt-spec-white-2: @hues-gray;
+        --yt-spec-white-3: @text-fg_float;
+        --yt-spec-white-4: darken(@text-fg_float, 5%);
+        --yt-spec-black-1: @text-fg_muted;
+        --yt-spec-black-2: @border-border;
+        --yt-spec-black-3: @surface-bg_p3;
+        --yt-spec-black-4: @surface-bg_p2;
+        --yt-spec-black-pure: @surface-bg_p1;
+        --yt-spec-grey-1: @text-fg;
+        --yt-spec-grey-2: @hues-gray;
+        --yt-spec-grey-3: @text-fg_float;
+        --yt-spec-grey-4: @hues-gray;
+        --yt-spec-grey-5: @text-fg_muted;
+        --yt-brand-youtube-red: @accent;
+        --yt-brand-medium-red: @accent;
+        --yt-brand-light-red: @accent;
+        --yt-spec-red-30: @hues-orange;
+        --yt-spec-red-70: @hues-red;
+        --yt-spec-red-indicator: @accent;
+        --yt-spec-pale-blue: @hues-cyan;
+        --yt-spec-light-blue: @hues-cyan;
+        --yt-spec-dark-blue: @palette-dragonBlue3;
+        --yt-spec-navy-blue: @hues-teal;
+        --yt-spec-light-green: @hues-green;
+        --yt-spec-dark-green: @hues-green;
+        --yt-spec-yellow: @hues-orange;
+        --yt-spec-black-pure-alpha-5: @hues-gray;
+        --yt-spec-black-pure-alpha-10: @hues-gray;
+        --yt-spec-black-pure-alpha-15: fade(@surface-bg_m3, 85%);
+        --yt-spec-black-pure-alpha-30: fade(@surface-bg_m3, 70%);
+        --yt-spec-black-pure-alpha-60: fade(@surface-bg_m3, 40%);
+        --yt-spec-black-pure-alpha-80: fade(@surface-bg_m3, 20%);
+        --yt-spec-black-1-alpha-98: fade(@surface-bg_m3, 2%);
+        --yt-spec-black-1-alpha-95: fade(@surface-bg_m3, 5%);
+        --yt-spec-white-1-alpha-10: fade(@text-fg, 90%);
+        --yt-spec-white-1-alpha-20: fade(@text-fg, 80%);
+        --yt-spec-white-1-alpha-25: fade(@text-fg, 75%);
+        --yt-spec-white-1-alpha-30: fade(@text-fg, 70%);
+        --yt-spec-white-1-alpha-70: fade(@text-fg, 30%);
+        --yt-spec-white-1-alpha-95: fade(@text-fg, 5%);
+        --yt-spec-white-1-alpha-98: fade(@text-fg, 2%);
+        --yt-brand-medium-red-alpha-90: fade(@accent, 10%);
+        --yt-brand-medium-red-alpha-30: fade(@accent, 70%);
+        --yt-brand-light-red-alpha-30: fade(@accent, 70%);
+        --yt-spec-light-blue-alpha-30: fade(@palette-dragonBlue3, 70%);
+        --yt-spec-dark-blue-alpha-30: fade(@palette-dragonBlue3, 70%);
+
+        --yt-spec-base-background: @surface-bg;
+        --yt-spec-raised-background: @surface-bg_p1;
+        --yt-spec-menu-background: @surface-bg_m1;
+        --yt-spec-inverted-background: @text-fg;
+        --yt-spec-additive-background: @surface-bg_p1;
+        --yt-spec-outline: @surface-bg_p1;
+        --yt-spec-shadow: fade(@surface-bg_m3, 75%);
+        --yt-spec-text-primary: @text-fg;
+        --yt-spec-text-secondary: @hues-gray;
+        --yt-spec-text-disabled: @text-fg_float;
+        --yt-spec-text-primary-inverse: @surface-bg_m3;
+        --yt-spec-call-to-action: @accent;
+        --yt-spec-call-to-action-inverse: @accent;
+        --yt-spec-suggested-action: fade(@accent, 20%);
+        --yt-spec-suggested-action-inverse: @text-fg;
+        --yt-spec-icon-active-other: @text-fg;
+        --yt-spec-button-chip-background-hover: @surface-bg_p2;
+        --yt-spec-touch-response: @surface-bg_p1;
+
+        --yt-spec-touch-response-inverse: @accent;
+        --yt-spec-brand-icon-active: @accent;
+        --yt-spec-brand-button-background: @accent;
+        --yt-spec-brand-link-text: @palette-dragonBlue3;
+        --yt-spec-wordmark-text: @text-fg;
+        --yt-spec-error-indicator: @hues-red;
+        --yt-spec-themed-blue: @accent;
+        --yt-spec-themed-green: @hues-green;
+        --yt-spec-ad-indicator: @hues-teal;
+        --yt-spec-themed-overlay-background: fade(@surface-bg_m3, 80%);
+        --yt-spec-commerce-badge-background: @hues-green;
+        --yt-spec-static-brand-red: @accent;
+        --yt-spec-static-brand-white: @text-fg;
+        --yt-spec-static-brand-black: @surface-bg;
+        --yt-spec-static-clear-color: fade(@surface-bg_m3, 100%);
+        --yt-spec-static-clear-black: @surface-bg;
+        --yt-spec-static-ad-yellow: @hues-orange;
+        --yt-spec-static-grey: @hues-gray;
+        --yt-spec-static-overlay-background-solid: @surface-bg_m3;
+        --yt-spec-static-overlay-background-heavy: @surface-bg_m3;
+        --yt-spec-static-overlay-background-medium: fade(@surface-bg_m3, 50%);
+        --yt-spec-static-overlay-background-light: fade(
+          @surface-bg_m3,
+          90%
+        );
+        --yt-spec-static-overlay-text-primary: @text-fg;
+        --yt-spec-static-overlay-text-secondary: fade(
+          @hues-gray,
+          30%
+        );
+        --yt-spec-static-overlay-text-disabled: fade(
+          @hues-gray,
+          70%
+        );
+        --yt-spec-static-overlay-call-to-action: @accent;
+        --yt-spec-static-overlay-icon-active-other: @surface-bg_m3;
+        --yt-spec-static-overlay-icon-inactive: @surface-bg_p2;
+        --yt-spec-static-overlay-icon-disabled: @surface-bg_p3;
+        --yt-spec-static-overlay-button-primary: @accent;
+        --yt-spec-static-overlay-touch-response: @text-fg_muted;
+        --yt-spec-static-overlay-touch-response-inverse: @surface-bg_p2;
+        --yt-spec-static-overlay-background-brand: @accent;
+        --yt-spec-assistive-feed-themed-gradient-1: @hues-gray;
+        --yt-spec-assistive-feed-themed-gradient-2: @palette-springViolet2;
+        --yt-spec-assistive-feed-themed-gradient-3: @hues-red;
+        --yt-spec-brand-background-solid: @surface-bg;
+        --yt-spec-brand-background-primary: @surface-bg;
+        --yt-spec-brand-background-secondary: @surface-bg_m1;
+        --yt-spec-general-background-a: @surface-bg;
+        --yt-spec-general-background-b: @surface-bg;
+        --yt-spec-general-background-c: @surface-bg_m3;
+        --yt-spec-error-background: @surface-bg;
+        --yt-spec-10-percent-layer: @surface-bg_p2;
+        --yt-spec-snackbar-background: @surface-bg_m1;
+        --yt-spec-snackbar-background-updated: @surface-bg_m1;
+        --yt-spec-badge-chip-background: @surface-bg_p1;
+        --yt-spec-verified-badge-background: @border-border;
+        --yt-spec-call-to-action-fadeoutd: fade(@palette-dragonBlue3, 70%);
+        --yt-spec-call-to-action-hover: @accent;
+        --yt-spec-brand-button-background-hover: @accent;
+        --yt-spec-brand-link-text-fadeoutd: fade(
+          @accent,
+          70%
+        );
+        --yt-spec-filled-button-focus-outline: @surface-bg_p1;
+        --yt-spec-static-overlay-button-hover: @surface-bg_p2;
+        --yt-spec-mono-filled-hover: @surface-bg_p2;
+        --yt-spec-commerce-filled-hover: @accent;
+        --yt-spec-mono-tonal-hover: @surface-bg_p2;
+        --yt-spec-commerce-tonal-hover: @surface-bg_p3;
+        --yt-spec-static-overlay-filled-hover: @text-fg_muted;
+        --yt-spec-static-overlay-tonal-hover: @surface-bg_p2;
+        --yt-spec-paper-tab-ink: fade(@text-fg, 70%);
+        --yt-spec-filled-button-text: @text-fg;
+        --yt-spec-selected-nav-text: @text-fg;
+        --iron-icon-fill-color: @text-fg;
+
+        --yt-spec-overlay-text-primary: @text-fg;
+        --yt-spec-overlay-background-medium-light: fade(@black, 60%);
+        --yt-spec-overlay-background-heavy: fade(@black, 80%);
+        --yt-spec-overlay-background-solid: @black;
+
+        /* Search bar */
+        --ytd-searchbox-border-color: @surface-bg_p1;
+        --ytd-searchbox-legacy-border-color: @surface-bg_p1;
+        --ytd-searchbox-legacy-border-shadow-color: fade(
+          @surface-bg_m3,
+          100%
+        );
+        --ytd-searchbox-legacy-button-color: @surface-bg_m1;
+        --ytd-searchbox-legacy-button-border-color: @surface-bg_p1;
+        --ytd-searchbox-legacy-button-focus-color: @accent;
+        --ytd-searchbox-legacy-button-hover-color: @surface-bg_m1;
+        --ytd-searchbox-legacy-button-hover-border-color: @surface-bg_p1;
+        --ytd-searchbox-legacy-button-icon-color: @accent;
+        --ytd-searchbox-background: @surface-bg;
+        --ytd-searchbox-text-color: @text-fg;
+
+        /* System icons */
+        --yt-spec-icon-inactive: @text-fg;
+        --yt-spec-icon-disabled: @text-fg_muted;
+        --yt-spec-brand-icon-inactive: @hues-gray;
+
+        /* Live chat */
+        --yt-live-chat-background-color: @surface-bg;
+        --yt-live-chat-primary-text-color: @text-fg;
+        --yt-live-chat-action-panel-background-color: @surface-bg;
+        --yt-live-chat-secondary-background-color: @surface-bg_p2;
+        --yt-live-chat-toast-background-color: @surface-bg_p3;
+        --yt-live-chat-mode-change-background-color: @surface-bg;
+        --yt-live-chat-secondary-text-color: @hues-gray;
+        --yt-live-chat-tertiary-text-color: fade(@text-fg, 46%);
+        --yt-live-chat-text-input-field-inactive-underline-color: @hues-gray;
+
+        --yt-live-chat-text-input-field-placeholder-color: @hues-gray;
+        --yt-live-chat-enabled-send-button-color: @text-fg;
+        --yt-live-chat-disabled-icon-button-color: @text-fg_float;
+        --yt-live-chat-picker-button-hover-color: @accent;
+        --yt-live-chat-mention-background-color: @accent;
+        --yt-live-chat-mention-text-color: @text-fg;
+        --yt-live-chat-deleted-message-color: @hues-gray;
+        --yt-live-chat-deleted-message-bar-color: @text-fg_float;
+        --yt-live-chat-reconnect-message-color: @text-fg;
+        --yt-live-chat-disabled-button-background-color: @border-border;
+        --yt-live-chat-sub-panel-background-color: @surface-bg;
+        --yt-live-chat-sub-panel-background-color-transparent: @surface-bg_m1;
+        --yt-live-chat-moderator-color: @palette-springViolet2;
+        --yt-live-chat-owner-color: @hues-orange;
+        --yt-live-chat-message-highlight-background-color: @surface-bg;
+        --yt-live-chat-sponsor-color: @hues-green;
+        --yt-live-chat-overlay-color: fade(@surface-bg_m1, 50%);
+        --yt-live-chat-dialog-background-color: @surface-bg;
+        --yt-emoji-picker-variant-selector-bg-color: @surface-bg;
+        --yt-live-chat-moderation-mode-hover-background-color: fade(
+          @surface-bg_m1,
+          70%
+        );
+        --yt-grey: @hues-gray;
+        --yt-live-chat-text-input-field-suggestion-background-color: @hues-gray;
+
+        --yt-live-chat-text-input-field-suggestion-background-color-hover: @text-fg_float;
+
+        --yt-emoji-picker-search-background-color: @surface-bg_p1;
+        --yt-emoji-picker-search-color: @text-fg;
+        --yt-emoji-picker-search-placeholder-color: @accent;
+        --yt-live-chat-slider-active-color: @accent;
+        --yt-live-chat-slider-container-color: @surface-bg_p1;
+        --yt-live-chat-slider-markers-color: @text-fg;
+        --yt-live-chat-banner-gradient-scrim: linear-gradient(
+          @surface-bg_m1,
+          transparent
+        );
+        --yt-live-chat-action-panel-gradient-scrim: linear-gradient(
+          to top,
+          @surface-bg_m1,
+          transparent
+        );
+        --yt-live-chat-automod-button-background-color-hover: fade(
+          @surface-bg_m3,
+          50%
+        );
+        --yt-live-chat-automod-button-explanation-color: fade(
+          @accent,
+          30%
+        );
+        --yt-live-chat-shimmer-background-color: fade(@surface-bg_m3, 60%);
+        --yt-live-chat-shimmer-linear-gradient: linear-gradient(
+          0deg,
+          fade(@text-fg, 90%) 40%,
+          fade(@surface-bg, 70%) 50%,
+          fade(@text-fg, 90%) 60%
+        );
+        --yt-live-chat-vem-background-color: @surface-bg_m1;
+        --yt-live-chat-product-picker-icon-color: fade(@text-fg, 50%);
+        --yt-live-chat-product-picker-hover-color: @border-border;
+        --yt-live-chat-product-picker-disabled-icon-color: fade(
+          @text-fg,
+          70%
+        );
+        --yt-live-chat-action-panel-background-color-transparent: (null);
+
+        --paper-tooltip-background: @surface-bg_p3;
+        --paper-tooltip-text-color: @text-fg;
+        .ytTooltipContainerDefaultTooltipContent {
+          background: var(--paper-tooltip-background);
+          color: var(--paper-tooltip-text-color);
+        }
+
+        /* Links */
+        --yt-endpoint-color: @text-fg;
+        --yt-endpoint-visited-color: @text-fg;
+        --yt-endpoint-hover-color: @accent;
+
+        --sb-dark-red-outline: @accent;
+        --sb-main-bg-color: @surface-bg;
+        --sb-main-fg-color: @text-fg;
+        --sb-grey-bg-color: @surface-bg;
+        --sb-grey-fg-color: @hues-gray;
+        --sb-red-bg-color: @accent;
+
+        & when (@sponsorBlock = 1) {
+          --sb-category-sponsor: @hues-green;
+          --sb-category-selfpromo: @hues-yellow;
+          --sb-category-exclusive_access: @hues-teal;
+          --sb-category-interaction: @hues-purple;
+          --sb-category-poi_highlight: @hues-pink;
+          --sb-category-intro: @hues-cyan;
+          --sb-category-outro: @hues-blue;
+          --sb-category-preview: @palette-dragonBlue3;
+          --sb-category-filler: @palette-springViolet2;
+          --sb-category-music_offtopic: @hues-orange;
+        }
+      }
+
+      &:not(.style-scope) {
+        --primary-text-color: @text-fg;
+        --primary-background-color: @surface-bg;
+        --secondary-text-color: @hues-gray;
+        --disabled-text-color: @text-fg_float;
+        --divider-color: @border-border;
+        --error-color: @hues-red;
+        --primary-color: @accent;
+        --light-primary-color: @accent;
+        --dark-primary-color: @hues-blue;
+        --accent-color: @accent;
+        --light-accent-color: @accent;
+        --dark-accent-color: @accent;
+        --light-theme-background-color: @surface-bg;
+        --light-theme-base-color: @text-fg;
+        --light-theme-text-color: @text-fg;
+        --light-theme-secondary-color: @hues-gray;
+        --light-theme-disabled-color: @text-fg_float;
+        --light-theme-divider-color: @border-border;
+        --dark-theme-background-color: @surface-bg;
+        --dark-theme-base-color: @text-fg;
+        --dark-theme-text-color: @text-fg;
+        --dark-theme-secondary-color: @hues-gray;
+        --dark-theme-disabled-color: @text-fg_float;
+        --dark-theme-divider-color: @border-border;
+      }
+    }
+
+    #--variables() !important;
+
+    /* Misc */
+
+    & when (@logo = 0) {
+      ytd-topbar-logo-renderer,
+      svg.ytd-consent-bump-v2-lightbox {
+        display: none;
+      }
+    }
+
+    #progress.yt-page-navigation-progress {
+      background: @accent;
+    }
+
+    /* Selected chapter */
+    ytd-macro-markers-list-item-renderer {
+      --ytd-macro-markers-list-item-background-color: @surface-bg_p1;
+      --ytd-macro-markers-list-item-title-color: @text-fg;
+      --ytd-macro-markers-list-item-secondary-color: @text-fg_float;
+      --ytd-macro-markers-list-item-timestamp-background-color: @surface-bg_p2;
+    }
+
+    ytd-playlist-panel-video-renderer {
+      --yt-lightsource-section2-color: @surface-bg_p2;
+      --yt-lightsource-section4-color: @surface-bg_p3;
+      --yt-lightsource-primary-title-color: @text-fg;
+      --yt-lightsource-secondary-title-color: @text-fg;
+      --yt-active-playlist-panel-background-color: @surface-bg_p1;
+    }
+
+    ytd-playlist-panel-renderer[collapsible][collapsed][use-color-palette]
+      .header.ytd-playlist-panel-renderer {
+      --iron-icon-fill-color: @text-fg;
+      background-color: @surface-bg;
+    }
+
+    #container.ytd-masthead {
+      --iron-icon-fill-color: @text-fg;
+    }
+
+    #background.ytd-masthead,
+    #frosted-glass {
+      --yt-frosted-glass-desktop: @surface-bg;
+      --yt-spec-frosted-glass-desktop: @surface-bg;
+    }
+
+    ytd-feed-filter-chip-bar-renderer[expand-instead-of-scroll]
+      #chips-wrapper.ytd-feed-filter-chip-bar-renderer {
+      --iron-icon-fill-color: @text-fg;
+      background-color: @surface-bg;
+    }
+
+    .ytp-progress-list {
+      background: fade(@surface-bg_p1, 80%);
+    }
+    .ytp-load-progress {
+      background: fade(@border-border, 100%);
+    }
+
+    ytd-expandable-metadata-renderer {
+      --yt-lightsource-section1-color: @surface-bg;
+      --yt-lightsource-section2-color: @surface-bg_p1;
+      --yt-lightsource-section3-color: @surface-bg_p2;
+      --yt-lightsource-section4-color: @surface-bg_p3;
+      --yt-lightsource-primary-title-color: @text-fg;
+      --yt-lightsource-secondary-title-color: @hues-gray;
+    }
+
+    yt-live-chat-renderer {
+      --yt-button-default-text-color: @text-fg;
+      --yt-button-default-background-color: @surface-bg;
+      --yt-button-dark-text-color: @surface-bg;
+      --yt-button-dark-background-color: @accent;
+      --yt-button-payment-background-color: @accent;
+    }
+
+    yt-icon-button.yt-live-chat-item-list-renderer {
+      background-color: @accent;
+      color: @surface-bg;
+
+      &:hover {
+        background-color: darken(@accent, 5%);
+      }
+    }
+
+    /* Skeleton */
+    #guide-skeleton,
+    #home-container-skeleton,
+    #home-chips {
+      background-color: @surface-bg;
+      z-index: -1;
+    }
+
+    ytd-app[is-shorts-page] {
+      background: var(
+        --yt-spec-base-background
+      ); // fix unset background on shorts page
+    }
+
+    #guide-skeleton .guide-ghost-icon,
+    #guide-skeleton .guide-ghost-text,
+    .masthead-skeleton-icon,
+    #home-page-skeleton .skeleton-bg-color,
+    .watch-skeleton .skeleton-bg-color {
+      background-color: @surface-bg_p2;
+    }
+
+    /* Ambient mode */
+    #cinematics,
+    #cinematic-container {
+      display: none;
+    }
+
+    .ytp-settings-button.ytp-hd-quality-badge::after,
+    .ytp-settings-button.ytp-hdr-quality-badge::after,
+    .ytp-settings-button.ytp-4k-quality-badge::after,
+    .ytp-settings-button.ytp-5k-quality-badge::after,
+    .ytp-settings-button.ytp-8k-quality-badge::after,
+    .ytp-settings-button.ytp-3d-badge-grey::after,
+    .ytp-settings-button.ytp-3d-badge::after {
+      background-color: @accent;
+    }
+
+    /* Icons */
+
+    [fill="red"],
+    [fill="#F00"],
+    [fill="#FF0000"],
+    [fill="#f03"],
+    [fill="#FF0033"] {
+      fill: @accent;
+    }
+
+    [fill="white"] {
+      fill: @text-fg;
+    }
+
+    yt-icon.ytd-logo [fill="white"] {
+      fill: @surface-bg_m3;
+    }
+
+    .yt-spec-icon-shape {
+      [fill="#FAFAFA"],
+      [fill="#000"],
+      [fill="#fff"],
+      [fill="#FFF"],
+      [fill="#FFFFFF"] {
+        fill: @surface-bg_m3;
+      }
+    }
+
+    /* Notifications Bell and Indicator */
+    .ytSpecIconBadgeShapeStyleOverlay .ytSpecIconBadgeShapeIcon,
+    .ytSpecIconBadgeShapeBadge {
+      color: @text-fg;
+    }
+    .ytSpecIconBadgeShapeTypeNotification .ytSpecIconBadgeShapeBadge {
+      background-color: @accent;
+      color: @surface-bg;
+    }
+
+    /* Buttons */
+
+    .yt-spec-button-shape-next--mono {
+      &.yt-spec-button-shape-next--tonal {
+        color: @text-fg;
+        background-color: @surface-bg_p1;
+
+        [fill="rgb(3,3,3)"],
+        [fill="rgb(0,0,0)"],
+        [fill="rgb(255,255,255)"] {
+          fill: @text-fg;
+        }
+
+        [stroke="rgb(0,0,0)"],
+        [stroke="rgb(255,255,255)"] {
+          stroke: @text-fg;
+        }
+
+        /* Accent for filled-in thumbs up (like button) */
+        [animated-icon-type="LIKE"] {
+          g path[fill] {
+            fill: @accent;
+
+            + [stroke] {
+              stroke: @accent;
+            }
+          }
+        }
+
+        &:hover {
+          background-color: @surface-bg_p2;
+        }
+      }
+
+      &.yt-spec-button-shape-next--outline {
+        color: @text-fg;
+        border-color: @surface-bg_p3;
+
+        &:hover {
+          background-color: @surface-bg_p3;
+        }
+      }
+
+      &.yt-spec-button-shape-next--text {
+        color: @text-fg;
+
+        /* Accent for filled-in thumbs up (like button) */
+        path[d="M3,11h3v10H3V11z M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11v10h10.43 c1.06,0,1.98-0.67,2.19-1.61l1.34-6C21.23,12.15,20.18,11,18.77,11z"] {
+          fill: @accent;
+        }
+
+        &:hover {
+          background-color: @surface-bg_p2;
+        }
+      }
+
+      &.yt-spec-button-shape-next--filled {
+        color: @surface-bg;
+        background-color: @accent;
+
+        &:hover {
+          background-color: darken(@accent, 5%);
+        }
+      }
+    }
+
+    .yt-spec-button-shape-next--disabled {
+      color: @text-fg_muted;
+    }
+
+    .yt-spec-button-shape-next--overlay {
+      &.yt-spec-button-shape-next--tonal {
+        color: @text-fg;
+        background-color: @surface-bg_p1;
+        &:hover {
+          background-color: @surface-bg_p2;
+        }
+      }
+      &.yt-spec-button-shape-next--text {
+        color: @text-fg;
+        &:hover {
+          background-color: @surface-bg_p1;
+        }
+      }
+
+      &.yt-spec-button-shape-next--filled {
+        color: @surface-bg;
+        background-color: @accent;
+      }
+
+      &.yt-spec-button-shape-next--outline {
+        color: @text-fg;
+        border-color: @surface-bg_p2;
+        &:hover {
+          background: @surface-bg_p1;
+        }
+      }
+    }
+
+    .yt-spec-button-shape-next--call-to-action {
+      &.yt-spec-button-shape-next--outline {
+        color: @accent;
+        border-color: @surface-bg_p3;
+
+        &:hover {
+          background-color: fade(@accent, 30%);
+          color: @accent;
+        }
+      }
+
+      &.yt-spec-button-shape-next--text {
+        color: @accent;
+
+        &:hover {
+          background-color: fade(@accent, 30%);
+        }
+      }
+
+      &.yt-spec-button-shape-next--filled {
+        color: @surface-bg;
+        background-color: @accent;
+
+        &:hover {
+          background-color: lighten(@accent, 5%);
+        }
+      }
+    }
+
+    .yt-spec-button-shape-next--disabled.yt-spec-button-shape-next--filled {
+      color: @hues-gray;
+      background-color: fade(@surface-bg_p2, 70%);
+    }
+
+    /* Search box */
+
+    .ytSearchboxComponentInputBox,
+    .ytSearchboxComponentInputBoxDark {
+      background: var(--ytd-searchbox-background);
+      color: var(--ytd-searchbox-text-color);
+      border-color: var(--ytd-searchbox-border-color);
+      box-shadow: none;
+    }
+
+    .ytSearchboxComponentInputBoxHasFocus,
+    .ytSearchboxComponentInputBoxHasFocusDark {
+      border-color: @accent;
+    }
+
+    .ytSuggestionComponentPersonalizedSuggestion {
+      color: @text-fg;
+    }
+    .ytSuggestionComponentHighlighted {
+      background: @surface-bg_p2;
+    }
+    .ytSuggestionComponentLargerRemovedText {
+      color: @text-fg_muted;
+    }
+
+    .ytSearchboxComponentSuggestionsContainer,
+    .ytSearchboxComponentSuggestionsContainerDark {
+      background: var(--yt-spec-raised-background);
+      border-color: var(--yt-spec-raised-background);
+    }
+
+    .ytSuggestionComponentSuggestion,
+    .ytSuggestionComponentSuggestionDark {
+      color: var(--ytd-searchbox-text-color);
+    }
+
+    .ytSearchboxComponentSearchButton,
+    .ytSearchboxComponentSearchButtonDark {
+      color: var(--ytd-searchbox-text-color);
+      background: var(--yt-spec-raised-background);
+      border-color: var(--ytd-searchbox-border-color);
+    }
+
+    .ytSearchboxComponentClearButtonIcon,
+    .ytSearchboxComponentClearButtonIconDark {
+      color: var(--ytd-searchbox-text-color);
+    }
+
+    /* Video description */
+
+    // Video description background (collapsed on hover)
+    ytd-watch-metadata {
+      --yt-saturated-raised-background: @surface-bg_p2 !important;
+      --yt-saturated-text-primary: @text-fg !important;
+      --yt-saturated-text-secondary: @text-fg_float !important;
+    }
+    // Video description text (expanded)
+    ytd-text-inline-expander
+      .ytAttributedStringLinkInheritColor:not(
+        .ytAttributedStringLink
+      ) {
+      color: @text-fg !important;
+    }
+    // Video description YouTube links
+    .ytAttributedStringHighlightTextDecorator {
+      background-color: @surface-bg_p3 !important;
+    }
+
+    /* Links */
+    .ytAttributedStringLinkCallToActionColor {
+      color: @accent;
+    }
+
+    /* Course Playlist (e.g. https://www.youtube.com/playlist?list=PLZHQObOWTQDNPOjrT6KVlfJuKtYTftqH6) */
+    .ytwCourseProgressViewModelHostProgressTitle,
+    .ytwCourseProgressViewModelHostProgressSubtitle {
+      color: @text-fg;
+    }
+    .ytwCourseProgressViewModelHostProgressBar {
+      background-color: fade(@white, 20%);
+
+      .ytwCourseProgressViewModelHostProgressBarFill {
+        background-color: @text-fg;
+      }
+    }
+
+    .ytwHowThisWasMadeSectionViewModelSectionTitle,
+    .ytwHowThisWasMadeSectionViewModelBodyHeader {
+      color: @text-fg;
+    }
+
+    .ytwHowThisWasMadeSectionViewModelBodyText {
+      color: @hues-gray;
+    }
+
+    // "Ask" - AI chat
+    .ytVideoDescriptionYouchatSectionViewModelSectionTitle {
+      color: @text-fg;
+    }
+    .ytVideoDescriptionYouchatSectionViewModelSubHeaderText {
+      color: @hues-gray;
+    }
+    .ytwYouChatItemViewModelHost {
+      color: @text-fg;
+    }
+    .ytwYouChatChipsDataChip {
+      color: @text-fg;
+      border-color: @surface-bg_p3;
+
+      &:hover {
+        background-color: @surface-bg_p2;
+      }
+    }
+    .chatInputViewModelChatDisclaimer {
+      color: @hues-gray;
+    }
+
+    // Timeline/Transcript
+    .ytwTimelineChapterViewModelTitle,
+    .ytShelfHeaderLayoutTitle {
+      color: @text-fg;
+    }
+    .ytwTranscriptSegmentViewModelHost {
+      color: @hues-gray;
+    }
+    .ytwTranscriptSegmentViewModelTimestamp {
+      background-color: @surface-bg_p3;
+      color: @text-fg_float;
+    }
+    .ytwTranscriptSegmentViewModelTimestampActive {
+      background-color: @border-border;
+      color: @text-fg;
+    }
+
+    // Video Attributes (Music, Games)
+    .videoAttributesSectionViewModelTitle,
+    .ytVideoAttributeViewModelTitle {
+      color: @text-fg;
+    }
+    .ytVideoAttributeViewModelSubtitle,
+    .ytVideoAttributeViewModelSecondarySubtitle {
+      color: @text-fg_float;
+    }
+
+    /* Thumbnails */
+
+    .ytp-sb-unsubscribe {
+      background-color: @surface-bg_p3;
+      color: @text-fg;
+    }
+    .ytp-sb-subscribe {
+      background-color: @accent;
+      color: @surface-bg;
+    }
+
+    // Watch progress bar
+    .ytThumbnailOverlayProgressBarHostWatchedProgressBar {
+      background-color: @surface-bg_p3;
+    }
+    .ytThumbnailOverlayProgressBarHostWatchedProgressBarSegment {
+      background: @accent;
+    }
+    // Watch progress bar (legacy component)
+    ytd-thumbnail-overlay-resume-playback-renderer {
+      background-color: @surface-bg_p3;
+
+      #progress.ytd-thumbnail-overlay-resume-playback-renderer {
+        background: @accent;
+      }
+    }
+
+    /* Panels, popups, tooltips */
+
+    .ytp-tooltip-bottom-text {
+      background: fade(@surface-bg_p1, 90%);
+      color: @text-fg;
+      text-shadow: none;
+    }
+
+    .ytp-popup {
+      background: fade(@surface-bg_p1, 90%);
+      text-shadow: none;
+    }
+
+    .ytp-panel-menu,
+    .ytp-panel-header,
+    .ytp-panel-footer,
+    .ytp-menuitem-label,
+    .ytp-premium-label,
+    .ytp-menuitem-content,
+    .ytp-menuitem-label-count,
+    .ytp-menu-label-secondary,
+    .ytd-menu-title-renderer {
+      color: @text-fg;
+    }
+
+    .ytp-panel-footer-content-link {
+      color: @accent;
+    }
+
+    .ytp-panel-back-button {
+      @svg: escape(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32" version="1.1"><path d="m19.41 20.09-4.58-4.59 4.58-4.59L18 9.5l-6 6 6 6z" fill="@{text-fg}"/></svg>'
+      );
+      background-image: url("data:image/svg+xml,@{svg}");
+    }
+
+    .ytp-menuitem[aria-checked="false"] .ytp-menuitem-toggle-checkbox {
+      &::after {
+        background-color: @text-fg_muted;
+      }
+    }
+    .ytp-menuitem[aria-checked="true"] .ytp-menuitem-toggle-checkbox {
+      background-color: @surface-bg_p3;
+
+      &::after {
+        background-color: @text-fg;
+      }
+    }
+
+    .ytp-menuitem {
+      &:not([aria-disabled="true"]):hover {
+        background-color: @surface-bg_p2;
+      }
+    }
+
+    /* Video player */
+
+    // Shorts and video hover preview progress bars
+    yt-progress-bar {
+      .ytProgressBarLineProgressBarPlayed,
+      .ytProgressBarPlayheadProgressBarPlayheadDot {
+        background: @accent;
+      }
+
+      .ytProgressBarLineProgressBarHovered,
+      .ytProgressBarLineProgressBarBackground {
+        background: @text-fg; // (background) opacity is already adequately set
+      }
+    }
+
+    .ytp-cards-button {
+      .ytp-cards-button-icon {
+        use {
+          fill: @black;
+        }
+        path {
+          fill: @white;
+        }
+      }
+    }
+    .ytp-cards-teaser {
+      .ytp-cards-teaser-box {
+        background-color: @surface-bg_p3;
+        border-bottom-color: @surface-bg_p3;
+      }
+      .ytp-cards-teaser-text {
+        color: @text-fg;
+      }
+    }
+
+    .html5-video-player {
+      color: @white;
+      & when (@oled = 0) {
+        background-color: @surface-bg_m3;
+      }
+
+      .ytp-swatch-background-color,
+      .ytp-play-progress {
+        background: @accent;
+      }
+
+      .ytp-svg-fill,
+      [fill="#fff"] {
+        fill: @white;
+      }
+
+      .ytp-volume-slider-handle {
+        &,
+        &::before {
+          background-color: @white;
+        }
+        &::after {
+          background-color: fade(@white, 20%);
+        }
+      }
+
+      .ytp-time-current,
+      .ytp-time-separator,
+      .ytp-time-duration {
+        color: @white;
+      }
+
+      .ytp-live-badge {
+        &[disabled]::before {
+          background: @accent;
+        }
+        &::before {
+          background: @border-border;
+        }
+      }
+
+      .ytp-button,
+      .ytp-subtitles-button {
+        &[aria-pressed]::after {
+          background-color: @accent;
+        }
+      }
+
+      /* stats for nerds */
+      .ytp-sfn {
+        background: fade(@surface-bg, 80%);
+        color: @text-fg;
+      }
+
+      .ytp-autonav-toggle-button {
+        background-color: @surface-bg_p3;
+
+        &::after {
+          @svg: escape(
+            '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M12.75 4.5h-3c-.6 0-1.17.23-1.6.65-.42.43-.65 1-.65 1.6v22.5c0 .59.23 1.16.65 1.59.43.42 1 .66 1.6.66h3c.59 0 1.16-.24 1.59-.66.42-.43.66-1 .66-1.59V6.75c0-.6-.24-1.17-.66-1.6-.43-.42-1-.65-1.59-.65m13.5 0h-3c-.6 0-1.17.23-1.6.65-.42.43-.65 1-.65 1.6v22.5c0 .59.23 1.16.65 1.59.43.42 1 .66 1.6.66h3c.59 0 1.16-.24 1.59-.66.42-.43.66-1 .66-1.59V6.75c0-.6-.24-1.17-.66-1.6-.43-.42-1-.65-1.59-.65" fill="@{white}"/></svg>'
+          );
+          background-image: url("data:image/svg+xml,@{svg}");
+          background-color: @text-fg_muted;
+        }
+
+        &[aria-checked="true"] {
+          &::after {
+            @svg: escape(
+              '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="m17 8.6-6.11-3.61c-1.5-.88-3.39.2-3.39 1.94v22.13c0 1.74 1.89 2.82 3.39 1.94L17 27.4zm0 0v18.8L33 18z" fill="@{black}"/></svg>'
+            );
+            background-image: url("data:image/svg+xml,@{svg}");
+            background-color: @white;
+          }
+        }
+      }
+    }
+
+    /* Video highlight */
+    ytd-rich-item-renderer.ytd-rich-item-renderer-highlight {
+      background-color: fade(@accent, 10%);
+      box-shadow: fade(@accent, 10%) 0 0 0 10px;
+    }
+
+    #shorts-container {
+      --yt-spec-static-overlay-text-primary: @white;
+
+      .YtwFactoidRendererLabel {
+        color: @hues-gray;
+      }
+      .YtwFactoidRendererValue {
+        color: @text-fg;
+      }
+
+      ytd-reel-video-renderer:not([is-watch-while-mode]) {
+        .ytSpecButtonShapeWithLabelLabel {
+          color: @text-fg_float;
+        }
+      }
+      ytd-reel-video-renderer[is-watch-while-mode]
+        .ytSpecButtonShapeWithLabelLabel {
+        color: @white;
+      }
+
+      .ytdVolumeControlsMuteIcon {
+        color: @white;
+      }
+
+      /* Buy super thanks button */
+      .YtdShortsSuggestedActionStaticHostContainer {
+        background-color: fade(@black, 60%);
+
+        .YtdShortsSuggestedActionStaticHostLeadingIcon,
+        .YtdShortsSuggestedActionStaticHostPrimaryText {
+          color: @text-fg;
+        }
+      }
+    }
+    // Video/thumbnail renderer overlayed buttons
+    .ytBadgeShapeThumbnailDefaultRedesign, // Timestamp
+    // Play Next
+    .yt-spec-button-shape-next--overlay-dark.yt-spec-button-shape-next--tonal[style="background-color: rgba(0, 0, 0, 0.3);"],
+    .ytdVolumeControlsBackgroundScrim, // Shorts Volume Slider
+    .ytInlinePlayerControlsTopRightControlsCircleButton // Homepage
+    {
+      background: fade(@black, 60%) !important;
+      color: @white;
+    }
+
+    .yt-spec-button-shape-next--overlay-dark.yt-spec-button-shape-next--filled {
+      background: @accent;
+      color: @surface-bg;
+    }
+
+    /* Video previews */
+
+    // Background (on hover)
+    .ytSpecTouchFeedbackShapeHoverEffect {
+      background-color: @surface-bg_p1 !important;
+    }
+    // Title
+    .ytLockupMetadataViewModelTitle {
+      color: @text-fg !important;
+    }
+    // Details
+    .ytLockupMetadataViewModelMetadata {
+      color: @hues-gray !important;
+    }
+    // Badges (e.g. "CC", "New")
+    .ytBadgeShapeDefault {
+      color: @hues-gray;
+      background: @surface-bg_p2;
+
+      &.ytBadgeShapeModern {
+        background: none;
+      }
+    }
+    // "Fundraiser"
+    .ytBadgeShapeCommerce {
+      color: @hues-green;
+    }
+    // "Live"
+    .ytBadgeShapeThumbnailLive {
+      background: @accent;
+      color: @surface-bg;
+    }
+
+    /* Shorts titles and views on homepage */
+    .shortsLockupViewModelHostOutsideMetadataEndpoint {
+      color: @text-fg;
+    }
+    .shortsLockupViewModelHostOutsideMetadataSubhead {
+      color: @hues-gray;
+    }
+
+    /* Buy super thanks bar */
+    #progressContainer.tp-yt-paper-progress {
+      background-color: @surface-bg_m1;
+    }
+
+    #comment-chip-container.yt-pdg-comment-chip-renderer,
+    .slider-knob-inner.tp-yt-paper-slider {
+      background: @accent;
+    }
+
+    #primaryProgress.tp-yt-paper-progress {
+      background: linear-gradient(139deg, @hues-orange, @terminal-dim_red, @hues-red, @hues-pink);
+    }
+
+    #container.ytd-pdg-comment-preview-renderer {
+      background-color: @surface-bg_m1;
+    }
+
+    #comment-chip-price.yt-pdg-comment-chip-renderer,
+    yt-icon.yt-pdg-comment-chip-renderer {
+      color: @surface-bg_m3;
+    }
+
+    /* Avatar */
+    .ytSpecAvatarShapeLiveRing::after {
+      background: @accent !important;
+    }
+    .ytSpecAvatarShapeLiveBadge {
+      background-color: @accent;
+    }
+    .ytSpecAvatarShapeLiveBadgeText {
+      color: @surface-bg;
+    }
+
+    /* Channel pages */
+
+    // Channel name
+    .ytPageHeaderViewModelHost {
+      .ytPageHeaderViewModelTitle {
+        color: @text-fg;
+      }
+
+      // Subscribers and video statistics
+      .ytPageHeaderViewModelContentMetadata {
+        color: @hues-gray;
+      }
+
+      // Handle and verified checkmark
+      [style$="color: rgb(255, 255, 255);"] {
+        color: @text-fg !important;
+      }
+    }
+    // Channel bio
+    .ytTruncatedTextHost {
+      color: @hues-gray;
+    }
+    // "...More", "and X more links"
+    .ytAttributionViewModelSuffix .ytAttributedStringLinkCallToActionColor,
+    .ytTruncatedTextAbsoluteButton {
+      color: @text-fg;
+    }
+
+    // Channel tabs
+    .ytTabShapeTab {
+      color: @text-fg_float;
+    }
+    .ytTabShapeTabSelected {
+      color: @text-fg;
+    }
+    .tabGroupShapeSlider {
+      background-color: @text-fg;
+    }
+    .ytTabShapeHost:hover .ytTabShapeTabBar {
+      background-color: @text-fg_float;
+    }
+
+    /* Components */
+
+    /* Menus and context sheets */
+    .ytContextualSheetLayoutHost, ytd-menu-popup-renderer {
+      background-color: @surface-bg_m1;
+    }
+    .ytListItemViewModelTappable:hover {
+      background-color: @surface-bg_p1;
+    }
+    .ytPanelHeaderViewModelTitle,
+    .ytListItemViewModelTitle,
+    .ytListItemViewModelAccessory {
+      color: @text-fg;
+    }
+    .ytListItemViewModelSubtitle {
+      color: @text-fg_float;
+    }
+    /* Dialogs */
+    .ytSpecDialogLayoutHost {
+      background-color: @surface-bg_m1;
+
+      .ytDialogHeaderViewModelText {
+        color: @text-fg;
+      }
+    }
+
+    /* Dropdowns */
+    .ytDropdownViewModelTitle {
+      color: @text-fg;
+    }
+    .ytDropdownViewModelLabel {
+      color: @hues-gray;
+    }
+    .ytDropdownViewModelSupportError {
+      color: @hues-red;
+    }
+    .ytDropdownViewModelDropdownContainerErrorBorder {
+      border-color: @hues-red;
+    }
+    .ytStandardsTextareaShapeTextareaContainerOutline:focus-within {
+      border-color: @text-fg;
+    }
+
+    /* Toggles/Switches */
+
+    .ytSwitchShapeTrack {
+      background-color: @surface-bg_p3;
+    }
+    .ytSwitchShapeKnob {
+      background-color: @surface-bg_m1;
+    }
+    .ytSwitchShapeTrackActive {
+      background-color: @accent;
+    }
+
+    /* Textareas */
+    .ytStandardsTextareaShapeTextarea {
+      color: @text-fg;
+    }
+    .ytStandardsTextareaShapePlaceholder {
+      color: @hues-gray;
+    }
+    .ytStandardsTextareaShapeTextarea::placeholder {
+      color: transparent !important; // defaults important overrides this
+    }
+
+    /* Comments */
+    .ytSubThreadConnection,
+    .ytSubThreadContinuation {
+      border-left-color: @surface-bg_p2;
+    }
+    .ytSubThreadConnection {
+      border-bottom-color: @surface-bg_p2;
+    }
+    .ytSubThreadHovered > .ytSubThreadThreadline .ytSubThreadConnection,
+    .ytSubThreadHovered > .ytSubThreadThreadline .ytSubThreadContinuation {
+      border-left-color: @border-border;
+    }
+    .ytSubThreadHovered > .ytSubThreadThreadline .ytSubThreadConnection {
+      border-bottom-color: @border-border;
+    }
+
+    /* Profile Card */
+    // (Click a user's profile picture in the comments to view.)
+    .ytProfileCardViewModelHost {
+      background-color: @surface-bg_m1;
+
+      // Name and handle
+      .ytProfileIdentityInfoViewModelChannelName,
+      .ytProfileIdentityInfoViewModelMetadataHandleWithBoldFont {
+        color: @text-fg;
+      }
+      // Verification badge
+      .ytProfileIdentityInfoViewModelBadge {
+        filter: @text-filter;
+      }
+      // Statistics
+      .ytProfileIdentityInfoViewModelMetadataContent {
+        color: @hues-gray;
+      }
+
+      // Subsection (e.g. "On this channel")
+      .ytProfileInfoViewModelSectionTitle {
+        color: @text-fg;
+      }
+      .ytProfileInfoViewModelSectionSubtitle {
+        color: @text-fg_float;
+      }
+      .ytProfileInfoViewModelSectionHeartIcon {
+        filter: @subtext1-filter;
+      }
+
+      // Subsection - "Recent comments on this channel"
+      .ytCommentInteractionViewModelVideoTitle {
+        color: @text-fg;
+      }
+      .ytCommentInteractionViewModelCommentContent {
+        color: @text-fg_float;
+      }
+    }
+
+    /* Live chat replay */
+    .ytVideoMetadataCarouselViewModelHost,
+    .YtVideoMetadataCarouselViewModelHost {
+      background-color: @surface-bg_p1;
+
+      .ytCarouselTitleViewModelTitle,
+      .YtCarouselTitleViewModelTitle,
+      .yt-core-attributed-string,
+      .yt-icon-shape {
+        color: @text-fg;
+      }
+      .ytTextCarouselItemViewModelHost {
+        color: @text-fg_float;
+      }
+    }
+
+    /* Category tag pills */
+    .ytChipShapeInactive {
+      background-color: @surface-bg_p1;
+      color: @text-fg;
+    }
+    .ytChipShapeActive {
+      background-color: @accent;
+      color: @surface-bg;
+    }
+  }
+}
+
+@-moz-document url-prefix("https://studio.youtube.com") {
+  :root {
+    #kanagawa();
+  }
+
+  #kanagawa() {
+    #lib.palette();
+    #lib.derived();
+    #lib.base24();
+    #lib.roles();
+    #lib.accent();
+
+    [src="https://www.gstatic.com/youtube/img/creator/yt_studio_logo_white.svg"] {
+      @svg: escape(
+        '<svg viewBox="0 0 97.55 24" xmlns="http://www.w3.org/2000/svg"><path fill="@{accent}" d="M17.1 0S6.4 0 3.8.7a4.15 4.15 0 0 0-3 3C0 6.4 0 12 0 12a45 45 0 0 0 .7 8.2 4.32 4.32 0 0 0 3 3c2.7.8 13.4.8 13.4.8s10.7 0 13.4-.7a4.32 4.32 0 0 0 3-3 45 45 0 0 0 .7-8.2s.1-5.7-.6-8.3a4.32 4.32 0 0 0-3-3C27.9 0 17.1 0 17.1 0m-3.4 6.9 8.9 5.1-8.9 5.1z"/><path fill="@{text-fg}" d="M76.3.9v4.4c0 1.1 0 2 .1 3.3h-.1A3.36 3.36 0 0 0 73.4 7c-2.3 0-3.3 2-3.3 6.6V16c0 4.9.8 6.6 3.2 6.6a3.42 3.42 0 0 0 3.2-2.4h.1l.4 2.1h2.6V.9zm6.688.4c-1.126.032-1.687.55-1.687 2.1 0 1.7.599 2.1 1.799 2.1s1.8-.5 1.8-2.1-.6-2.1-1.8-2.1zM45 1.4c-3.6 0-5 1.7-5 4.9s1.1 4.5 3.7 6.8c1.6 1.4 2.8 2.5 2.8 4.8 0 1.5-.4 2.2-1.6 2.2s-1.7-.8-1.6-3.6h-3.1c-.6 4.2.8 6.1 4.5 6.2 3.5 0 5-1.5 5-5.4 0-3.1-1.3-4.4-3.7-6.6-1.9-1.8-2.8-2.5-2.8-4.6 0-1.4.3-2.2 1.6-2.2s1.6 1.1 1.5 3.9l3.1-.2c.5-4.2-.8-6.2-4.4-6.2m7.6 1.4-.4 4.5h-1.4v2.6H52v8.8c0 2.7.4 3.8 2.6 3.8a7.4 7.4 0 0 0 3.1-.6l-.6-2.2a5.2 5.2 0 0 1-1.3.2c-.5 0-.7-.3-.7-1.7V9.9h2.2V7.3H55V2.8zM91 7c-3.3 0-4.7 1.8-4.7 6.7v2.2c0 4.7 1.1 6.7 4.6 6.7s4.7-2 4.7-6.7v-2.2C95.6 8.9 94.3 7 91 7m-31.8.3v11.4c0 2.7.9 4 2.9 4a3.46 3.46 0 0 0 3.2-2.1h.1l.3 1.8h2.7V7.3H65v12a1.51 1.51 0 0 1-1.4 1c-.7 0-1-.6-1-1.9V7.3zm22.3 0v15.1h3.2V7.3zm9.4 2c1 0 1.3 1 1.3 3.1v4.7c0 2.2-.4 3.1-1.3 3.1s-1.2-.9-1.2-3.1v-4.7c0-2 .2-3.1 1.2-3.1M75 9.4a1.56 1.56 0 0 1 1.3.8v8.5c-.2.9-.9 1.4-1.4 1.3-1 0-1.3-1-1.3-4.4v-1.9c0-3.3.3-4.3 1.4-4.3"/></svg>'
+      );
+      content: url("data:image/svg+xml,@{svg}");
+    }
+
+    &,
+    html,
+    html[dark],
+    html[dark][dark],
+    &[dark],
+    &[light],
+    [light],
+    html[light],
+    html[light][light] {
+      --yt-spec-black-pure-alpha-80: (null);
+      --yt-spec-black-pure-alpha-60: (null);
+      --yt-spec-black-1-alpha-98: (null);
+      --yt-spec-black-1-alpha-95: (null);
+      --iron-icon-fill-color: unset;
+
+      --yt-spec-text-primary: @text-fg;
+      --ytcp-text-primary: @text-fg;
+      --ytcp-text-primary-inverse: @surface-bg;
+      --ytcp-static-overlay-text-primary-inverse: @surface-bg;
+      --ytcp-wordmark-text: @text-fg;
+      --ytcp-text-secondary: @hues-gray;
+      --ytcp-text-disabled: @text-fg_float;
+      --ytcp-overlay-text-primary: @hues-gray;
+
+      --ytcp-general-background-a: @surface-bg;
+      --yt-spec-base-background: @surface-bg;
+      --yt-spec-black-3: @surface-bg;
+
+      --yt-spec-brand-background-solid: @surface-bg_m1;
+      --ytcp-brand-background-solid: @surface-bg_m1;
+      --yt-spec-raised-background: @surface-bg_m1;
+      --ytcp-general-background-b: @surface-bg_m1;
+      --ytcp-analytics-reach-background: @surface-bg_m1;
+      --yt-spec-black-2: @surface-bg_m1;
+
+      --ytcp-general-background-c: @surface-bg_m3;
+      --ytcp-menu-background: @surface-bg_p1;
+
+      --ytcp-container-border-color: @surface-bg_p1;
+      --ytcp-container-hovered-border-color: @surface-bg_p1;
+      --ytcp-line-divider-solid: @surface-bg_p1;
+      --ytcp-container-border-color-inverse: @hues-gray;
+      --ytcp-line-divider-solid-inverse: @hues-gray;
+
+      --ytcp-call-to-action: @accent;
+      --ytcp-call-to-action-inverse: @surface-bg_m1;
+      --ytcp-call-to-action-raised-background: @accent;
+      --yt-spec-brand-button-background: @accent;
+      --ytcp-call-to-action-raised-disabled: @surface-bg_p3;
+      --ytcp-call-to-action-raised-disabled-background: @hues-gray;
+      --ytcp-call-to-action-raised-background-inverse: @surface-bg;
+      --ytcp-call-to-action-raised-disabled-inverse: @surface-bg_p3;
+      --ytcp-call-to-action-raised-disabled-background-inverse: @hues-gray;
+
+      --yt-spec-brand-background-primary: @surface-bg_p1;
+
+      --yt-compact-link-icon-color: @hues-gray;
+      --ytcp-icon-active: @accent;
+      --ytcp-icon-inactive: @hues-gray;
+      --ytcp-icon-disabled: @border-border;
+      --ytcp-icon-active-inverse: @text-fg_muted;
+      --ytcp-icon-disabled-inverse: @text-fg_float;
+
+      --ytcp-error-red: @hues-red;
+      --ytcp-badge-red: @hues-red;
+      --ytcp-error-red-inverse: @hues-red;
+      --ytcp-themed-red-inverse: @hues-red;
+      --ytcp-themed-red: @accent;
+      --ytcp-themed-blue: @accent;
+      --ytcp-badge-blue: fade(@accent, 30%);
+      --ytcp-badge-blue-solid: @hues-blue;
+      --ytcp-themed-blue-inverse: @hues-blue;
+      --ytcp-themed-green: @hues-green;
+      --ytmus-genre-primary-melon: @hues-green;
+      --ytcp-themed-green-inverse: @hues-green;
+      --ytcp-analytics-pine: @hues-green;
+      --ytcp-analytics-pine-inverse: @hues-green;
+      --ytcp-analytics-parrot: @hues-green;
+      --ytcp-themed-yellow: @hues-orange;
+      --ytmus-genre-primary-gold: @hues-orange;
+      --ytcp-yellow-inverse: @hues-orange;
+      --ytcp-badge-yellow: @hues-orange;
+      --ytcp-analytics-yellow: @hues-orange;
+      --ytcp-analytics-apricot: @hues-orange;
+      --ytcp-suggested-action: @hues-teal;
+      --ytcp-analytics-overview: @hues-teal;
+      --ytcp-analytics-revenue: @hues-teal;
+      --ytcp-analytics-default-secondary: @hues-teal;
+      --ytcp-analytics-royal-blue: @palette-springViolet2;
+      --ytcp-analytics-reach: @palette-springViolet2;
+      --ytcp-analytics-audience: @palette-springViolet2;
+      --ytcp-analytics-engagement: @hues-pink;
+      --ytcp-analytics-revenue-secondary: @hues-pink;
+      --ytcp-analytics-bubblegum: @palette-canvasPink2;
+      --ytmus-genre-primary-ruby: @palette-canvasPink2;
+      --ytmus-genre-primary-salmon: @hues-purple;
+      --ytmus-genre-primary-orange: @terminal-dim_red;
+      --ytmus-genre-primary-sky: @hues-cyan;
+      --ytmus-genre-primary-sky-inverse: @hues-cyan;
+
+      --yt-spec-badge-chip-background: @surface-bg_p2;
+      --ytcp-focus-inverse: @accent;
+      --ytcp-focus: @accent;
+      --ytcp-selected-item: @accent;
+      --ytcp-hover-item: @hues-gray;
+      --ytcp-chip-active-focus: @accent;
+      --ytcp-playhead: @hues-gray;
+      --ytcp-playhead-inverse: @hues-gray;
+    }
+
+    ytcp-button.destructive.ytls-error-dialog {
+      color: @surface-bg;
+    }
+
+    yt-formatted-string.ytls-error-dialog,
+    tp-yt-iron-icon.ytls-error-dialog {
+      color: @text-fg;
+    }
+  }
+}
+
+@-moz-document domain("m.youtube.com") {
+  html {
+    #kanagawa();
+  }
+
+  #kanagawa() {
+    #lib.palette();
+    #lib.derived();
+    #lib.base24();
+    #lib.roles();
+    #lib.accent();
+
+    background-color: @surface-bg !important;
+    color: @text-fg !important;
+
+    /* Ambient mode */
+    #cinematics {
+      mix-blend-mode: lighten;
+    }
+
+    .mobile-topbar-header[data-mode="watch"],
+    ytm-mobile-topbar-renderer:not([ambient-topbar]) {
+      background: @surface-bg;
+    }
+
+    .mobile-topbar-header[data-mode="watch"] .mobile-topbar-logo,
+    .mobile-topbar-header[data-mode="watch"] .mobile-topbar-title,
+    .mobile-topbar-header[data-mode="watch"] .mobile-topbar-header-content {
+      color: @text-fg;
+    }
+
+    .yt-spec-bottom-sheet-layout__bottom-sheet-renderer-container,
+    .modern-styling {
+      background: @surface-bg_p1;
+    }
+
+    .yt-spec-bottom-sheet-layout__bottom-sheet-layout-header-wrapper {
+      border-bottom-color: @surface-bg_p1;
+    }
+
+    .yt-spec-bottom-sheet-layout__bottom-sheet-content {
+      color: @text-fg;
+    }
+
+    /* Comment box */
+    .engagement-panel-container {
+      background: @surface-bg_m1;
+    }
+
+    /* Bottom bar */
+    ytm-pivot-bar-renderer {
+      background: @surface-bg_m1;
+      color: @text-fg;
+      border-top-color: @surface-bg_p1;
+    }
+
+    /* Chips */
+    .chip-bar {
+      background-color: @surface-bg;
+    }
+
+    [chip-style*="STYLE_"] {
+      .chip-container {
+        color: @text-fg;
+        background-color: @surface-bg_p1;
+      }
+
+      &.selected .chip-container {
+        color: @surface-bg;
+        background-color: @accent;
+      }
+    }
+
+    /* Buttons */
+
+    .yt-spec-touch-feedback-shape--touch-response {
+      .yt-spec-touch-feedback-shape__fill {
+        background-color: @text-fg;
+      }
+
+      .yt-spec-touch-feedback-shape__stroke {
+        border-color: @surface-bg_p2;
+      }
+    }
+
+    .yt-spec-touch-feedback-shape--overlay-touch-response-inverse
+      .yt-spec-touch-feedback-shape__fill {
+      background-color: @accent;
+    }
+    .yt-spec-touch-feedback-shape--overlay-touch-response
+      .yt-spec-touch-feedback-shape__fill {
+      background-color: @text-fg;
+    }
+  }
+}

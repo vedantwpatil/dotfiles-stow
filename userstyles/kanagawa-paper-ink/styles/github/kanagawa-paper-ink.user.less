@@ -1,0 +1,1581 @@
+/* ==UserStyle==
+@name GitHub Kanagawa Paper Ink
+@namespace github.com/vedantpatil/dotfiles/userstyles/kanagawa-paper-ink/styles/github
+@version 2026.09.27
+@description Soothing pastel theme for GitHub
+@author Vedant Patil (derived from Catppuccin/userstyles, MIT)
+@license MIT
+
+@preprocessor less
+@var select accentColor "Accent" ["red:Red", "orange:Orange", "yellow:Yellow", "green:Green", "teal:Teal", "cyan:Cyan", "blue:Blue", "purple:Purple*", "pink:Pink", "brown:Brown", "gray:Gray"]
+==/UserStyle== */
+
+/*
+ * Kanagawa Paper Ink - shared LESS role library for catppuccin/userstyles sites.
+ * Palette, derived colors, base24 terminal slots, and semantic roles mirror
+ * ~/.config/nvim/lua/kanagawa-paper-ink-extended.lua 1:1 (M.palette, M.derived,
+ * M.base24, M.roles). Keep both in sync by hand when that theme changes.
+ * Icon-recolor filter() approximations in .hues-filters() carry over from the
+ * prior catppuccin-shaped bridge (mocha row) since target hex is unchanged for
+ * 10 of 11 hues; approximation, not exact - see upstream catppuccin/userstyles
+ * lib/std. @brown has no prior equivalent and reuses @orange's filter as the
+ * nearest match.
+ * See ../../LICENSE.
+ */
+
+#lib {
+  .palette() {
+    @palette-autumnGreen: #76946a;
+    @palette-autumnRed: #c34043;
+    @palette-autumnYellow: #dca561;
+    @palette-boatYellow1: #938056;
+    @palette-boatYellow2: #c0a36e;
+    @palette-canvasAqua1: #7b958e;
+    @palette-canvasAsh1: #637263;
+    @palette-canvasBlue1: #809ba7;
+    @palette-canvasBlue2: #6b8998;
+    @palette-canvasBlue3: #577888;
+    @palette-canvasBlue4: #516e7d;
+    @palette-canvasBlue5: #3a515e;
+    @palette-canvasCyan1: #4a905d;
+    @palette-canvasGray1: #aeaea6;
+    @palette-canvasGray2: #8e8a80;
+    @palette-canvasGray3: #73787d;
+    @palette-canvasGreen1: #7e9579;
+    @palette-canvasGreen2: #7a8c6a;
+    @palette-canvasGreen3: #9ba98e;
+    @palette-canvasOrange1: #b28d77;
+    @palette-canvasOrange2: #a8826a;
+    @palette-canvasPink1: #9e7e98;
+    @palette-canvasPink2: #c1b4c1;
+    @palette-canvasPink3: #d4cdd4;
+    @palette-canvasRed1: #c27672;
+    @palette-canvasTeal1: #7e8faf;
+    @palette-canvasViolet1: #7880a5;
+    @palette-canvasViolet2: #9ba1bf;
+    @palette-canvasWhite1: #cbc8bc;
+    @palette-canvasWhite2: #d1cfc5;
+    @palette-canvasWhite3: #d8d8d2;
+    @palette-canvasWhite4: #e1e1de;
+    @palette-canvasWhite5: #e6e6e3;
+    @palette-canvasWhite6: #ecece8;
+    @palette-canvasYellow1: #a7956a;
+    @palette-canvasYellow2: #b4a88a;
+    @palette-carpYellow: #e6c384;
+    @palette-crystalBlue: #7e9cd8;
+    @palette-dragonAqua: #8ea49e;
+    @palette-dragonAsh: #737c73;
+    @palette-dragonBlack0: #0d0c0c;
+    @palette-dragonBlack1: #12120f;
+    @palette-dragonBlack2: #1d1c19;
+    @palette-dragonBlack3: #181616;
+    @palette-dragonBlack4: #282727;
+    @palette-dragonBlack5: #393836;
+    @palette-dragonBlack6: #625e5a;
+    @palette-dragonBlue: #658594;
+    @palette-dragonBlue2: #859fac;
+    @palette-dragonBlue3: #708e9e;
+    @palette-dragonBlue4: #5d7a88;
+    @palette-dragonBlue5: #435965;
+    @palette-dragonGray: #a6a69c;
+    @palette-dragonGray2: #9e9b93;
+    @palette-dragonGray3: #7a8382;
+    @palette-dragonGreen: #699469;
+    @palette-dragonGreen2: #8a9a7b;
+    @palette-dragonGreen3: #717e67;
+    @palette-dragonOrange: #b6927b;
+    @palette-dragonOrange2: #9d7665;
+    @palette-dragonPink: #a292a3;
+    @palette-dragonRed: #c4746e;
+    @palette-dragonTeal: #949fb5;
+    @palette-dragonViolet: #8992a7;
+    @palette-dragonWhite: #c5c9c5;
+    @palette-dragonYellow: #c4b28a;
+    @palette-fujiGray: #727169;
+    @palette-fujiWhite: #dcd7ba;
+    @palette-katanaGray: #717c7c;
+    @palette-lightBlue: #a3d4d5;
+    @palette-lotusAqua: #597b75;
+    @palette-lotusAqua2: #5e857a;
+    @palette-lotusBlue1: #c7d7e0;
+    @palette-lotusBlue2: #b5cbd2;
+    @palette-lotusBlue3: #9fb5c9;
+    @palette-lotusBlue4: #4d699b;
+    @palette-lotusBlue5: #5d57a3;
+    @palette-lotusCyan: #d7e3d8;
+    @palette-lotusGray: #dcd7ba;
+    @palette-lotusGray2: #716e61;
+    @palette-lotusGray3: #8a8980;
+    @palette-lotusGreen: #6f894e;
+    @palette-lotusGreen2: #6e915f;
+    @palette-lotusGreen3: #b7d0ae;
+    @palette-lotusInk0: #3d3d5e;
+    @palette-lotusInk1: #545464;
+    @palette-lotusInk2: #43436c;
+    @palette-lotusOrange: #cc6d00;
+    @palette-lotusOrange2: #e98a00;
+    @palette-lotusPink: #b35b79;
+    @palette-lotusRed: #c84053;
+    @palette-lotusRed2: #d7474b;
+    @palette-lotusRed3: #e82424;
+    @palette-lotusRed4: #d9a594;
+    @palette-lotusTeal1: #4e8ca2;
+    @palette-lotusTeal2: #6693bf;
+    @palette-lotusTeal3: #5a7785;
+    @palette-lotusViolet1: #a09cac;
+    @palette-lotusViolet2: #766b90;
+    @palette-lotusViolet3: #c9cbd1;
+    @palette-lotusViolet4: #624c83;
+    @palette-lotusWhite0: #d5cea3;
+    @palette-lotusWhite1: #dcd5ac;
+    @palette-lotusWhite2: #e5ddb0;
+    @palette-lotusWhite3: #f2ecbc;
+    @palette-lotusWhite4: #e7dba0;
+    @palette-lotusWhite5: #e4d794;
+    @palette-lotusYellow: #77713f;
+    @palette-lotusYellow2: #836f4a;
+    @palette-lotusYellow3: #de9800;
+    @palette-lotusYellow4: #f9d791;
+    @palette-oldWhite: #c8c093;
+    @palette-oniViolet: #957fb8;
+    @palette-oniViolet2: #b8b4d0;
+    @palette-peachRed: #ff5d62;
+    @palette-roninYellow: #ff9e3b;
+    @palette-sakuraPink: #d27e99;
+    @palette-samuraiRed: #e82424;
+    @palette-springBlue: #7fb4ca;
+    @palette-springGreen: #98bb6c;
+    @palette-springViolet1: #938aa9;
+    @palette-springViolet2: #9cabca;
+    @palette-sumiInk0: #16161d;
+    @palette-sumiInk1: #181820;
+    @palette-sumiInk2: #1a1a22;
+    @palette-sumiInk3: #1f1f28;
+    @palette-sumiInk4: #2a2a37;
+    @palette-sumiInk5: #363646;
+    @palette-sumiInk6: #54546d;
+    @palette-sumiInkn1: #0f0f15;
+    @palette-surimiOrange: #ffa066;
+    @palette-waveAqua1: #6a9589;
+    @palette-waveAqua2: #7aa89f;
+    @palette-waveBlue1: #223249;
+    @palette-waveBlue2: #2d4f67;
+    @palette-waveRed: #e46876;
+    @palette-winterBlue: #252535;
+    @palette-winterGreen: #2b3328;
+    @palette-winterRed: #43242b;
+    @palette-winterYellow: #49443c;
+  }
+
+  .derived() {
+    @derived-dragonGreenTint: #2c3732; // dragonGreen blended 90% toward sumiInk3 (ink)
+    @derived-dragonRedTint: #452f33; // dragonRed blended 90% toward sumiInk3 (ink)
+    @derived-dragonYellowTint: #45403a; // dragonYellow blended 90% toward sumiInk3 (ink)
+    @derived-dragonBlueTint: #2b333c; // dragonBlue blended 90% toward sumiInk3 (ink)
+    @derived-dragonGreenMist: #2a3331; // dragonGreen blended 92% toward sumiInk3 (ink)
+    @derived-dragonRedMist: #3f2c31; // dragonRed blended 92% toward sumiInk3 (ink)
+    @derived-dragonYellowMist: #3f3a37; // dragonYellow blended 92% toward sumiInk3 (ink)
+    @derived-dragonBlueMist: #293039; // dragonBlue blended 92% toward sumiInk3 (ink)
+    @derived-dragonAquaMist: #32373b; // dragonAqua blended 92% toward sumiInk3 (ink)
+    @derived-dragonBlack5Bright: #aca9a4; // dragonBlack5 brightened 0.6 (HSLuv L) (ink)
+    @derived-dragonRedBright: #cc928e; // dragonRed brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonGreenBright: #72a072; // dragonGreen brightened 0.1 (HSLuv L) (ink)
+    @derived-dragonYellowBright: #d4c196; // dragonYellow brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonBlue5Bright: #698a9b; // dragonBlue5 brightened 0.3 (HSLuv L) (ink)
+    @derived-dragonPinkBright: #b4a7b5; // dragonPink brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonAquaBright: #96ada7; // dragonAqua brightened 0.1 (HSLuv L) (ink)
+    @derived-oldWhiteBright: #d5cd9d; // oldWhite brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonRedShade: #522c2a; // dragonRed darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonPinkShade: #413941; // dragonPink darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonBlueShade: #27363d; // dragonBlue darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonOrange2Shade: #412f27; // dragonOrange2 darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonGreenShade: #283b28; // dragonGreen darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonAshShade: #2e322e; // dragonAsh darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonGreen3Wash: #4b5348; // dragonGreen3 blended 60% toward sumiInk3 (ink)
+    @derived-dragonBlue5Wash: #313d47; // dragonBlue5 blended 60% toward sumiInk3 (ink)
+    @derived-dragonOrange2Wash: #664e47; // dragonOrange2 blended 60% toward sumiInk3 (ink)
+    @derived-dragonRedLift: #c8837e; // dragonRed brightened 0.1 (HSLuv L) (ink)
+    @derived-dragonGreenEmph: #394c3d; // dragonGreen blended 77% toward sumiInk3
+    @derived-dragonRedEmph: #623e3f; // dragonRed blended 77% toward sumiInk3
+    @derived-dragonYellowEmph: #625a4b; // dragonYellow blended 77% toward sumiInk3
+    @derived-dragonBlueEmph: #38454f; // dragonBlue blended 77% toward sumiInk3
+    @derived-springViolet1Emph: #4c4858; // springViolet1 blended 77% toward sumiInk3
+    @derived-springViolet1Mist: #33313d; // springViolet1 blended 92% toward sumiInk3
+    @derived-fujiWhiteBright: #e8e3c5; // fujiWhite brightened 0.3 (HSLuv L)
+    @derived-dragonBlue2Bright: #96b3c1; // dragonBlue2 brightened 0.2 (HSLuv L)
+    @derived-sumiInk6Bright: #6b6b83; // sumiInk6 brightened 0.15 (HSLuv L)
+    @derived-sumiInk45: #30303f; // sumiInk5 blended 50% toward sumiInk4
+    @derived-sumiInkn1Scrim: #0f0f1599; // sumiInkn1 at 60% opacity
+    @derived-sumiInkn1Shadow: #0f0f1580; // sumiInkn1 at 50% opacity
+    @derived-dragonBlack5Dim: #2f2e2c; // dragonBlack5 darkened 0.2 (HSLuv L)
+    @derived-dragonRedDim: #9d5a55; // dragonRed darkened 0.2 (HSLuv L)
+    @derived-dragonGreenDim: #527552; // dragonGreen darkened 0.2 (HSLuv L)
+    @derived-dragonYellowDim: #9a8b6b; // dragonYellow darkened 0.2 (HSLuv L)
+    @derived-dragonBlue5Dim: #354751; // dragonBlue5 darkened 0.2 (HSLuv L)
+    @derived-dragonPinkDim: #817282; // dragonPink darkened 0.2 (HSLuv L)
+    @derived-dragonAquaDim: #6f817c; // dragonAqua darkened 0.2 (HSLuv L)
+    @derived-oldWhiteDim: #9d9672; // oldWhite darkened 0.2 (HSLuv L)
+    @derived-dragonOrangeVivid: #be7f46; // dragonOrange saturate 0.6, brighten -0.075
+    @derived-waveAqua1Vivid: #37a28b; // waveAqua1 saturate 0.75, brighten 0.05
+    @derived-oniVioletVivid: #987cc2; // oniViolet saturate 0.15
+    @derived-dragonYellowVivid: #aa8f41; // dragonYellow saturate 0.65, brighten -0.175
+    @derived-sakuraPinkVivid: #ce6c8d; // sakuraPink brighten -0.075
+    @derived-dragonGreenVivid: #528b52; // dragonGreen saturate 0.25, brighten -0.075
+    @derived-crystalBlueVivid: #6b8fd3; // crystalBlue brighten -0.075
+    @derived-dragonRedVivid: #c8726b; // dragonRed saturate 0.05
+    @derived-seqBlue1: #39527f; // crystalBlue hue at OKLCH L 0.44 / C 0.08
+    @derived-seqBlue2: #46669c; // crystalBlue hue at OKLCH L 0.51 / C 0.095
+    @derived-seqBlue3: #547aba; // crystalBlue hue at OKLCH L 0.58 / C 0.108
+    @derived-seqBlue4: #678fd4; // crystalBlue hue at OKLCH L 0.65 / C 0.113
+    @derived-seqBlue5: #86a4e1; // crystalBlue hue at OKLCH L 0.72 / C 0.096
+    @derived-seqBlue6: #a6bae9; // crystalBlue hue at OKLCH L 0.79 / C 0.07
+    @derived-seqBlue7: #c4d1ef; // crystalBlue hue at OKLCH L 0.86 / C 0.044
+    @derived-divRed1: #794d4b; // dragonRed hue at OKLCH L 0.47 / C 0.06
+    @derived-divBlue1: #495b7d; // crystalBlue hue at OKLCH L 0.47 / C 0.06
+    @derived-divRed2: #a8635d; // dragonRed hue at OKLCH L 0.575 / C 0.09
+    @derived-divBlue2: #5d78ae; // crystalBlue hue at OKLCH L 0.575 / C 0.09
+    @derived-divRed3: #d67b73; // dragonRed hue at OKLCH L 0.68 / C 0.115
+    @derived-divBlue3: #7098df; // crystalBlue hue at OKLCH L 0.68 / C 0.115
+  }
+
+  .base24() {
+    @base00: #1f1f28; // sumiInk3: default background
+    @base01: #2a2a37; // sumiInk4: lighter background (status bars)
+    @base02: #363646; // sumiInk5: selection background
+    @base03: #727169; // fujiGray: comments, invisibles
+    @base04: #9e9b93; // dragonGray2: dark foreground (status bars)
+    @base05: #dcd7ba; // fujiWhite: default foreground
+    @base06: #c8c093; // oldWhite: light foreground
+    @base07: #e1e1de; // canvasWhite4: light background (kanagawa-paper canvas)
+    @base08: #c4746e; // dragonRed: variables, tags, deleted
+    @base09: #b6927b; // dragonOrange: numbers, constants, booleans
+    @base0A: #c4b28a; // dragonYellow: classes, search, bold
+    @base0B: #8a9a7b; // dragonGreen2: strings, inserted
+    @base0C: #8ea49e; // dragonAqua: support, regex, escapes
+    @base0D: #859fac; // dragonBlue2: functions, headings
+    @base0E: #a292a3; // dragonPink: keywords, changed
+    @base0F: #9d7665; // dragonOrange2: deprecated, embedded tags
+    @base10: #16161d; // sumiInk0: darker background
+    @base11: #0f0f15; // sumiInkn1: darkest background
+    @base12: #cc928e; // dragonRedBright: bright red
+    @base13: #d4c196; // dragonYellowBright: bright yellow
+    @base14: #72a072; // dragonGreenBright: bright green
+    @base15: #96ada7; // dragonAquaBright: bright cyan
+    @base16: #96b3c1; // dragonBlue2Bright: bright blue
+    @base17: #b4a7b5; // dragonPinkBright: bright magenta
+  }
+
+  .roles() {
+    @surface-bg_m4: #0f0f15;
+    @surface-bg_m3: #16161d;
+    @surface-bg_m2: #181820;
+    @surface-bg_m1: #1a1a22;
+    @surface-bg: #1f1f28;
+    @surface-bg_p1: #2a2a37;
+    @surface-bg_p2: #363646;
+    @surface-bg_p3: #54546d;
+    @surface-overlay: #0f0f1599;
+    @surface-shadow: #0f0f1580;
+    @text-fg_bright: #e8e3c5;
+    @text-fg: #dcd7ba;
+    @text-fg_float: #c8c093;
+    @text-fg_dim: #9e9b93;
+    @text-fg_muted: #727169;
+    @text-fg_subtle: #54546d;
+    @text-fg_dimmer: #393836;
+    @text-on_accent: #1f1f28;
+    @text-fg_reverse: #1d1c19;
+    @text-fg_dark: #181616;
+    @text-link: #938aa9;
+    @text-link_visited: #a292a3;
+    @text-placeholder: #727169;
+    @text-disabled: #54546d;
+    @border-border: #625e5a;
+    @border-border_float: #363646;
+    @border-border_focus: #c4b28a;
+    @border-border_search: #938aa9;
+    @border-win_separator: #8992a7;
+    @border-indent: #363646;
+    @border-indent_scope: #8992a7;
+    @border-ruler: #2a2a37;
+    @state-cursorline: #2a2a37;
+    @state-cursorline_alt: #363646;
+    @state-selection: #363646;
+    @state-selection_inactive: #30303f;
+    @state-hover: #2a2a37;
+    @state-active: #363646;
+    @state-reference: #363646;
+    @state-search: #938aa9;
+    @state-search_current: #938aa9;
+    @state-search_other: #4c4858;
+    @state-substitute: #c4746e;
+    @state-match_paren: #c4b28a;
+    @state-mark: #7aa89f;
+    @state-yank: #54546d;
+    @state-paste: #c8837e;
+    @state-jump_label: #c4746e;
+    @state-jump_label_2: #b6927b;
+    @state-jump_backdrop: #727169;
+    @state-scrollbar: #363646;
+    @state-scrollbar_thumb: #54546d;
+    @state-scrollbar_thumb_hover: #6b6b83;
+    @state-fold_bg: #181820;
+    @state-fold_fg: #8ea49e;
+    @modes-normal: #c4b28a;
+    @modes-insert: #c4746e;
+    @modes-visual: #938aa9;
+    @modes-replace: #c4746e;
+    @modes-command: #c4b28a;
+    @modes-terminal: #699469;
+    @modes-select: #a292a3;
+    @modes-pending: #b6927b;
+    @modes-cursor: #c4b28a;
+    @modes-cursor_text: #1f1f28;
+    @modes-cursor_insert: #c4746e;
+    @modes-cursor_visual: #938aa9;
+    @accent-primary: #c4b28a;
+    @accent-primary_hover: #d4c196;
+    @accent-secondary: #c4746e;
+    @accent-tertiary: #938aa9;
+    @accent-accent1: #658594;
+    @accent-accent2: #b6927b;
+    @accent-accent3: #6a9589;
+    @accent-accent4: #7a8382;
+    @accent-accent5: #c4746e;
+    @accent-invert: #2a2a37;
+    @chrome-statusline_bg: #2a2a37;
+    @chrome-statusline_fg: #9e9b93;
+    @chrome-statusline_section_bg: #363646;
+    @chrome-statusline_inactive_bg: #0f0f15;
+    @chrome-statusline_inactive_fg: #9e9b93;
+    @chrome-statusline_debug_bg: #b6927b;
+    @chrome-tabline_bg: #16161d;
+    @chrome-tab_active_bg: #1f1f28;
+    @chrome-tab_active_fg: #c5c9c5;
+    @chrome-tab_inactive_bg: #16161d;
+    @chrome-tab_inactive_fg: #393836;
+    @chrome-tab_alternate_fg: #a292a3;
+    @chrome-tab_indicator: #658594;
+    @chrome-tab_modified: #c4b28a;
+    @chrome-tab_close: #c4746e;
+    @chrome-float_bg: #2a2a37;
+    @chrome-float_fg: #c8c093;
+    @chrome-float_border: #363646;
+    @chrome-float_title: #8ea49e;
+    @chrome-float_footer: #54546d;
+    @chrome-pmenu_bg: #2a2a37;
+    @chrome-pmenu_fg: #dcd7ba;
+    @chrome-pmenu_sel_bg: #363646;
+    @chrome-pmenu_match: #859fac;
+    @chrome-pmenu_kind: #7a8382;
+    @chrome-pmenu_extra: #8ea49e;
+    @chrome-pmenu_thumb: #54546d;
+    @chrome-sidebar_bg: #2a2a37;
+    @chrome-sidebar_fg: #c8c093;
+    @chrome-line_nr: #54546d;
+    @chrome-line_nr_current: #c4b28a;
+    @chrome-gutter_bg: transparent;
+    @chrome-nontext: #54546d;
+    @chrome-whitespace: #54546d;
+    @chrome-special_key: #8ea49e;
+    @chrome-winbar_fg: #393836;
+    @chrome-title: #8ea49e;
+    @chrome-header1: #8992a7;
+    @chrome-header2: #b6927b;
+    @chrome-msg_fg: #9e9b93;
+    @chrome-more_msg: #658594;
+    @chrome-mode_msg: #c4b28a;
+    @chrome-error_msg: #c4746e;
+    @chrome-warning_msg: #c4b28a;
+    @controls-button_bg: #c4b28a;
+    @controls-button_fg: #1f1f28;
+    @controls-button_hover_bg: #d4c196;
+    @controls-button_secondary_bg: #363646;
+    @controls-button_secondary_fg: #dcd7ba;
+    @controls-button_secondary_hover_bg: #54546d;
+    @controls-button_danger_bg: #c4746e;
+    @controls-input_bg: #2a2a37;
+    @controls-input_fg: #dcd7ba;
+    @controls-input_border: #363646;
+    @controls-input_border_focus: #c4b28a;
+    @controls-input_placeholder: #727169;
+    @controls-toggle_on: #c4b28a;
+    @controls-toggle_off: #54546d;
+    @controls-badge_bg: #363646;
+    @controls-badge_fg: #dcd7ba;
+    @controls-badge_accent_bg: #c4b28a;
+    @controls-progress: #c4b28a;
+    @controls-progress_track: #363646;
+    @controls-kbd_bg: #2a2a37;
+    @controls-kbd_border: #54546d;
+    @controls-kbd_fg: #dcd7ba;
+    @syntax-variable: #dcd7ba;
+    @syntax-comment: #727169;
+    @syntax-docstring: #717e67;
+    @syntax-string: #8a9a7b;
+    @syntax-character: #8a9a7b;
+    @syntax-number: #a292a3;
+    @syntax-float: #a292a3;
+    @syntax-boolean: #b6927b;
+    @syntax-constant: #b6927b;
+    @syntax-constant_builtin: #c4b28a;
+    @syntax-identifier: #c4b28a;
+    @syntax-property: #c4b28a;
+    @syntax-member: #c4746e;
+    @syntax-parameter: #a6a69c;
+    @syntax-variable_builtin: #b6927b;
+    @syntax-global: #b6927b;
+    @syntax-function: #859fac;
+    @syntax-method: #859fac;
+    @syntax-function_builtin: #c4b28a;
+    @syntax-constructor: #8ea49e;
+    @syntax-macro: #c4746e;
+    @syntax-type: #8ea49e;
+    @syntax-type_builtin: #c4b28a;
+    @syntax-type_parameter: #8ea49e;
+    @syntax-enum_member: #b6927b;
+    @syntax-namespace: #a292a3;
+    @syntax-attribute: #c4b28a;
+    @syntax-keyword: #a292a3;
+    @syntax-keyword_import: #c4746e;
+    @syntax-keyword_operator: #c4746e;
+    @syntax-statement: #8992a7;
+    @syntax-label: #8992a7;
+    @syntax-preproc: #c4746e;
+    @syntax-operator: #c4746e;
+    @syntax-punctuation: #9e9b93;
+    @syntax-punctuation_special: #c4746e;
+    @syntax-regex: #c4746e;
+    @syntax-escape: #c4746e;
+    @syntax-symbol: #c4746e;
+    @syntax-lifetime: #c4746e;
+    @syntax-string_special: #c4b28a;
+    @syntax-url: #938aa9;
+    @syntax-tag: #c4b28a;
+    @syntax-tag_attribute: #c4b28a;
+    @syntax-tag_delimiter: #9e9b93;
+    @syntax-special1: #c4b28a;
+    @syntax-special2: #c4746e;
+    @syntax-special3: #938aa9;
+    @syntax-deprecated: #717c7c;
+    @syntax-unused: #727169;
+    @syntax-inlay_hint: #9e9b93;
+    @syntax-code_lens: #727169;
+    @syntax-ghost_text: #727169;
+    @syntax-active_parameter: #c4746e;
+    @diag-error: #c4746e;
+    @diag-warning: #c4b28a;
+    @diag-info: #658594;
+    @diag-hint: #8ea49e;
+    @diag-ok: #699469;
+    @diag-error_bg: #3f2c31;
+    @diag-warning_bg: #3f3a37;
+    @diag-info_bg: #293039;
+    @diag-hint_bg: #32373b;
+    @diag-ok_bg: #2a3331;
+    @diag-spell_bad: #c4746e;
+    @diag-spell_cap: #c4b28a;
+    @diag-spell_local: #c4b28a;
+    @diag-spell_rare: #c4b28a;
+    @diff-add: #699469;
+    @diff-delete: #c4746e;
+    @diff-change: #c4b28a;
+    @diff-text: #658594;
+    @diff-add_bg: #2c3732;
+    @diff-delete_bg: #452f33;
+    @diff-change_bg: #45403a;
+    @diff-text_bg: #2b333c;
+    @diff-add_emph: #394c3d;
+    @diff-delete_emph: #623e3f;
+    @diff-change_emph: #625a4b;
+    @diff-text_emph: #38454f;
+    @diff-conflict_ours: #717e67;
+    @diff-conflict_theirs: #435965;
+    @diff-conflict_ancestor: #9d7665;
+    @diff-conflict_ours_bg: #4b5348;
+    @diff-conflict_theirs_bg: #313d47;
+    @diff-conflict_ancestor_bg: #664e47;
+    @diff-file_header: #8ea49e;
+    @diff-hunk_header: #8992a7;
+    @git-added: #699469;
+    @git-modified: #c4b28a;
+    @git-deleted: #c4746e;
+    @git-untracked: #7aa89f;
+    @git-renamed: #658594;
+    @git-conflicted: #c4746e;
+    @git-ignored: #727169;
+    @git-submodule: #8992a7;
+    @git-sign_add: #699469;
+    @git-sign_change: #c4b28a;
+    @git-sign_delete: #c4746e;
+    @git-commit_hash: #c4b28a;
+    @git-head: #8ea49e;
+    @git-branch_local: #699469;
+    @git-branch_remote: #c4746e;
+    @git-tag: #b6927b;
+    @git-stash: #a292a3;
+    @git-author: #859fac;
+    @git-date: #727169;
+    @git-blame: #727169;
+    @git-graph: transparent;
+    @terminal-black: #393836;
+    @terminal-red: #c4746e;
+    @terminal-green: #699469;
+    @terminal-yellow: #c4b28a;
+    @terminal-blue: #435965;
+    @terminal-magenta: #a292a3;
+    @terminal-cyan: #8ea49e;
+    @terminal-white: #c8c093;
+    @terminal-bright_black: #aca9a4;
+    @terminal-bright_red: #cc928e;
+    @terminal-bright_green: #72a072;
+    @terminal-bright_yellow: #d4c196;
+    @terminal-bright_blue: #698a9b;
+    @terminal-bright_magenta: #b4a7b5;
+    @terminal-bright_cyan: #96ada7;
+    @terminal-bright_white: #d5cd9d;
+    @terminal-dim_black: #2f2e2c;
+    @terminal-dim_red: #9d5a55;
+    @terminal-dim_green: #527552;
+    @terminal-dim_yellow: #9a8b6b;
+    @terminal-dim_blue: #354751;
+    @terminal-dim_magenta: #817282;
+    @terminal-dim_cyan: #6f817c;
+    @terminal-dim_white: #9d9672;
+    @terminal-color16: #b6927b;
+    @terminal-color17: #c4746e;
+    @terminal-background: #1f1f28;
+    @terminal-foreground: #dcd7ba;
+    @terminal-cursor: #c4b28a;
+    @terminal-cursor_text: #1f1f28;
+    @terminal-selection_bg: #363646;
+    @terminal-selection_fg: #9e9b93;
+    @terminal-url: #938aa9;
+    @terminal-split: #8992a7;
+    @terminal-tab_bar_bg: #2a2a37;
+    @terminal-tab_active_bg: #1f1f28;
+    @terminal-tab_active_fg: #c4b28a;
+    @terminal-tab_inactive_bg: #2a2a37;
+    @terminal-tab_inactive_fg: #9e9b93;
+    @terminal-border_active: #c4b28a;
+    @terminal-border_inactive: #625e5a;
+    @terminal-border_bell: #c4746e;
+    @terminal-search_match_bg: #4c4858;
+    @terminal-search_focused_bg: #938aa9;
+    @terminal-hint_start_bg: #c4746e;
+    @terminal-hint_end_bg: #363646;
+    @terminal-footer_bg: #2a2a37;
+    @terminal-footer_fg: #9e9b93;
+    @terminal-vi_cursor: #938aa9;
+    @terminal-visual_bell: #363646;
+    @terminal-scrollbar_thumb: #54546d;
+    @terminal-compose_cursor: #b6927b;
+    @terminal-mark1: #7aa89f;
+    @terminal-mark2: #a292a3;
+    @terminal-mark3: #b6927b;
+    @rainbow-rainbow1: #c4746e;
+    @rainbow-rainbow2: #a292a3;
+    @rainbow-rainbow3: #658594;
+    @rainbow-rainbow4: #9d7665;
+    @rainbow-rainbow5: #699469;
+    @rainbow-rainbow6: #737c73;
+    @rainbow-rainbow7: #949fb5;
+    @markup-h1: #c4746e;
+    @markup-h2: #a292a3;
+    @markup-h3: #658594;
+    @markup-h4: #9d7665;
+    @markup-h5: #699469;
+    @markup-h6: #737c73;
+    @markup-h1_bg: #522c2a;
+    @markup-h2_bg: #413941;
+    @markup-h3_bg: #27363d;
+    @markup-h4_bg: #412f27;
+    @markup-h5_bg: #283b28;
+    @markup-h6_bg: #2e322e;
+    @markup-link_text: #938aa9;
+    @markup-link_url: #938aa9;
+    @markup-code: #8a9a7b;
+    @markup-code_bg: #2a2a37;
+    @markup-quote: #9e9b93;
+    @markup-quote_bar: #54546d;
+    @markup-list_marker: #c4b28a;
+    @markup-checkbox_done: #699469;
+    @markup-checkbox_todo: #9e9b93;
+    @markup-table_border: #54546d;
+    @markup-table_header: #8992a7;
+    @markup-rule: #54546d;
+    @markup-math: #b6927b;
+    @markup-environment: #a292a3;
+    @markup-highlight_bg: #49443c;
+    @markup-footnote: #938aa9;
+    @markup-note: #658594;
+    @markup-note_bg: #293039;
+    @markup-tip: #699469;
+    @markup-tip_bg: #2a3331;
+    @markup-important: #938aa9;
+    @markup-important_bg: #33313d;
+    @markup-warning: #c4b28a;
+    @markup-warning_bg: #3f3a37;
+    @markup-caution: #c4746e;
+    @markup-caution_bg: #3f2c31;
+    @tags-todo: #658594;
+    @tags-fix: #c4746e;
+    @tags-hack: #c4b28a;
+    @tags-note: #8ea49e;
+    @tags-perf: #957fb8;
+    @tags-test: #a292a3;
+    @debug-breakpoint: #c4746e;
+    @debug-breakpoint_condition: #b6927b;
+    @debug-breakpoint_rejected: #727169;
+    @debug-logpoint: #658594;
+    @debug-stopped: #c4b28a;
+    @debug-stopped_line_bg: #49443c;
+    @debug-continue: #8a9a7b;
+    @debug-stop: #c4746e;
+    @debug-step: #c4b28a;
+    @debug-modified_value: #c4b28a;
+    @debug-value: #c4b28a;
+    @debug-source: #c4746e;
+    @debug-unavailable: #727169;
+    @test-passed: #699469;
+    @test-failed: #c4746e;
+    @test-running: #c4b28a;
+    @test-skipped: #8ea49e;
+    @test-queued: #658594;
+    @test-unknown: #717c7c;
+    @test-marked: #c4b28a;
+    @test-adapter: #938aa9;
+    @log-error: #c4746e;
+    @log-warn: #c4b28a;
+    @log-info: #658594;
+    @log-debug: #7a8382;
+    @log-trace: #a292a3;
+    @log-success: #699469;
+    @kinds-Text: #dcd7ba;
+    @kinds-Method: #859fac;
+    @kinds-Function: #859fac;
+    @kinds-Constructor: #8ea49e;
+    @kinds-Field: #c4746e;
+    @kinds-Variable: #dcd7ba;
+    @kinds-Class: #8ea49e;
+    @kinds-Interface: #8ea49e;
+    @kinds-Module: #a292a3;
+    @kinds-Property: #c4b28a;
+    @kinds-Unit: #a292a3;
+    @kinds-Value: #8a9a7b;
+    @kinds-Enum: #8ea49e;
+    @kinds-Keyword: #a292a3;
+    @kinds-Snippet: #c4b28a;
+    @kinds-Color: #c4b28a;
+    @kinds-File: #859fac;
+    @kinds-Reference: #c4b28a;
+    @kinds-Folder: #859fac;
+    @kinds-EnumMember: #b6927b;
+    @kinds-Constant: #b6927b;
+    @kinds-Struct: #8ea49e;
+    @kinds-Event: #8ea49e;
+    @kinds-Operator: #c4746e;
+    @kinds-TypeParameter: #8ea49e;
+    @kinds-Namespace: #a292a3;
+    @kinds-Package: #a292a3;
+    @kinds-Object: #8ea49e;
+    @kinds-Array: #9e9b93;
+    @kinds-Key: #c4b28a;
+    @kinds-String: #8a9a7b;
+    @kinds-Number: #a292a3;
+    @kinds-Boolean: #b6927b;
+    @kinds-Null: #c4b28a;
+    @kinds-AI: #8a9a7b;
+    @files-directory: #859fac;
+    @files-directory_open: #658594;
+    @files-root: #c4746e;
+    @files-file: #dcd7ba;
+    @files-file_opened: #8ea49e;
+    @files-file_modified: #c4b28a;
+    @files-symlink: #8ea49e;
+    @files-symlink_broken: #c4746e;
+    @files-hidden: #727169;
+    @files-special_file: #c4b28a;
+    @files-executable: #cc928e;
+    @files-source: #699469;
+    @files-build_tooling: #72a072;
+    @files-config: #c4b28a;
+    @files-document: #c4b28a;
+    @files-office: #8ea49e;
+    @files-media: #a292a3;
+    @files-archive: #96ada7;
+    @files-unimportant: #54546d;
+    @prompt-prompt_ok: #699469;
+    @prompt-prompt_err: #c4746e;
+    @prompt-path: #859fac;
+    @prompt-git_branch: #a292a3;
+    @prompt-git_status: #c4b28a;
+    @prompt-duration: #b6927b;
+    @prompt-user: #8ea49e;
+    @prompt-root: #c4746e;
+    @prompt-host: #949fb5;
+    @prompt-context: #938aa9;
+    @prompt-jobs: #658594;
+    @prompt-time: #727169;
+    @hues-red: #c4746e;
+    @hues-orange: #b6927b;
+    @hues-yellow: #c4b28a;
+    @hues-green: #699469;
+    @hues-teal: #7aa89f;
+    @hues-cyan: #8ea49e;
+    @hues-blue: #859fac;
+    @hues-purple: #938aa9;
+    @hues-pink: #a292a3;
+    @hues-brown: #9d7665;
+    @hues-gray: #9e9b93;
+    @charts-series1: #be7f46;
+    @charts-series2: #37a28b;
+    @charts-series3: #987cc2;
+    @charts-series4: #aa8f41;
+    @charts-series5: #ce6c8d;
+    @charts-series6: #528b52;
+    @charts-series7: #6b8fd3;
+    @charts-series8: #c8726b;
+    @charts-seq1: #39527f;
+    @charts-seq2: #46669c;
+    @charts-seq3: #547aba;
+    @charts-seq4: #678fd4;
+    @charts-seq5: #86a4e1;
+    @charts-seq6: #a6bae9;
+    @charts-seq7: #c4d1ef;
+    @charts-div_neg3: #d67b73;
+    @charts-div_neg2: #a8635d;
+    @charts-div_neg1: #794d4b;
+    @charts-div_mid: #393836;
+    @charts-div_pos1: #495b7d;
+    @charts-div_pos2: #5d78ae;
+    @charts-div_pos3: #7098df;
+    @charts-good: #699469;
+    @charts-warning: #c4b28a;
+    @charts-serious: #b6927b;
+    @charts-critical: #c4746e;
+    @charts-surface: #1f1f28;
+    @charts-grid: #363646;
+    @charts-axis: #54546d;
+    @charts-label: #9e9b93;
+    @charts-title: #dcd7ba;
+    @charts-tooltip_bg: #2a2a37;
+    @charts-tooltip_border: #363646;
+  }
+
+  .hues() {
+    @hues: {
+      @red: #c4746e;
+      @orange: #b6927b;
+      @yellow: #c4b28a;
+      @green: #699469;
+      @teal: #7aa89f;
+      @cyan: #8ea49e;
+      @blue: #859fac;
+      @purple: #938aa9;
+      @pink: #a292a3;
+      @brown: #9d7665;
+      @gray: #9e9b93;
+    };
+  }
+
+  .hues-filters() {
+    @hues-filters: {
+      @red: brightness(0) saturate(100%) invert(61%) sepia(33%) saturate(540%) hue-rotate(293deg) brightness(101%) contrast(90%);
+      @orange: brightness(0) saturate(100%) invert(73%) sepia(36%) saturate(519%) hue-rotate(332deg) brightness(100%) contrast(93%);
+      @yellow: brightness(0) saturate(100%) invert(85%) sepia(27%) saturate(512%) hue-rotate(336deg) brightness(108%) contrast(96%);
+      @green: brightness(0) saturate(100%) invert(86%) sepia(22%) saturate(538%) hue-rotate(63deg) brightness(97%) contrast(88%);
+      @teal: brightness(0) saturate(100%) invert(90%) sepia(24%) saturate(532%) hue-rotate(105deg) brightness(95%) contrast(85%);
+      @cyan: brightness(0) saturate(100%) invert(81%) sepia(27%) saturate(522%) hue-rotate(141deg) brightness(99%) contrast(86%);
+      @blue: brightness(0) saturate(100%) invert(57%) sepia(66%) saturate(1020%) hue-rotate(195deg) brightness(115%) contrast(96%);
+      @purple: brightness(0) saturate(100%) invert(63%) sepia(71%) saturate(1021%) hue-rotate(208deg) brightness(110%) contrast(94%);
+      @pink: brightness(0) saturate(100%) invert(76%) sepia(28%) saturate(508%) hue-rotate(290deg) brightness(112%) contrast(92%);
+      @brown: brightness(0) saturate(100%) invert(73%) sepia(36%) saturate(519%) hue-rotate(332deg) brightness(100%) contrast(93%); // approximation, borrows @orange's filter
+      @gray: brightness(0) saturate(100%) invert(79%) sepia(13%) saturate(517%) hue-rotate(191deg) brightness(93%) contrast(71%);
+    };
+  }
+
+  // Resolves the user's @accentColor choice (see @var select above)
+  // against .hues() / .hues-filters(). Requires @accentColor in scope.
+  .accent() {
+    .hues();
+    .hues-filters();
+    @accent: @hues[@@accentColor];
+    @accent-filter: @hues-filters[@@accentColor];
+  }
+
+  // color-scheme + selection/placeholder defaults. Call after .roles() and .accent().
+  .defaults() {
+    color-scheme: dark;
+
+    ::selection {
+      background-color: fade(@accent, 30%);
+    }
+
+    input,
+    textarea {
+      &::placeholder {
+        color: @text-placeholder !important;
+      }
+    }
+  }
+
+  .rgbify(@color) {
+    @rgb: red(@color), green(@color), blue(@color);
+  }
+
+  .hslify(@color) {
+    @raw: e(
+      %("%s, %s%, %s%", hue(@color), saturation(@color), lightness(@color))
+    );
+  }
+}
+
+@-moz-document /* Match every page on GitHub except github.com/home, github.com/features/*, and github.com/organizations/plan. */
+regexp(
+    "https:\/\/github\.com(?!(\/home$|\/features($|\/.*)|\/organizations\/plan)).*$"
+  ),
+  domain("gist.github.com"),
+  domain("docs.github.com"),
+  domain("viewscreen.githubusercontent.com") {
+  [data-color-mode] {
+    #kanagawa();
+  }
+
+  #kanagawa() {
+    #lib.palette();
+    #lib.derived();
+    #lib.base24();
+    #lib.roles();
+    #lib.accent();
+    #lib.defaults();
+    .cm-placeholder {
+      color: @hues-gray;
+    }
+
+    accent-color: @accent;
+    color: @text-fg;
+
+    --color-social-reaction-bg-reacted-hover: fade(@accent, 30%);
+    --color-notifications-button-hover-bg: fade(@accent, 60%);
+    --color-workflow-card-header-shadow: rgba(27, 31, 35, 0.04);
+    --color-icon-directory: var(--fgColor-muted, var(--color-fg-muted));
+    --color-calendar-halloween-graph-day-L1-bg: fade(
+      @accent,
+      40%
+    ) !important;
+    --color-calendar-halloween-graph-day-L2-bg: fade(
+      @accent,
+      60%
+    ) !important;
+    --color-calendar-halloween-graph-day-L3-bg: fade(
+      @accent,
+      80%
+    ) !important;
+    --color-calendar-halloween-graph-day-L4-bg: @accent !important;
+    --color-calendar-winter-graph-day-L1-bg: fade(
+      @accent,
+      40%
+    ) !important;
+    --color-calendar-winter-graph-day-L2-bg: fade(
+      @accent,
+      60%
+    ) !important;
+    --color-calendar-winter-graph-day-L3-bg: fade(
+      @accent,
+      80%
+    ) !important;
+    --color-calendar-winter-graph-day-L4-bg: @accent !important;
+    --color-calendar-graph-day-bg: @surface-bg_p1 !important;
+    --color-calendar-graph-day-border: transparent !important;
+    --color-calendar-graph-day-L1-bg: fade(@accent, 40%) !important;
+    --color-calendar-graph-day-L2-bg: fade(@accent, 60%) !important;
+    --color-calendar-graph-day-L3-bg: fade(@accent, 80%) !important;
+    --color-calendar-graph-day-L4-bg: @accent !important;
+    --color-calendar-graph-day-L2-border: transparent !important;
+    --color-calendar-graph-day-L3-border: transparent !important;
+    --color-calendar-graph-day-L4-border: transparent !important;
+    --contribution-default-bgColor-0: fade(@accent, 10%) !important;
+    --contribution-default-bgColor-1: fade(@accent, 40%) !important;
+    --contribution-default-bgColor-2: fade(@accent, 60%) !important;
+    --contribution-default-bgColor-3: fade(@accent, 80%) !important;
+    --contribution-default-bgColor-4: @accent !important;
+    --color-user-mention-fg: @accent;
+    --color-user-mention-bg: fade(@accent, 30%);
+    --color-dashboard-feed-bg: var(--color-scale-gray-9);
+    --color-mktg-btn-shadow-outline: rgba(255, 255, 255, 0.25) 0 0 0 1px inset;
+    --color-marketing-icon-secondary: var(--color-scale-blue-5);
+    --color-project-header-bg: var(--color-scale-gray-9);
+    --color-project-sidebar-bg: var(--color-scale-gray-8);
+    --color-project-gradient-in: var(--color-scale-gray-8);
+    --color-project-gradient-out: rgba(22, 27, 34, 0);
+    --color-diff-blob-selected-line-highlight-mix-blend-mode: screen;
+    --topicTag-borderColor: #0000;
+    --highlight-neutral-bgColor: fade(@hues-yellow, 30%);
+    --page-header-bgColor: @surface-bg_m3;
+    --diffBlob-additionNum-bgColor: fade(@hues-green, 30%);
+    --diffBlob-additionNum-fgColor: @text-fg;
+    --diffBlob-additionLine-bgColor: fade(@hues-green, 15%);
+    --diffBlob-additionWord-bgColor: fade(@hues-green, 30%);
+    --diffBlob-additionWord-fgColor: @text-fg;
+    --diffBlob-deletionNum-bgColor: fade(@hues-red, 30%);
+    --diffBlob-deletionNum-fgColor: @text-fg;
+    --diffBlob-deletionLine-bgColor: fade(@hues-red, 15%);
+    --diffBlob-deletionWord-bgColor: fade(@hues-red, 30%);
+    --diffBlob-deletionWord-fgColor: @text-fg;
+    --diffBlob-hunkNum-bgColor-rest: fade(@accent, 40%);
+    --diffBlob-hunkNum-bgColor-hover: fade(@accent, 75%);
+    --diffBlob-hunkLine-bgColor: fade(@accent, 25%);
+    --diffBlob-expander-iconColor: @hues-gray;
+    --diffBlob-emptyNum-bgColor: @surface-bg_m1;
+    --diffBlob-emptyLine-bgColor: @surface-bg_m1;
+    --codeMirror-fgColor: @text-fg;
+    --codeMirror-bgColor: @surface-bg;
+    --codeMirror-gutters-bgColor: @surface-bg;
+    --codeMirror-gutterMarker-fgColor-default: @surface-bg;
+    --codeMirror-gutterMarker-fgColor-muted: @border-border;
+    --codeMirror-lineNumber-fgColor: @text-fg_muted;
+    --codeMirror-cursor-fgColor: @text-fg;
+    --codeMirror-selection-bgColor: #388bfd66;
+    --codeMirror-activeline-bgColor: #6e768166;
+    --codeMirror-matchingBracket-fgColor: @text-fg;
+    --codeMirror-lines-bgColor: @surface-bg;
+    --codeMirror-syntax-fgColor-comment: @hues-gray;
+    --codeMirror-syntax-fgColor-constant: @hues-blue;
+    --codeMirror-syntax-fgColor-entity: @hues-blue;
+    --codeMirror-syntax-fgColor-keyword: @hues-purple;
+    --codeMirror-syntax-fgColor-storage: @hues-orange;
+    --codeMirror-syntax-fgColor-string: @hues-green;
+    --codeMirror-syntax-fgColor-support: #79c0ff;
+    --codeMirror-syntax-fgColor-variable: @hues-orange;
+    --header-fgColor-default: @text-fg;
+    --header-fgColor-logo: @text-fg;
+    --header-bgColor: @surface-bg_m3;
+    --header-borderColor-divider: #8b949e;
+    --headerSearch-bgColor: @surface-bg_m1;
+    --headerSearch-borderColor: @surface-bg_p1;
+    --avatar-bgColor: fade(@text-fg, 26%);
+    --avatar-borderColor: @surface-bg_p1;
+    --avatar-shadow: 0px 0px 0px 2px #0d1117;
+    --avatarStack-fade-bgColor-default: @surface-bg_p2;
+    --avatarStack-fade-bgColor-muted: #21262d;
+    --control-bgColor-rest: @hues-red;
+    --control-bgColor-hover: #292e36;
+    --control-bgColor-active: @surface-bg_p2;
+    --control-bgColor-disabled: fade(@surface-bg_m1, 60%);
+    --control-bgColor-selected: #161b22;
+    --control-fgColor-rest: @text-fg;
+    --control-fgColor-placeholder: #484f58;
+    --control-fgColor-disabled: fade(@hues-gray, 70%);
+    --control-borderColor-rest: @surface-bg_p2;
+    --control-borderColor-emphasis: #666e79;
+    --control-borderColor-disabled: fade(@surface-bg_p2, 75%);
+    --control-borderColor-selected: #f0f6fc;
+    --control-borderColor-success: @hues-green;
+    --control-borderColor-danger: @hues-red;
+    --control-borderColor-warning: @hues-yellow;
+    --control-iconColor-rest: #848d97;
+    --control-transparent-bgColor-rest: #0000;
+    --control-transparent-bgColor-hover: fade(@surface-bg_p3, 20%);
+    --control-transparent-bgColor-active: fade(@border-border, 50%);
+    --control-transparent-bgColor-disabled: #21262db3;
+    --control-transparent-bgColor-selected: #b1bac414;
+    --control-transparent-borderColor-rest: #0000;
+    --control-transparent-borderColor-hover: #0000;
+    --control-transparent-borderColor-active: #0000;
+    --control-danger-fgColor-rest: @hues-red;
+    --control-danger-fgColor-hover: @surface-bg_m3;
+    --control-danger-bgColor-hover: fade(@hues-red, 80%);
+    --control-danger-bgColor-active: @hues-red;
+    --control-checked-bgColor-rest: @accent;
+    --control-checked-bgColor-hover: lighten(@accent, 5%);
+    --control-checked-bgColor-active: lighten(@accent, 5%);
+    --control-checked-bgColor-disabled: #6e7681;
+    --control-checked-fgColor-rest: @surface-bg_m3;
+    --control-checked-fgColor-disabled: #010409;
+    --control-checked-borderColor-rest: @accent;
+    --control-checked-borderColor-hover: @accent;
+    --control-checked-borderColor-active: @accent;
+    --control-checked-borderColor-disabled: @surface-bg_p1;
+    --controlTrack-bgColor-rest: @surface-bg_p1;
+    --controlTrack-bgColor-hover: @surface-bg_p2;
+    --controlTrack-bgColor-active: @surface-bg_p3;
+    --controlTrack-bgColor-disabled: #6e7681;
+    --controlTrack-fgColor-rest: #848d97;
+    --controlTrack-fgColor-disabled: @text-fg;
+    --controlTrack-borderColor-rest: #0000;
+    --controlTrack-borderColor-disabled: #6e7681;
+    --controlKnob-bgColor-rest: @surface-bg;
+    --controlKnob-bgColor-disabled: #21262db3;
+    --controlKnob-bgColor-checked: @text-fg;
+    --controlKnob-borderColor-rest: @surface-bg_p3;
+    --controlKnob-borderColor-disabled: #21262db3;
+    --controlKnob-borderColor-checked: @hues-blue;
+    --button-default-fgColor-rest: @text-fg;
+    --button-default-bgColor-rest: @surface-bg_p1;
+    --button-default-bgColor-hover: @surface-bg_p2;
+    --button-default-bgColor-active: @surface-bg_p3;
+    --button-default-bgColor-selected: @surface-bg_p3;
+    --button-default-bgColor-disabled: fade(@surface-bg_p1, 70%);
+    --button-default-borderColor-rest: @surface-bg_p2;
+    --button-default-borderColor-hover: @surface-bg_p2;
+    --button-default-borderColor-active: @surface-bg_p2;
+    --button-default-borderColor-disabled: fade(@surface-bg_p1, 70%);
+    --button-default-shadow-resting: 0px 0px 0px 0px #000;
+    --button-primary-fgColor-rest: @surface-bg;
+    --button-primary-fgColor-disabled: fade(@surface-bg, 60%);
+    --button-primary-iconColor-rest: @surface-bg;
+    --button-primary-bgColor-rest: @hues-green;
+    --button-primary-bgColor-hover: lighten(@hues-green, 5%);
+    --button-primary-bgColor-active: saturate(@hues-green, 5%);
+    --button-primary-bgColor-disabled: fade(@hues-green, 70%);
+    --button-primary-borderColor-rest: @hues-green;
+    --button-primary-borderColor-hover: @hues-green;
+    --button-primary-borderColor-active: @hues-green;
+    --button-primary-borderColor-disabled: fade(@hues-green, 70%);
+    --button-primary-shadow-selected: 0px 0px 0px 0px #000;
+    --button-invisible-fgColor-rest: @text-fg;
+    --button-invisible-fgColor-hover: lighten(@accent, 10%);
+    --button-invisible-fgColor-disabled: #6e7681;
+    --button-invisible-iconColor-rest: @hues-gray;
+    --button-invisible-iconColor-hover: #e6edf3;
+    --button-invisible-iconColor-disabled: #6e7681;
+    --button-invisible-bgColor-rest: #0000;
+    --button-invisible-bgColor-hover: #b1bac41f;
+    --button-invisible-bgColor-active: #b1bac433;
+    --button-invisible-bgColor-disabled: fade(@surface-bg_p2, 70%);
+    --button-invisible-borderColor-rest: #0000;
+    --button-invisible-borderColor-hover: #0000;
+    --button-invisible-borderColor-disabled: fade(@surface-bg_p2, 70%);
+    --button-outline-fgColor-rest: #388bfd;
+    --button-outline-fgColor-hover: #58a6ff;
+    --button-outline-fgColor-active: @text-fg;
+    --button-outline-fgColor-disabled: #4493f880;
+    --button-outline-bgColor-rest: #f0f6fc;
+    --button-outline-bgColor-hover: @surface-bg_p2;
+    --button-outline-bgColor-active: #0d419d;
+    --button-outline-bgColor-disabled: #0d1117;
+    --button-outline-borderColor-hover: #f0f6fc1a;
+    --button-outline-borderColor-selected: #f0f6fc1a;
+    --button-outline-shadow-selected: 0px 0px 0px 0px #000;
+    --button-danger-fgColor-rest: @hues-red;
+    --button-danger-fgColor-hover: @surface-bg;
+    --button-danger-fgColor-active: @surface-bg;
+    --button-danger-fgColor-disabled: fade(@hues-red, 50%);
+    --button-danger-iconColor-rest: @hues-red;
+    --button-danger-iconColor-hover: @surface-bg_m3;
+    --button-danger-bgColor-rest: @surface-bg_p1;
+    --button-danger-bgColor-hover: @hues-red;
+    --button-danger-bgColor-active: darken(@hues-red, 5%);
+    --button-danger-bgColor-disabled: @surface-bg;
+    --button-danger-borderColor-rest: @surface-bg_p2;
+    --button-danger-borderColor-hover: @hues-red;
+    --button-danger-borderColor-active: darken(@hues-red, 5%);
+    --button-danger-shadow-selected: 0px 0px 0px 0px #000;
+    --button-inactive-fgColor: #8b949e;
+    --button-inactive-bgColor: #21262d;
+    --button-star-iconColor: @hues-yellow;
+    --buttonCounter-default-bgColor-rest: @surface-bg_p2;
+    --buttonCounter-invisible-bgColor-rest: @surface-bg_p2;
+    --buttonCounter-primary-bgColor-rest: #04260f33;
+    --buttonCounter-outline-bgColor-rest: #051d4d33;
+    --buttonCounter-outline-bgColor-hover: #051d4d33;
+    --buttonCounter-outline-bgColor-disabled: #1f6feb0d;
+    --buttonCounter-outline-fgColor-rest: #388bfd;
+    --buttonCounter-outline-fgColor-hover: #58a6ff;
+    --buttonCounter-outline-fgColor-disabled: #4493f880;
+    --buttonCounter-danger-bgColor-hover: fade(@text-fg, 20%);
+    --buttonCounter-danger-bgColor-disabled: #da36330d;
+    --buttonCounter-danger-bgColor-rest: #49020233;
+    --buttonCounter-danger-fgColor-rest: @hues-red;
+    --buttonCounter-danger-fgColor-hover: @text-fg;
+    --buttonCounter-danger-fgColor-disabled: fade(@hues-red, 50%);
+    --focus-outlineColor: @accent;
+    --menu-bgColor-active: @surface-bg_m1;
+    --overlay-bgColor: @surface-bg;
+    --overlay-borderColor: @surface-bg_p1;
+    --overlay-backdrop-bgColor: #161b2266;
+    --selectMenu-borderColor: #484f58;
+    --selectMenu-bgColor-active: #0c2d6b;
+    --sideNav-bgColor-selected: #21262d;
+    --skeletonLoader-bgColor: #161b22;
+    --timelineBadge-bgColor: @surface-bg_m1;
+    --treeViewItem-leadingVisual-iconColor-rest: @hues-gray;
+    --underlineNav-borderColor-active: @accent;
+    --underlineNav-borderColor-hover: #6e768166;
+    --underlineNav-iconColor-rest: #848d97;
+    --selection-bgColor: fade(@accent, 30%);
+    --reactionButton-selected-bgColor-rest: fade(@accent, 20%);
+    --reactionButton-selected-bgColor-hover: fade(@accent, 35%);
+    --reactionButton-selected-fgColor-rest: @accent;
+    --reactionButton-selected-fgColor-hover: @accent;
+    --fgColor-default: @text-fg;
+    --fgColor-muted: @text-fg_float;
+    --fgColor-onEmphasis: @surface-bg;
+    --fgColor-white: @text-fg;
+    --fgColor-disabled: @surface-bg_p3;
+    --fgColor-link: @accent;
+    --fgColor-neutral: @text-fg_float;
+    --fgColor-accent: @accent;
+    --fgColor-success: @hues-green;
+    --fgColor-attention: @hues-yellow;
+    --fgColor-severe: @hues-orange;
+    --fgColor-danger: @hues-red;
+    --fgColor-open: @hues-green;
+    --fgColor-closed: @hues-red;
+    --fgColor-done: @hues-purple;
+    --fgColor-sponsors: @hues-pink;
+    --bgColor-default: @surface-bg;
+    --bgColor-muted: @surface-bg_m1;
+    --bgColor-inset: @surface-bg_m3;
+    --bgColor-emphasis: @hues-gray;
+    --bgColor-inverse: @text-fg;
+    --bgColor-disabled: #21262db3;
+    --bgColor-transparent: #0000;
+    --bgColor-neutral-muted: fade(@surface-bg_p1, 40%);
+    --bgColor-neutral-emphasis: @hues-gray;
+    --bgColor-accent-muted: fade(@accent, 20%);
+    --bgColor-accent-emphasis: @accent;
+    --bgColor-success-muted: #2ea04326;
+    --bgColor-success-emphasis: @hues-green;
+    --bgColor-attention-muted: fade(@hues-yellow, 15%);
+    --bgColor-attention-emphasis: @hues-yellow;
+    --bgColor-severe-muted: fade(@hues-orange, 26%);
+    --bgColor-severe-emphasis: @hues-orange;
+    --bgColor-danger-muted: fade(@hues-red, 26%);
+    --bgColor-danger-emphasis: @hues-red;
+    --bgColor-open-muted: #2ea0431a;
+    --bgColor-open-emphasis: @hues-green;
+    --bgColor-closed-muted: fade(@hues-red, 15%);
+    --bgColor-closed-emphasis: @hues-red;
+    --bgColor-done-muted: #a371f726;
+    --bgColor-done-emphasis: @hues-purple;
+    --bgColor-sponsors-muted: #db61a21a;
+    --bgColor-sponsors-emphasis: @hues-pink;
+    --borderColor-default: @surface-bg_p2;
+    --borderColor-muted: @surface-bg_p1;
+    --borderColor-emphasis: #484f58;
+    --borderColor-disabled: #21262db3;
+    --borderColor-transparent: #0000;
+    --borderColor-neutral-muted: #6e768166;
+    --borderColor-neutral-emphasis: #6e7681;
+    --borderColor-accent-muted: fade(@accent, 50%);
+    --borderColor-accent-emphasis: @accent;
+    --borderColor-success-muted: darken(@hues-green, 5%);
+    --borderColor-success-emphasis: @hues-green;
+    --borderColor-attention-muted: fade(@palette-canvasPink2, 30%);
+    --borderColor-attention-emphasis: @palette-canvasPink2;
+    --borderColor-severe-muted: @hues-orange;
+    --borderColor-severe-emphasis: #bd561d;
+    --borderColor-danger-muted: @hues-red;
+    --borderColor-danger-emphasis: @hues-red;
+    --borderColor-open-muted: darken(@hues-green, 5%);
+    --borderColor-open-emphasis: @hues-green;
+    --borderColor-closed-muted: @hues-red;
+    --borderColor-closed-emphasis: @hues-red;
+    --borderColor-done-muted: @palette-springViolet2;
+    --borderColor-done-emphasis: @hues-purple;
+    --borderColor-sponsors-muted: #db61a266;
+    --borderColor-sponsors-emphasis: @hues-pink;
+    --color-ansi-black: @surface-bg_p2;
+    --color-ansi-black-bright: @surface-bg_p3;
+    --color-ansi-gray: @surface-bg_p3;
+    --color-ansi-white: @text-fg_float;
+    --color-ansi-white-bright: @hues-gray;
+    --color-ansi-red: @hues-red;
+    --color-ansi-red-bright: @hues-red;
+    --color-ansi-green: @hues-green;
+    --color-ansi-green-bright: @hues-green;
+    --color-ansi-yellow: @hues-yellow;
+    --color-ansi-yellow-bright: @hues-yellow;
+    --color-ansi-blue: @hues-blue;
+    --color-ansi-blue-bright: @hues-blue;
+    --color-ansi-magenta: @hues-pink;
+    --color-ansi-magenta-bright: @hues-pink;
+    --color-ansi-cyan: @hues-teal;
+    --color-ansi-cyan-bright: @hues-teal;
+    --color-prettylights-syntax-comment: @hues-gray;
+    --color-prettylights-syntax-constant: @hues-blue;
+    --color-prettylights-syntax-constant-other-reference-link: @hues-blue;
+    --color-prettylights-syntax-entity: @hues-blue;
+    --color-prettylights-syntax-storage-modifier-import: @hues-orange;
+    --color-prettylights-syntax-entity-tag: @hues-blue;
+    --color-prettylights-syntax-keyword: @hues-purple;
+    --color-prettylights-syntax-string: @hues-green;
+    --color-prettylights-syntax-variable: @hues-orange;
+    --color-prettylights-syntax-invalid-illegal-text: @hues-red;
+    --color-prettylights-syntax-invalid-illegal-bg: fade(@hues-red, 15%);
+    --color-prettylights-syntax-markup-heading: @hues-red;
+    --color-prettylights-syntax-markup-italic: @hues-yellow;
+    --color-prettylights-syntax-markup-bold: @hues-yellow;
+    --color-prettylights-syntax-markup-deleted-text: @text-fg;
+    --color-prettylights-syntax-markup-deleted-bg: fade(@hues-red, 40%);
+    --color-prettylights-syntax-markup-inserted-text: @text-fg;
+    --color-prettylights-syntax-markup-inserted-bg: fade(@hues-green, 40%);
+    --color-prettylights-syntax-markup-changed-text: @text-fg;
+    --color-prettylights-syntax-markup-changed-bg: fade(@hues-yellow, 40%);
+    --color-prettylights-syntax-markup-ignored-text: @text-fg;
+    --bgColor-white: @surface-bg;
+    --color-scale-white: @surface-bg;
+    --color-scale-gray-3: @hues-gray;
+    --color-scale-gray-5: @border-border;
+    --color-scale-gray-6: @surface-bg_p2;
+    --color-scale-gray-7: @surface-bg_p2;
+    --color-scale-blue-2: @hues-cyan;
+    --color-scale-blue-5: @hues-blue;
+    --color-scale-green-3: @hues-green;
+    --color-scale-green-4: @hues-green;
+    --color-scale-yellow-3: @hues-orange;
+    --color-scale-orange-4: @hues-orange;
+    --color-scale-red-4: @hues-red;
+    --shadow-inset: inset 0px 1px 0px 0px @surface-bg_m3;
+    --shadow-resting-xsmall: 0px 1px 0px 0px @surface-bg_m3;
+    --shadow-resting-small: 0px 1px 0px 0px @surface-bg_m3, 0px 1px 3px 0px @surface-bg_m3;
+    --shadow-resting-medium: 0px 3px 6px 0px @surface-bg_m3;
+    --shadow-floating-small:
+      0px 0px 0px 1px @surface-bg, 0px 6px 12px -3px @surface-bg_m3, 0px 6px 18px 0px @surface-bg_m3;
+    --shadow-floating-medium:
+      0px 0px 0px 1px @surface-bg_p1, 0px 8px 16px -4px @surface-bg_m3, 0px 4px 32px -4px
+      @surface-bg_m3, 0px 24px 48px -12px @surface-bg_m3, 0px 48px 96px -24px @surface-bg_m3;
+    --shadow-floating-large:
+      0px 0px 0px 1px @surface-bg_p1, 0px 24px 48px 0px #010409;
+    --shadow-floating-xlarge:
+      0px 0px 0px 1px @surface-bg_p1, 0px 32px 64px 0px #010409;
+    --shadow-floating-legacy: 0px 6px 12px -3px @surface-bg_m3, 0px 6px 18px 0px @surface-bg_m3;
+    --outline-focus: @hues-blue solid 2px;
+
+    /* Feed Links */
+    .feed-item-content a code, .feed-item-content a tt {
+      color: @accent;
+    }
+
+    /* Customer Terms & Agreements Page: https://github.com/customer-terms */
+    .enterprise-customer-agreement {
+      color: @text-fg !important;
+
+      &:hover {
+        .octicon,
+        h3 {
+          color: @accent !important;
+        }
+      }
+    }
+
+    /* Enhanced Repo Insights Views - https://github.com/orgs/community/discussions/135572 */
+    --data-blue-color-emphasis: @accent;
+    --data-red-color-emphasis: @hues-red;
+    --data-green-color-emphasis: @hues-green;
+
+    /* Copilot Chat */
+    --display-green-fgColor: @hues-green;
+    --display-teal-fgColor: @hues-teal;
+    --display-purple-fgColor: @hues-purple;
+    --display-blue-fgColor: @hues-blue;
+    --display-pink-fgColor: @hues-pink;
+    --display-gray-fgColor: @hues-gray;
+    react-app[app-name="copilot-immersive-v1"],
+    copilot-dashboard-entrypoint {
+      button {
+        color: @text-fg;
+      }
+    }
+
+    /* docs.github.com */
+    --color-fg-default: @text-fg;
+    --color-canvas-default: @surface-bg;
+    --color-canvas-subtle: @surface-bg_m1;
+
+    --tooltip-fgColor: @surface-bg;
+    --tooltip-bgColor: @hues-gray;
+
+    /* Refined GitHub */
+    --rgh-heat-color: @hues-orange;
+
+    .turbo-progress-bar {
+      background-color: @accent;
+    }
+
+    .form-select {
+      @svg: escape(
+        '<svg width="16" height="16" viewBox="0 0 16 16" fill="@{hues-gray}" xmlns="http://www.w3.org/2000/svg"><path d="m4.427 9.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 9H4.604a.25.25 0 0 0-.177.427M4.423 6.47 7.82 3.072a.25.25 0 0 1 .354 0L11.57 6.47a.25.25 0 0 1-.177.427H4.6a.25.25 0 0 1-.177-.427"/></svg>'
+      );
+      background-image: url("data:image/svg+xml,@{svg}");
+    }
+
+    img[src="https://github.githubassets.com/assets/mona-loading-default-c3c7aad1282f.gif"] {
+      content: url("https://giscus.catppuccin.com/assets/loading_48x48.gif");
+    }
+
+    /* Header when logged out */
+    .header-search-button {
+      svg {
+        fill: @text-fg !important;
+      }
+    }
+    .HeaderMenu-toggle-bar {
+      border-color: @text-fg;
+    }
+    .notification-indicator .mail-status {
+      background-image: linear-gradient(
+        @accent,
+        darken(@accent, 5%)
+      );
+    }
+
+    .CheckStep {
+      .ansifg-r {
+        color: var(--color-ansi-red);
+      }
+      .ansifg-y {
+        color: var(--color-ansi-yellow);
+      }
+      .ansifg-g {
+        color: var(--color-ansi-green);
+      }
+      .ansifg-b {
+        color: var(--color-ansi-blue);
+      }
+      .ansifg-c {
+        color: var(--color-ansi-cyan);
+      }
+      .ansifg-m {
+        color: var(--color-ansi-magenta);
+      }
+      .ansifg-gr {
+        color: var(--color-ansi-gray);
+      }
+    }
+
+    .js-activity-overview-graph .js-highlight-blob {
+      fill: @accent;
+      stroke: @accent;
+    }
+
+    .subnav-link.selected {
+      border-bottom-color: @accent;
+    }
+
+    /* Pull request check in progress indicator */
+    [stroke="#DBAB0A" i] {
+      stroke: fade(@hues-yellow, 70%) !important;
+    }
+    [fill="#DBAB0A" i] {
+      fill: @hues-yellow !important;
+    }
+
+    /* Issue timeline icon */
+    [class*="prc-Timeline-TimelineBadge"], .TimelineItem-Badge {
+      /* Completed */
+      path[d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm1.5 0a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm10.28-1.72-4.5 4.5a.75.75 0 0 1-1.06 0l-2-2a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l1.47 1.47 3.97-3.97a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Z"],
+      /* Duplicate / Not planned */
+      path[d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM3.965 13.096a6.5 6.5 0 0 0 9.131-9.131ZM1.5 8a6.474 6.474 0 0 0 1.404 4.035l9.131-9.131A6.499 6.499 0 0 0 1.5 8Z"],
+      /* Reopen */
+      path[d="M5.029 2.217a6.5 6.5 0 0 1 9.437 5.11.75.75 0 1 0 1.492-.154 8 8 0 0 0-14.315-4.03L.427 1.927A.25.25 0 0 0 0 2.104V5.75A.25.25 0 0 0 .25 6h3.646a.25.25 0 0 0 .177-.427L2.715 4.215a6.491 6.491 0 0 1 2.314-1.998ZM1.262 8.169a.75.75 0 0 0-1.22.658 8.001 8.001 0 0 0 14.315 4.03l1.216 1.216a.25.25 0 0 0 .427-.177V10.25a.25.25 0 0 0-.25-.25h-3.646a.25.25 0 0 0-.177.427l1.358 1.358a6.501 6.501 0 0 1-11.751-3.11.75.75 0 0 0-.272-.506Z"],
+      path[d="M9.06 9.06a1.5 1.5 0 1 1-2.12-2.12 1.5 1.5 0 0 1 2.12 2.12Z"] {
+        fill: @surface-bg;
+      }
+    }
+  }
+}
+
+@-moz-document url-prefix(
+    "https://viewscreen.githubusercontent.com/markdown/mermaid"
+  ) {
+  [data-color-mode] {
+    #kanagawa();
+  }
+
+  #kanagawa() {
+    #lib.palette();
+    #lib.derived();
+    #lib.base24();
+    #lib.roles();
+    #lib.accent();
+
+    ::selection {
+      background-color: fade(@accent, 30%);
+    }
+
+    background-color: @surface-bg;
+
+    --color-btn-text: @text-fg;
+    --color-btn-bg: @surface-bg_p1;
+    --color-btn-border: @surface-bg_p2;
+    --color-btn-hover-bg: @surface-bg_p2;
+    --color-btn-hover-border: @surface-bg_p3;
+    --color-btn-active-bg: @surface-bg_p3;
+    --color-btn-selected-bg: @surface-bg_p3;
+    --color-btn-counter-bg: @surface-bg_p3;
+    --color-btn-outline-text: @accent;
+    --color-fg-muted: @text-fg_float;
+    --button-default-fgColor-rest: @text-fg;
+    --button-default-bgColor-rest: @surface-bg_p1;
+    --button-default-bgColor-hover: @surface-bg_p2;
+    --button-default-bgColor-active: @surface-bg_p3;
+    --button-default-bgColor-selected: @surface-bg_p3;
+    --button-default-bgColor-disabled: fade(@surface-bg_p1, 70%);
+    --button-default-borderColor-rest: @surface-bg_p2;
+    --button-default-borderColor-hover: @surface-bg_p2;
+    --button-default-borderColor-active: @surface-bg_p2;
+    --button-default-borderColor-disabled: fade(@surface-bg_p1, 70%);
+
+    #diagram {
+      .node rect,
+      .node circle,
+      .node ellipse,
+      .node polygon,
+      .node path {
+        fill: fade(@accent, 10%);
+        stroke: @accent;
+      }
+
+      .cluster rect {
+        fill: @surface-bg_p1;
+        stroke: @surface-bg_p3;
+      }
+
+      .label text,
+      span,
+      p {
+        fill: @text-fg;
+        color: @text-fg;
+      }
+
+      .flowchart-link {
+        stroke: @hues-gray;
+      }
+      .marker {
+        stroke: @hues-gray;
+        fill: @hues-gray;
+      }
+
+      .edgeLabel {
+        background-color: @surface-bg_m3;
+        p {
+          background-color: @surface-bg_p3;
+        }
+      }
+    }
+
+    .octicon {
+      fill: var(--color-fg-muted) !important;
+    }
+  }
+}
+
+@-moz-document regexp(
+    "https:\/\/notebooks\.githubusercontent\.com\/view\/ipynb.*"
+  ) {
+  :root {
+    #kanagawa();
+  }
+
+  #kanagawa() {
+    #lib.palette();
+    #lib.derived();
+    #lib.base24();
+    #lib.roles();
+    #lib.accent();
+    #lib.defaults();
+
+    --jp-border-color0: var(--color-scale-gray-7);
+    --jp-border-color1: var(--color-scale-gray-7);
+    --jp-border-color2: var(--color-scale-gray-8);
+    --jp-border-color3: var(--color-scale-gray-9);
+    --jp-ui-font-color0: @text-fg;
+    --jp-ui-font-color1: fade(@text-fg, 87%);
+    --jp-ui-font-color2: fade(@text-fg, 54%);
+    --jp-ui-font-color3: fade(@text-fg, 28%);
+    --jp-ui-inverse-font-color0: @surface-bg_m3;
+    --jp-ui-inverse-font-color1: fade(@surface-bg_m3, 80%);
+    --jp-ui-inverse-font-color2: fade(@surface-bg_m3, 50%);
+    --jp-ui-inverse-font-color3: fade(@surface-bg_m3, 30%);
+    --jp-content-font-color0: @text-fg;
+    --jp-content-font-color1: @text-fg;
+    --jp-content-font-color2: fade(@text-fg, 70%);
+    --jp-content-font-color3: fade(@text-fg, 50%);
+    --jp-content-link-color: @palette-dragonBlue3;
+    --jp-layout-color0: @surface-bg !important;
+    --jp-layout-color1: var(--color-scale-gray-9);
+    --jp-layout-color2: var(--color-scale-gray-8);
+    --jp-layout-color3: var(--color-scale-gray-7);
+    --jp-layout-color4: var(--color-scale-gray-6);
+    --jp-inverse-layout-color0: var(--color-scale-white);
+    --jp-inverse-layout-color1: var(--color-scale-white);
+    --jp-inverse-layout-color2: var(--color-scale-gray-2);
+    --jp-inverse-layout-color3: var(--color-scale-gray-4);
+    --jp-inverse-layout-color4: var(--color-scale-gray-6);
+    --jp-brand-color0: var(--color-scale-blue-7);
+    --jp-brand-color1: var(--color-scale-blue-5);
+    --jp-brand-color2: var(--color-scale-blue-3);
+    --jp-brand-color3: var(--color-scale-blue-1);
+    --jp-brand-color4: var(--color-scale-blue-0);
+    --jp-accent-color0: var(--color-scale-green-7);
+    --jp-accent-color1: var(--color-scale-green-5);
+    --jp-accent-color2: var(--color-scale-green-3);
+    --jp-accent-color3: var(--color-scale-green-1);
+    --jp-warn-color0: var(--color-scale-orange-7);
+    --jp-warn-color1: var(--color-scale-orange-5);
+    --jp-warn-color2: var(--color-scale-orange-3);
+    --jp-warn-color3: var(--color-scale-orange-1);
+    --jp-error-color0: var(--color-scale-red-7);
+    --jp-error-color1: var(--color-scale-red-5);
+    --jp-error-color2: var(--color-scale-red-3);
+    --jp-error-color3: var(--color-scale-red-1);
+    --jp-success-color0: var(--color-scale-green-7);
+    --jp-success-color1: var(--color-scale-green-5);
+    --jp-success-color2: var(--color-scale-green-3);
+    --jp-success-color3: var(--color-scale-green-1);
+    --jp-info-color0: var(--color-scale-blue-7);
+    --jp-info-color1: var(--color-scale-blue-5);
+    --jp-info-color2: var(--color-scale-blue-3);
+    --jp-info-color3: var(--color-scale-blue-1);
+    --jp-cell-editor-background: @surface-bg_m1;
+    --jp-cell-editor-border-color: var(--color-scale-gray-7);
+    --jp-cell-editor-box-shadow: inset 0 0 2px var(--color-scale-blue-3);
+    --jp-cell-prompt-not-active-font-color: fade(@text-fg, 50%);
+    --jp-cell-inprompt-font-color: var(--color-scale-blue-6);
+    --jp-cell-outprompt-font-color: var(--color-scale-coral-6);
+    --jp-notebook-multiselected-color: fade(@hues-gray, 14%);
+    --jp-rendermime-error-background: fade(@hues-red, 18%);
+    --jp-rendermime-table-row-background: var(--color-scale-gray-9);
+    --jp-rendermime-table-row-hover-background: fade(@surface-bg_p3, 14%);
+    --jp-dialog-background: fade(@surface-bg_m3, 60%);
+    --jp-toolbar-box-shadow: 0px 0px 2px 0px fade(@surface-bg_m3, 80%);
+    --jp-input-box-shadow: inset 0 0 2px var(--color-scale-blue-3);
+    --jp-input-background: var(--color-scale-gray-8);
+    --jp-input-active-box-shadow-color: fade(@hues-blue, 30%);
+    --jp-editor-selected-focused-background: fade(@hues-blue, 14%);
+    --jp-mirror-editor-keyword-color: var(--color-scale-green-5);
+    --jp-mirror-editor-atom-color: var(--color-scale-blue-3);
+    --jp-mirror-editor-number-color: var(--color-scale-green-4);
+    --jp-mirror-editor-def-color: var(--color-scale-blue-6);
+    --jp-mirror-editor-variable-color: var(--color-scale-gray-3);
+    --jp-mirror-editor-variable-2-color: var(--color-scale-blue-4);
+    --jp-mirror-editor-variable-3-color: var(--color-scale-green-6);
+    --jp-mirror-editor-punctuation-color: var(--color-scale-blue-4);
+    --jp-mirror-editor-property-color: var(--color-scale-blue-4);
+    --jp-mirror-editor-operator-color: @hues-purple;
+    --jp-mirror-editor-comment-color: @hues-gray;
+    --jp-mirror-editor-string-color: @hues-orange;
+    --jp-mirror-editor-string-2-color: var(--color-scale-purple-3);
+    --jp-mirror-editor-meta-color: @hues-purple;
+    --jp-mirror-editor-qualifier-color: var(--color-scale-gray-5);
+    --jp-mirror-editor-builtin-color: var(--color-scale-green-6);
+    --jp-mirror-editor-bracket-color: var(--color-scale-gray-2);
+    --jp-mirror-editor-tag-color: var(--color-scale-blue-7);
+    --jp-mirror-editor-attribute-color: var(--color-scale-blue-7);
+    --jp-mirror-editor-header-color: var(--color-scale-blue-5);
+    --jp-mirror-editor-quote-color: var(--color-scale-green-3);
+    --jp-mirror-editor-link-color: var(--color-scale-blue-7);
+    --jp-mirror-editor-error-color: @hues-red;
+    --jp-mirror-editor-hr-color: var(--color-scale-gray-8);
+    --jp-vega-background: var(--color-scale-gray-4);
+    --jp-search-selected-match-background-color: @hues-yellow;
+    --jp-search-selected-match-color: @surface-bg_m3;
+    --jp-icon-contrast-color0: var(--color-scale-purple-6);
+    --jp-icon-contrast-color1: var(--color-scale-green-6);
+    --jp-icon-contrast-color2: var(--color-scale-pink-6);
+    --jp-icon-contrast-color3: var(--color-scale-blue-6);
+  }
+}

@@ -1,0 +1,979 @@
+/* ==UserStyle==
+@name Reddit Kanagawa Paper Ink
+@namespace github.com/vedantpatil/dotfiles/userstyles/kanagawa-paper-ink/styles/reddit
+@version 2026.09.27
+@description Soothing pastel theme for Reddit
+@author Vedant Patil (derived from Catppuccin/userstyles, MIT)
+@license MIT
+
+@preprocessor less
+@var select accentColor "Accent" ["red:Red", "orange:Orange", "yellow:Yellow", "green:Green", "teal:Teal", "cyan:Cyan", "blue:Blue", "purple:Purple*", "pink:Pink", "brown:Brown", "gray:Gray"]
+==/UserStyle== */
+
+/*
+ * Kanagawa Paper Ink - shared LESS role library for catppuccin/userstyles sites.
+ * Palette, derived colors, base24 terminal slots, and semantic roles mirror
+ * ~/.config/nvim/lua/kanagawa-paper-ink-extended.lua 1:1 (M.palette, M.derived,
+ * M.base24, M.roles). Keep both in sync by hand when that theme changes.
+ * Icon-recolor filter() approximations in .hues-filters() carry over from the
+ * prior catppuccin-shaped bridge (mocha row) since target hex is unchanged for
+ * 10 of 11 hues; approximation, not exact - see upstream catppuccin/userstyles
+ * lib/std. @brown has no prior equivalent and reuses @orange's filter as the
+ * nearest match.
+ * See ../../LICENSE.
+ */
+
+#lib {
+  .palette() {
+    @palette-autumnGreen: #76946a;
+    @palette-autumnRed: #c34043;
+    @palette-autumnYellow: #dca561;
+    @palette-boatYellow1: #938056;
+    @palette-boatYellow2: #c0a36e;
+    @palette-canvasAqua1: #7b958e;
+    @palette-canvasAsh1: #637263;
+    @palette-canvasBlue1: #809ba7;
+    @palette-canvasBlue2: #6b8998;
+    @palette-canvasBlue3: #577888;
+    @palette-canvasBlue4: #516e7d;
+    @palette-canvasBlue5: #3a515e;
+    @palette-canvasCyan1: #4a905d;
+    @palette-canvasGray1: #aeaea6;
+    @palette-canvasGray2: #8e8a80;
+    @palette-canvasGray3: #73787d;
+    @palette-canvasGreen1: #7e9579;
+    @palette-canvasGreen2: #7a8c6a;
+    @palette-canvasGreen3: #9ba98e;
+    @palette-canvasOrange1: #b28d77;
+    @palette-canvasOrange2: #a8826a;
+    @palette-canvasPink1: #9e7e98;
+    @palette-canvasPink2: #c1b4c1;
+    @palette-canvasPink3: #d4cdd4;
+    @palette-canvasRed1: #c27672;
+    @palette-canvasTeal1: #7e8faf;
+    @palette-canvasViolet1: #7880a5;
+    @palette-canvasViolet2: #9ba1bf;
+    @palette-canvasWhite1: #cbc8bc;
+    @palette-canvasWhite2: #d1cfc5;
+    @palette-canvasWhite3: #d8d8d2;
+    @palette-canvasWhite4: #e1e1de;
+    @palette-canvasWhite5: #e6e6e3;
+    @palette-canvasWhite6: #ecece8;
+    @palette-canvasYellow1: #a7956a;
+    @palette-canvasYellow2: #b4a88a;
+    @palette-carpYellow: #e6c384;
+    @palette-crystalBlue: #7e9cd8;
+    @palette-dragonAqua: #8ea49e;
+    @palette-dragonAsh: #737c73;
+    @palette-dragonBlack0: #0d0c0c;
+    @palette-dragonBlack1: #12120f;
+    @palette-dragonBlack2: #1d1c19;
+    @palette-dragonBlack3: #181616;
+    @palette-dragonBlack4: #282727;
+    @palette-dragonBlack5: #393836;
+    @palette-dragonBlack6: #625e5a;
+    @palette-dragonBlue: #658594;
+    @palette-dragonBlue2: #859fac;
+    @palette-dragonBlue3: #708e9e;
+    @palette-dragonBlue4: #5d7a88;
+    @palette-dragonBlue5: #435965;
+    @palette-dragonGray: #a6a69c;
+    @palette-dragonGray2: #9e9b93;
+    @palette-dragonGray3: #7a8382;
+    @palette-dragonGreen: #699469;
+    @palette-dragonGreen2: #8a9a7b;
+    @palette-dragonGreen3: #717e67;
+    @palette-dragonOrange: #b6927b;
+    @palette-dragonOrange2: #9d7665;
+    @palette-dragonPink: #a292a3;
+    @palette-dragonRed: #c4746e;
+    @palette-dragonTeal: #949fb5;
+    @palette-dragonViolet: #8992a7;
+    @palette-dragonWhite: #c5c9c5;
+    @palette-dragonYellow: #c4b28a;
+    @palette-fujiGray: #727169;
+    @palette-fujiWhite: #dcd7ba;
+    @palette-katanaGray: #717c7c;
+    @palette-lightBlue: #a3d4d5;
+    @palette-lotusAqua: #597b75;
+    @palette-lotusAqua2: #5e857a;
+    @palette-lotusBlue1: #c7d7e0;
+    @palette-lotusBlue2: #b5cbd2;
+    @palette-lotusBlue3: #9fb5c9;
+    @palette-lotusBlue4: #4d699b;
+    @palette-lotusBlue5: #5d57a3;
+    @palette-lotusCyan: #d7e3d8;
+    @palette-lotusGray: #dcd7ba;
+    @palette-lotusGray2: #716e61;
+    @palette-lotusGray3: #8a8980;
+    @palette-lotusGreen: #6f894e;
+    @palette-lotusGreen2: #6e915f;
+    @palette-lotusGreen3: #b7d0ae;
+    @palette-lotusInk0: #3d3d5e;
+    @palette-lotusInk1: #545464;
+    @palette-lotusInk2: #43436c;
+    @palette-lotusOrange: #cc6d00;
+    @palette-lotusOrange2: #e98a00;
+    @palette-lotusPink: #b35b79;
+    @palette-lotusRed: #c84053;
+    @palette-lotusRed2: #d7474b;
+    @palette-lotusRed3: #e82424;
+    @palette-lotusRed4: #d9a594;
+    @palette-lotusTeal1: #4e8ca2;
+    @palette-lotusTeal2: #6693bf;
+    @palette-lotusTeal3: #5a7785;
+    @palette-lotusViolet1: #a09cac;
+    @palette-lotusViolet2: #766b90;
+    @palette-lotusViolet3: #c9cbd1;
+    @palette-lotusViolet4: #624c83;
+    @palette-lotusWhite0: #d5cea3;
+    @palette-lotusWhite1: #dcd5ac;
+    @palette-lotusWhite2: #e5ddb0;
+    @palette-lotusWhite3: #f2ecbc;
+    @palette-lotusWhite4: #e7dba0;
+    @palette-lotusWhite5: #e4d794;
+    @palette-lotusYellow: #77713f;
+    @palette-lotusYellow2: #836f4a;
+    @palette-lotusYellow3: #de9800;
+    @palette-lotusYellow4: #f9d791;
+    @palette-oldWhite: #c8c093;
+    @palette-oniViolet: #957fb8;
+    @palette-oniViolet2: #b8b4d0;
+    @palette-peachRed: #ff5d62;
+    @palette-roninYellow: #ff9e3b;
+    @palette-sakuraPink: #d27e99;
+    @palette-samuraiRed: #e82424;
+    @palette-springBlue: #7fb4ca;
+    @palette-springGreen: #98bb6c;
+    @palette-springViolet1: #938aa9;
+    @palette-springViolet2: #9cabca;
+    @palette-sumiInk0: #16161d;
+    @palette-sumiInk1: #181820;
+    @palette-sumiInk2: #1a1a22;
+    @palette-sumiInk3: #1f1f28;
+    @palette-sumiInk4: #2a2a37;
+    @palette-sumiInk5: #363646;
+    @palette-sumiInk6: #54546d;
+    @palette-sumiInkn1: #0f0f15;
+    @palette-surimiOrange: #ffa066;
+    @palette-waveAqua1: #6a9589;
+    @palette-waveAqua2: #7aa89f;
+    @palette-waveBlue1: #223249;
+    @palette-waveBlue2: #2d4f67;
+    @palette-waveRed: #e46876;
+    @palette-winterBlue: #252535;
+    @palette-winterGreen: #2b3328;
+    @palette-winterRed: #43242b;
+    @palette-winterYellow: #49443c;
+  }
+
+  .derived() {
+    @derived-dragonGreenTint: #2c3732; // dragonGreen blended 90% toward sumiInk3 (ink)
+    @derived-dragonRedTint: #452f33; // dragonRed blended 90% toward sumiInk3 (ink)
+    @derived-dragonYellowTint: #45403a; // dragonYellow blended 90% toward sumiInk3 (ink)
+    @derived-dragonBlueTint: #2b333c; // dragonBlue blended 90% toward sumiInk3 (ink)
+    @derived-dragonGreenMist: #2a3331; // dragonGreen blended 92% toward sumiInk3 (ink)
+    @derived-dragonRedMist: #3f2c31; // dragonRed blended 92% toward sumiInk3 (ink)
+    @derived-dragonYellowMist: #3f3a37; // dragonYellow blended 92% toward sumiInk3 (ink)
+    @derived-dragonBlueMist: #293039; // dragonBlue blended 92% toward sumiInk3 (ink)
+    @derived-dragonAquaMist: #32373b; // dragonAqua blended 92% toward sumiInk3 (ink)
+    @derived-dragonBlack5Bright: #aca9a4; // dragonBlack5 brightened 0.6 (HSLuv L) (ink)
+    @derived-dragonRedBright: #cc928e; // dragonRed brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonGreenBright: #72a072; // dragonGreen brightened 0.1 (HSLuv L) (ink)
+    @derived-dragonYellowBright: #d4c196; // dragonYellow brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonBlue5Bright: #698a9b; // dragonBlue5 brightened 0.3 (HSLuv L) (ink)
+    @derived-dragonPinkBright: #b4a7b5; // dragonPink brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonAquaBright: #96ada7; // dragonAqua brightened 0.1 (HSLuv L) (ink)
+    @derived-oldWhiteBright: #d5cd9d; // oldWhite brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonRedShade: #522c2a; // dragonRed darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonPinkShade: #413941; // dragonPink darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonBlueShade: #27363d; // dragonBlue darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonOrange2Shade: #412f27; // dragonOrange2 darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonGreenShade: #283b28; // dragonGreen darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonAshShade: #2e322e; // dragonAsh darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonGreen3Wash: #4b5348; // dragonGreen3 blended 60% toward sumiInk3 (ink)
+    @derived-dragonBlue5Wash: #313d47; // dragonBlue5 blended 60% toward sumiInk3 (ink)
+    @derived-dragonOrange2Wash: #664e47; // dragonOrange2 blended 60% toward sumiInk3 (ink)
+    @derived-dragonRedLift: #c8837e; // dragonRed brightened 0.1 (HSLuv L) (ink)
+    @derived-dragonGreenEmph: #394c3d; // dragonGreen blended 77% toward sumiInk3
+    @derived-dragonRedEmph: #623e3f; // dragonRed blended 77% toward sumiInk3
+    @derived-dragonYellowEmph: #625a4b; // dragonYellow blended 77% toward sumiInk3
+    @derived-dragonBlueEmph: #38454f; // dragonBlue blended 77% toward sumiInk3
+    @derived-springViolet1Emph: #4c4858; // springViolet1 blended 77% toward sumiInk3
+    @derived-springViolet1Mist: #33313d; // springViolet1 blended 92% toward sumiInk3
+    @derived-fujiWhiteBright: #e8e3c5; // fujiWhite brightened 0.3 (HSLuv L)
+    @derived-dragonBlue2Bright: #96b3c1; // dragonBlue2 brightened 0.2 (HSLuv L)
+    @derived-sumiInk6Bright: #6b6b83; // sumiInk6 brightened 0.15 (HSLuv L)
+    @derived-sumiInk45: #30303f; // sumiInk5 blended 50% toward sumiInk4
+    @derived-sumiInkn1Scrim: #0f0f1599; // sumiInkn1 at 60% opacity
+    @derived-sumiInkn1Shadow: #0f0f1580; // sumiInkn1 at 50% opacity
+    @derived-dragonBlack5Dim: #2f2e2c; // dragonBlack5 darkened 0.2 (HSLuv L)
+    @derived-dragonRedDim: #9d5a55; // dragonRed darkened 0.2 (HSLuv L)
+    @derived-dragonGreenDim: #527552; // dragonGreen darkened 0.2 (HSLuv L)
+    @derived-dragonYellowDim: #9a8b6b; // dragonYellow darkened 0.2 (HSLuv L)
+    @derived-dragonBlue5Dim: #354751; // dragonBlue5 darkened 0.2 (HSLuv L)
+    @derived-dragonPinkDim: #817282; // dragonPink darkened 0.2 (HSLuv L)
+    @derived-dragonAquaDim: #6f817c; // dragonAqua darkened 0.2 (HSLuv L)
+    @derived-oldWhiteDim: #9d9672; // oldWhite darkened 0.2 (HSLuv L)
+    @derived-dragonOrangeVivid: #be7f46; // dragonOrange saturate 0.6, brighten -0.075
+    @derived-waveAqua1Vivid: #37a28b; // waveAqua1 saturate 0.75, brighten 0.05
+    @derived-oniVioletVivid: #987cc2; // oniViolet saturate 0.15
+    @derived-dragonYellowVivid: #aa8f41; // dragonYellow saturate 0.65, brighten -0.175
+    @derived-sakuraPinkVivid: #ce6c8d; // sakuraPink brighten -0.075
+    @derived-dragonGreenVivid: #528b52; // dragonGreen saturate 0.25, brighten -0.075
+    @derived-crystalBlueVivid: #6b8fd3; // crystalBlue brighten -0.075
+    @derived-dragonRedVivid: #c8726b; // dragonRed saturate 0.05
+    @derived-seqBlue1: #39527f; // crystalBlue hue at OKLCH L 0.44 / C 0.08
+    @derived-seqBlue2: #46669c; // crystalBlue hue at OKLCH L 0.51 / C 0.095
+    @derived-seqBlue3: #547aba; // crystalBlue hue at OKLCH L 0.58 / C 0.108
+    @derived-seqBlue4: #678fd4; // crystalBlue hue at OKLCH L 0.65 / C 0.113
+    @derived-seqBlue5: #86a4e1; // crystalBlue hue at OKLCH L 0.72 / C 0.096
+    @derived-seqBlue6: #a6bae9; // crystalBlue hue at OKLCH L 0.79 / C 0.07
+    @derived-seqBlue7: #c4d1ef; // crystalBlue hue at OKLCH L 0.86 / C 0.044
+    @derived-divRed1: #794d4b; // dragonRed hue at OKLCH L 0.47 / C 0.06
+    @derived-divBlue1: #495b7d; // crystalBlue hue at OKLCH L 0.47 / C 0.06
+    @derived-divRed2: #a8635d; // dragonRed hue at OKLCH L 0.575 / C 0.09
+    @derived-divBlue2: #5d78ae; // crystalBlue hue at OKLCH L 0.575 / C 0.09
+    @derived-divRed3: #d67b73; // dragonRed hue at OKLCH L 0.68 / C 0.115
+    @derived-divBlue3: #7098df; // crystalBlue hue at OKLCH L 0.68 / C 0.115
+  }
+
+  .base24() {
+    @base00: #1f1f28; // sumiInk3: default background
+    @base01: #2a2a37; // sumiInk4: lighter background (status bars)
+    @base02: #363646; // sumiInk5: selection background
+    @base03: #727169; // fujiGray: comments, invisibles
+    @base04: #9e9b93; // dragonGray2: dark foreground (status bars)
+    @base05: #dcd7ba; // fujiWhite: default foreground
+    @base06: #c8c093; // oldWhite: light foreground
+    @base07: #e1e1de; // canvasWhite4: light background (kanagawa-paper canvas)
+    @base08: #c4746e; // dragonRed: variables, tags, deleted
+    @base09: #b6927b; // dragonOrange: numbers, constants, booleans
+    @base0A: #c4b28a; // dragonYellow: classes, search, bold
+    @base0B: #8a9a7b; // dragonGreen2: strings, inserted
+    @base0C: #8ea49e; // dragonAqua: support, regex, escapes
+    @base0D: #859fac; // dragonBlue2: functions, headings
+    @base0E: #a292a3; // dragonPink: keywords, changed
+    @base0F: #9d7665; // dragonOrange2: deprecated, embedded tags
+    @base10: #16161d; // sumiInk0: darker background
+    @base11: #0f0f15; // sumiInkn1: darkest background
+    @base12: #cc928e; // dragonRedBright: bright red
+    @base13: #d4c196; // dragonYellowBright: bright yellow
+    @base14: #72a072; // dragonGreenBright: bright green
+    @base15: #96ada7; // dragonAquaBright: bright cyan
+    @base16: #96b3c1; // dragonBlue2Bright: bright blue
+    @base17: #b4a7b5; // dragonPinkBright: bright magenta
+  }
+
+  .roles() {
+    @surface-bg_m4: #0f0f15;
+    @surface-bg_m3: #16161d;
+    @surface-bg_m2: #181820;
+    @surface-bg_m1: #1a1a22;
+    @surface-bg: #1f1f28;
+    @surface-bg_p1: #2a2a37;
+    @surface-bg_p2: #363646;
+    @surface-bg_p3: #54546d;
+    @surface-overlay: #0f0f1599;
+    @surface-shadow: #0f0f1580;
+    @text-fg_bright: #e8e3c5;
+    @text-fg: #dcd7ba;
+    @text-fg_float: #c8c093;
+    @text-fg_dim: #9e9b93;
+    @text-fg_muted: #727169;
+    @text-fg_subtle: #54546d;
+    @text-fg_dimmer: #393836;
+    @text-on_accent: #1f1f28;
+    @text-fg_reverse: #1d1c19;
+    @text-fg_dark: #181616;
+    @text-link: #938aa9;
+    @text-link_visited: #a292a3;
+    @text-placeholder: #727169;
+    @text-disabled: #54546d;
+    @border-border: #625e5a;
+    @border-border_float: #363646;
+    @border-border_focus: #c4b28a;
+    @border-border_search: #938aa9;
+    @border-win_separator: #8992a7;
+    @border-indent: #363646;
+    @border-indent_scope: #8992a7;
+    @border-ruler: #2a2a37;
+    @state-cursorline: #2a2a37;
+    @state-cursorline_alt: #363646;
+    @state-selection: #363646;
+    @state-selection_inactive: #30303f;
+    @state-hover: #2a2a37;
+    @state-active: #363646;
+    @state-reference: #363646;
+    @state-search: #938aa9;
+    @state-search_current: #938aa9;
+    @state-search_other: #4c4858;
+    @state-substitute: #c4746e;
+    @state-match_paren: #c4b28a;
+    @state-mark: #7aa89f;
+    @state-yank: #54546d;
+    @state-paste: #c8837e;
+    @state-jump_label: #c4746e;
+    @state-jump_label_2: #b6927b;
+    @state-jump_backdrop: #727169;
+    @state-scrollbar: #363646;
+    @state-scrollbar_thumb: #54546d;
+    @state-scrollbar_thumb_hover: #6b6b83;
+    @state-fold_bg: #181820;
+    @state-fold_fg: #8ea49e;
+    @modes-normal: #c4b28a;
+    @modes-insert: #c4746e;
+    @modes-visual: #938aa9;
+    @modes-replace: #c4746e;
+    @modes-command: #c4b28a;
+    @modes-terminal: #699469;
+    @modes-select: #a292a3;
+    @modes-pending: #b6927b;
+    @modes-cursor: #c4b28a;
+    @modes-cursor_text: #1f1f28;
+    @modes-cursor_insert: #c4746e;
+    @modes-cursor_visual: #938aa9;
+    @accent-primary: #c4b28a;
+    @accent-primary_hover: #d4c196;
+    @accent-secondary: #c4746e;
+    @accent-tertiary: #938aa9;
+    @accent-accent1: #658594;
+    @accent-accent2: #b6927b;
+    @accent-accent3: #6a9589;
+    @accent-accent4: #7a8382;
+    @accent-accent5: #c4746e;
+    @accent-invert: #2a2a37;
+    @chrome-statusline_bg: #2a2a37;
+    @chrome-statusline_fg: #9e9b93;
+    @chrome-statusline_section_bg: #363646;
+    @chrome-statusline_inactive_bg: #0f0f15;
+    @chrome-statusline_inactive_fg: #9e9b93;
+    @chrome-statusline_debug_bg: #b6927b;
+    @chrome-tabline_bg: #16161d;
+    @chrome-tab_active_bg: #1f1f28;
+    @chrome-tab_active_fg: #c5c9c5;
+    @chrome-tab_inactive_bg: #16161d;
+    @chrome-tab_inactive_fg: #393836;
+    @chrome-tab_alternate_fg: #a292a3;
+    @chrome-tab_indicator: #658594;
+    @chrome-tab_modified: #c4b28a;
+    @chrome-tab_close: #c4746e;
+    @chrome-float_bg: #2a2a37;
+    @chrome-float_fg: #c8c093;
+    @chrome-float_border: #363646;
+    @chrome-float_title: #8ea49e;
+    @chrome-float_footer: #54546d;
+    @chrome-pmenu_bg: #2a2a37;
+    @chrome-pmenu_fg: #dcd7ba;
+    @chrome-pmenu_sel_bg: #363646;
+    @chrome-pmenu_match: #859fac;
+    @chrome-pmenu_kind: #7a8382;
+    @chrome-pmenu_extra: #8ea49e;
+    @chrome-pmenu_thumb: #54546d;
+    @chrome-sidebar_bg: #2a2a37;
+    @chrome-sidebar_fg: #c8c093;
+    @chrome-line_nr: #54546d;
+    @chrome-line_nr_current: #c4b28a;
+    @chrome-gutter_bg: transparent;
+    @chrome-nontext: #54546d;
+    @chrome-whitespace: #54546d;
+    @chrome-special_key: #8ea49e;
+    @chrome-winbar_fg: #393836;
+    @chrome-title: #8ea49e;
+    @chrome-header1: #8992a7;
+    @chrome-header2: #b6927b;
+    @chrome-msg_fg: #9e9b93;
+    @chrome-more_msg: #658594;
+    @chrome-mode_msg: #c4b28a;
+    @chrome-error_msg: #c4746e;
+    @chrome-warning_msg: #c4b28a;
+    @controls-button_bg: #c4b28a;
+    @controls-button_fg: #1f1f28;
+    @controls-button_hover_bg: #d4c196;
+    @controls-button_secondary_bg: #363646;
+    @controls-button_secondary_fg: #dcd7ba;
+    @controls-button_secondary_hover_bg: #54546d;
+    @controls-button_danger_bg: #c4746e;
+    @controls-input_bg: #2a2a37;
+    @controls-input_fg: #dcd7ba;
+    @controls-input_border: #363646;
+    @controls-input_border_focus: #c4b28a;
+    @controls-input_placeholder: #727169;
+    @controls-toggle_on: #c4b28a;
+    @controls-toggle_off: #54546d;
+    @controls-badge_bg: #363646;
+    @controls-badge_fg: #dcd7ba;
+    @controls-badge_accent_bg: #c4b28a;
+    @controls-progress: #c4b28a;
+    @controls-progress_track: #363646;
+    @controls-kbd_bg: #2a2a37;
+    @controls-kbd_border: #54546d;
+    @controls-kbd_fg: #dcd7ba;
+    @syntax-variable: #dcd7ba;
+    @syntax-comment: #727169;
+    @syntax-docstring: #717e67;
+    @syntax-string: #8a9a7b;
+    @syntax-character: #8a9a7b;
+    @syntax-number: #a292a3;
+    @syntax-float: #a292a3;
+    @syntax-boolean: #b6927b;
+    @syntax-constant: #b6927b;
+    @syntax-constant_builtin: #c4b28a;
+    @syntax-identifier: #c4b28a;
+    @syntax-property: #c4b28a;
+    @syntax-member: #c4746e;
+    @syntax-parameter: #a6a69c;
+    @syntax-variable_builtin: #b6927b;
+    @syntax-global: #b6927b;
+    @syntax-function: #859fac;
+    @syntax-method: #859fac;
+    @syntax-function_builtin: #c4b28a;
+    @syntax-constructor: #8ea49e;
+    @syntax-macro: #c4746e;
+    @syntax-type: #8ea49e;
+    @syntax-type_builtin: #c4b28a;
+    @syntax-type_parameter: #8ea49e;
+    @syntax-enum_member: #b6927b;
+    @syntax-namespace: #a292a3;
+    @syntax-attribute: #c4b28a;
+    @syntax-keyword: #a292a3;
+    @syntax-keyword_import: #c4746e;
+    @syntax-keyword_operator: #c4746e;
+    @syntax-statement: #8992a7;
+    @syntax-label: #8992a7;
+    @syntax-preproc: #c4746e;
+    @syntax-operator: #c4746e;
+    @syntax-punctuation: #9e9b93;
+    @syntax-punctuation_special: #c4746e;
+    @syntax-regex: #c4746e;
+    @syntax-escape: #c4746e;
+    @syntax-symbol: #c4746e;
+    @syntax-lifetime: #c4746e;
+    @syntax-string_special: #c4b28a;
+    @syntax-url: #938aa9;
+    @syntax-tag: #c4b28a;
+    @syntax-tag_attribute: #c4b28a;
+    @syntax-tag_delimiter: #9e9b93;
+    @syntax-special1: #c4b28a;
+    @syntax-special2: #c4746e;
+    @syntax-special3: #938aa9;
+    @syntax-deprecated: #717c7c;
+    @syntax-unused: #727169;
+    @syntax-inlay_hint: #9e9b93;
+    @syntax-code_lens: #727169;
+    @syntax-ghost_text: #727169;
+    @syntax-active_parameter: #c4746e;
+    @diag-error: #c4746e;
+    @diag-warning: #c4b28a;
+    @diag-info: #658594;
+    @diag-hint: #8ea49e;
+    @diag-ok: #699469;
+    @diag-error_bg: #3f2c31;
+    @diag-warning_bg: #3f3a37;
+    @diag-info_bg: #293039;
+    @diag-hint_bg: #32373b;
+    @diag-ok_bg: #2a3331;
+    @diag-spell_bad: #c4746e;
+    @diag-spell_cap: #c4b28a;
+    @diag-spell_local: #c4b28a;
+    @diag-spell_rare: #c4b28a;
+    @diff-add: #699469;
+    @diff-delete: #c4746e;
+    @diff-change: #c4b28a;
+    @diff-text: #658594;
+    @diff-add_bg: #2c3732;
+    @diff-delete_bg: #452f33;
+    @diff-change_bg: #45403a;
+    @diff-text_bg: #2b333c;
+    @diff-add_emph: #394c3d;
+    @diff-delete_emph: #623e3f;
+    @diff-change_emph: #625a4b;
+    @diff-text_emph: #38454f;
+    @diff-conflict_ours: #717e67;
+    @diff-conflict_theirs: #435965;
+    @diff-conflict_ancestor: #9d7665;
+    @diff-conflict_ours_bg: #4b5348;
+    @diff-conflict_theirs_bg: #313d47;
+    @diff-conflict_ancestor_bg: #664e47;
+    @diff-file_header: #8ea49e;
+    @diff-hunk_header: #8992a7;
+    @git-added: #699469;
+    @git-modified: #c4b28a;
+    @git-deleted: #c4746e;
+    @git-untracked: #7aa89f;
+    @git-renamed: #658594;
+    @git-conflicted: #c4746e;
+    @git-ignored: #727169;
+    @git-submodule: #8992a7;
+    @git-sign_add: #699469;
+    @git-sign_change: #c4b28a;
+    @git-sign_delete: #c4746e;
+    @git-commit_hash: #c4b28a;
+    @git-head: #8ea49e;
+    @git-branch_local: #699469;
+    @git-branch_remote: #c4746e;
+    @git-tag: #b6927b;
+    @git-stash: #a292a3;
+    @git-author: #859fac;
+    @git-date: #727169;
+    @git-blame: #727169;
+    @git-graph: transparent;
+    @terminal-black: #393836;
+    @terminal-red: #c4746e;
+    @terminal-green: #699469;
+    @terminal-yellow: #c4b28a;
+    @terminal-blue: #435965;
+    @terminal-magenta: #a292a3;
+    @terminal-cyan: #8ea49e;
+    @terminal-white: #c8c093;
+    @terminal-bright_black: #aca9a4;
+    @terminal-bright_red: #cc928e;
+    @terminal-bright_green: #72a072;
+    @terminal-bright_yellow: #d4c196;
+    @terminal-bright_blue: #698a9b;
+    @terminal-bright_magenta: #b4a7b5;
+    @terminal-bright_cyan: #96ada7;
+    @terminal-bright_white: #d5cd9d;
+    @terminal-dim_black: #2f2e2c;
+    @terminal-dim_red: #9d5a55;
+    @terminal-dim_green: #527552;
+    @terminal-dim_yellow: #9a8b6b;
+    @terminal-dim_blue: #354751;
+    @terminal-dim_magenta: #817282;
+    @terminal-dim_cyan: #6f817c;
+    @terminal-dim_white: #9d9672;
+    @terminal-color16: #b6927b;
+    @terminal-color17: #c4746e;
+    @terminal-background: #1f1f28;
+    @terminal-foreground: #dcd7ba;
+    @terminal-cursor: #c4b28a;
+    @terminal-cursor_text: #1f1f28;
+    @terminal-selection_bg: #363646;
+    @terminal-selection_fg: #9e9b93;
+    @terminal-url: #938aa9;
+    @terminal-split: #8992a7;
+    @terminal-tab_bar_bg: #2a2a37;
+    @terminal-tab_active_bg: #1f1f28;
+    @terminal-tab_active_fg: #c4b28a;
+    @terminal-tab_inactive_bg: #2a2a37;
+    @terminal-tab_inactive_fg: #9e9b93;
+    @terminal-border_active: #c4b28a;
+    @terminal-border_inactive: #625e5a;
+    @terminal-border_bell: #c4746e;
+    @terminal-search_match_bg: #4c4858;
+    @terminal-search_focused_bg: #938aa9;
+    @terminal-hint_start_bg: #c4746e;
+    @terminal-hint_end_bg: #363646;
+    @terminal-footer_bg: #2a2a37;
+    @terminal-footer_fg: #9e9b93;
+    @terminal-vi_cursor: #938aa9;
+    @terminal-visual_bell: #363646;
+    @terminal-scrollbar_thumb: #54546d;
+    @terminal-compose_cursor: #b6927b;
+    @terminal-mark1: #7aa89f;
+    @terminal-mark2: #a292a3;
+    @terminal-mark3: #b6927b;
+    @rainbow-rainbow1: #c4746e;
+    @rainbow-rainbow2: #a292a3;
+    @rainbow-rainbow3: #658594;
+    @rainbow-rainbow4: #9d7665;
+    @rainbow-rainbow5: #699469;
+    @rainbow-rainbow6: #737c73;
+    @rainbow-rainbow7: #949fb5;
+    @markup-h1: #c4746e;
+    @markup-h2: #a292a3;
+    @markup-h3: #658594;
+    @markup-h4: #9d7665;
+    @markup-h5: #699469;
+    @markup-h6: #737c73;
+    @markup-h1_bg: #522c2a;
+    @markup-h2_bg: #413941;
+    @markup-h3_bg: #27363d;
+    @markup-h4_bg: #412f27;
+    @markup-h5_bg: #283b28;
+    @markup-h6_bg: #2e322e;
+    @markup-link_text: #938aa9;
+    @markup-link_url: #938aa9;
+    @markup-code: #8a9a7b;
+    @markup-code_bg: #2a2a37;
+    @markup-quote: #9e9b93;
+    @markup-quote_bar: #54546d;
+    @markup-list_marker: #c4b28a;
+    @markup-checkbox_done: #699469;
+    @markup-checkbox_todo: #9e9b93;
+    @markup-table_border: #54546d;
+    @markup-table_header: #8992a7;
+    @markup-rule: #54546d;
+    @markup-math: #b6927b;
+    @markup-environment: #a292a3;
+    @markup-highlight_bg: #49443c;
+    @markup-footnote: #938aa9;
+    @markup-note: #658594;
+    @markup-note_bg: #293039;
+    @markup-tip: #699469;
+    @markup-tip_bg: #2a3331;
+    @markup-important: #938aa9;
+    @markup-important_bg: #33313d;
+    @markup-warning: #c4b28a;
+    @markup-warning_bg: #3f3a37;
+    @markup-caution: #c4746e;
+    @markup-caution_bg: #3f2c31;
+    @tags-todo: #658594;
+    @tags-fix: #c4746e;
+    @tags-hack: #c4b28a;
+    @tags-note: #8ea49e;
+    @tags-perf: #957fb8;
+    @tags-test: #a292a3;
+    @debug-breakpoint: #c4746e;
+    @debug-breakpoint_condition: #b6927b;
+    @debug-breakpoint_rejected: #727169;
+    @debug-logpoint: #658594;
+    @debug-stopped: #c4b28a;
+    @debug-stopped_line_bg: #49443c;
+    @debug-continue: #8a9a7b;
+    @debug-stop: #c4746e;
+    @debug-step: #c4b28a;
+    @debug-modified_value: #c4b28a;
+    @debug-value: #c4b28a;
+    @debug-source: #c4746e;
+    @debug-unavailable: #727169;
+    @test-passed: #699469;
+    @test-failed: #c4746e;
+    @test-running: #c4b28a;
+    @test-skipped: #8ea49e;
+    @test-queued: #658594;
+    @test-unknown: #717c7c;
+    @test-marked: #c4b28a;
+    @test-adapter: #938aa9;
+    @log-error: #c4746e;
+    @log-warn: #c4b28a;
+    @log-info: #658594;
+    @log-debug: #7a8382;
+    @log-trace: #a292a3;
+    @log-success: #699469;
+    @kinds-Text: #dcd7ba;
+    @kinds-Method: #859fac;
+    @kinds-Function: #859fac;
+    @kinds-Constructor: #8ea49e;
+    @kinds-Field: #c4746e;
+    @kinds-Variable: #dcd7ba;
+    @kinds-Class: #8ea49e;
+    @kinds-Interface: #8ea49e;
+    @kinds-Module: #a292a3;
+    @kinds-Property: #c4b28a;
+    @kinds-Unit: #a292a3;
+    @kinds-Value: #8a9a7b;
+    @kinds-Enum: #8ea49e;
+    @kinds-Keyword: #a292a3;
+    @kinds-Snippet: #c4b28a;
+    @kinds-Color: #c4b28a;
+    @kinds-File: #859fac;
+    @kinds-Reference: #c4b28a;
+    @kinds-Folder: #859fac;
+    @kinds-EnumMember: #b6927b;
+    @kinds-Constant: #b6927b;
+    @kinds-Struct: #8ea49e;
+    @kinds-Event: #8ea49e;
+    @kinds-Operator: #c4746e;
+    @kinds-TypeParameter: #8ea49e;
+    @kinds-Namespace: #a292a3;
+    @kinds-Package: #a292a3;
+    @kinds-Object: #8ea49e;
+    @kinds-Array: #9e9b93;
+    @kinds-Key: #c4b28a;
+    @kinds-String: #8a9a7b;
+    @kinds-Number: #a292a3;
+    @kinds-Boolean: #b6927b;
+    @kinds-Null: #c4b28a;
+    @kinds-AI: #8a9a7b;
+    @files-directory: #859fac;
+    @files-directory_open: #658594;
+    @files-root: #c4746e;
+    @files-file: #dcd7ba;
+    @files-file_opened: #8ea49e;
+    @files-file_modified: #c4b28a;
+    @files-symlink: #8ea49e;
+    @files-symlink_broken: #c4746e;
+    @files-hidden: #727169;
+    @files-special_file: #c4b28a;
+    @files-executable: #cc928e;
+    @files-source: #699469;
+    @files-build_tooling: #72a072;
+    @files-config: #c4b28a;
+    @files-document: #c4b28a;
+    @files-office: #8ea49e;
+    @files-media: #a292a3;
+    @files-archive: #96ada7;
+    @files-unimportant: #54546d;
+    @prompt-prompt_ok: #699469;
+    @prompt-prompt_err: #c4746e;
+    @prompt-path: #859fac;
+    @prompt-git_branch: #a292a3;
+    @prompt-git_status: #c4b28a;
+    @prompt-duration: #b6927b;
+    @prompt-user: #8ea49e;
+    @prompt-root: #c4746e;
+    @prompt-host: #949fb5;
+    @prompt-context: #938aa9;
+    @prompt-jobs: #658594;
+    @prompt-time: #727169;
+    @hues-red: #c4746e;
+    @hues-orange: #b6927b;
+    @hues-yellow: #c4b28a;
+    @hues-green: #699469;
+    @hues-teal: #7aa89f;
+    @hues-cyan: #8ea49e;
+    @hues-blue: #859fac;
+    @hues-purple: #938aa9;
+    @hues-pink: #a292a3;
+    @hues-brown: #9d7665;
+    @hues-gray: #9e9b93;
+    @charts-series1: #be7f46;
+    @charts-series2: #37a28b;
+    @charts-series3: #987cc2;
+    @charts-series4: #aa8f41;
+    @charts-series5: #ce6c8d;
+    @charts-series6: #528b52;
+    @charts-series7: #6b8fd3;
+    @charts-series8: #c8726b;
+    @charts-seq1: #39527f;
+    @charts-seq2: #46669c;
+    @charts-seq3: #547aba;
+    @charts-seq4: #678fd4;
+    @charts-seq5: #86a4e1;
+    @charts-seq6: #a6bae9;
+    @charts-seq7: #c4d1ef;
+    @charts-div_neg3: #d67b73;
+    @charts-div_neg2: #a8635d;
+    @charts-div_neg1: #794d4b;
+    @charts-div_mid: #393836;
+    @charts-div_pos1: #495b7d;
+    @charts-div_pos2: #5d78ae;
+    @charts-div_pos3: #7098df;
+    @charts-good: #699469;
+    @charts-warning: #c4b28a;
+    @charts-serious: #b6927b;
+    @charts-critical: #c4746e;
+    @charts-surface: #1f1f28;
+    @charts-grid: #363646;
+    @charts-axis: #54546d;
+    @charts-label: #9e9b93;
+    @charts-title: #dcd7ba;
+    @charts-tooltip_bg: #2a2a37;
+    @charts-tooltip_border: #363646;
+  }
+
+  .hues() {
+    @hues: {
+      @red: #c4746e;
+      @orange: #b6927b;
+      @yellow: #c4b28a;
+      @green: #699469;
+      @teal: #7aa89f;
+      @cyan: #8ea49e;
+      @blue: #859fac;
+      @purple: #938aa9;
+      @pink: #a292a3;
+      @brown: #9d7665;
+      @gray: #9e9b93;
+    };
+  }
+
+  .hues-filters() {
+    @hues-filters: {
+      @red: brightness(0) saturate(100%) invert(61%) sepia(33%) saturate(540%) hue-rotate(293deg) brightness(101%) contrast(90%);
+      @orange: brightness(0) saturate(100%) invert(73%) sepia(36%) saturate(519%) hue-rotate(332deg) brightness(100%) contrast(93%);
+      @yellow: brightness(0) saturate(100%) invert(85%) sepia(27%) saturate(512%) hue-rotate(336deg) brightness(108%) contrast(96%);
+      @green: brightness(0) saturate(100%) invert(86%) sepia(22%) saturate(538%) hue-rotate(63deg) brightness(97%) contrast(88%);
+      @teal: brightness(0) saturate(100%) invert(90%) sepia(24%) saturate(532%) hue-rotate(105deg) brightness(95%) contrast(85%);
+      @cyan: brightness(0) saturate(100%) invert(81%) sepia(27%) saturate(522%) hue-rotate(141deg) brightness(99%) contrast(86%);
+      @blue: brightness(0) saturate(100%) invert(57%) sepia(66%) saturate(1020%) hue-rotate(195deg) brightness(115%) contrast(96%);
+      @purple: brightness(0) saturate(100%) invert(63%) sepia(71%) saturate(1021%) hue-rotate(208deg) brightness(110%) contrast(94%);
+      @pink: brightness(0) saturate(100%) invert(76%) sepia(28%) saturate(508%) hue-rotate(290deg) brightness(112%) contrast(92%);
+      @brown: brightness(0) saturate(100%) invert(73%) sepia(36%) saturate(519%) hue-rotate(332deg) brightness(100%) contrast(93%); // approximation, borrows @orange's filter
+      @gray: brightness(0) saturate(100%) invert(79%) sepia(13%) saturate(517%) hue-rotate(191deg) brightness(93%) contrast(71%);
+    };
+  }
+
+  // Resolves the user's @accentColor choice (see @var select above)
+  // against .hues() / .hues-filters(). Requires @accentColor in scope.
+  .accent() {
+    .hues();
+    .hues-filters();
+    @accent: @hues[@@accentColor];
+    @accent-filter: @hues-filters[@@accentColor];
+  }
+
+  // color-scheme + selection/placeholder defaults. Call after .roles() and .accent().
+  .defaults() {
+    color-scheme: dark;
+
+    ::selection {
+      background-color: fade(@accent, 30%);
+    }
+
+    input,
+    textarea {
+      &::placeholder {
+        color: @text-placeholder !important;
+      }
+    }
+  }
+
+  .rgbify(@color) {
+    @rgb: red(@color), green(@color), blue(@color);
+  }
+
+  .hslify(@color) {
+    @raw: e(
+      %("%s, %s%, %s%", hue(@color), saturation(@color), lightness(@color))
+    );
+  }
+}
+
+@-moz-document domain("reddit.com") {
+  :root:not(.theme-dark) .theme-rpl,
+  :root:not(.theme-dark).theme-rpl,
+  :root:not(.theme-dark) .theme-beta,
+  :root:not(.theme-dark).theme-beta,
+  .theme-light,
+  :root:not(.theme-light) .theme-rpl,
+  :root:not(.theme-light).theme-rpl,
+  :root:not(.theme-light) .theme-beta,
+  :root:not(.theme-light).theme-beta,
+  .theme-dark {
+    #lib.palette();
+    #lib.derived();
+    #lib.base24();
+    #lib.roles();
+    #lib.accent();
+    #lib.defaults();
+
+    --color-pizzaRed: @hues-red !important;
+    --color-global-brand-orangered: @accent !important;
+    --color-global-focus: @border-border_float !important;
+    --color-interactive-content-disabled: @hues-gray !important;
+    --color-interactive-background-disabled: fade(@text-disabled, 70%) !important;
+    --color-interactive-pressed: @surface-bg_p3 !important;
+    --color-neutral-content: @text-fg !important;
+    --color-neutral-content-disabled: @hues-gray !important;
+    --color-neutral-content-weak: @text-fg_dim !important;
+    --color-neutral-content-strong: @text-fg !important;
+    --color-global-white: @surface-bg_m3 !important;
+    --color-neutral-background: @surface-bg !important;
+    --color-neutral-background-selected: @surface-bg_p1 !important;
+    --color-neutral-background-weak: @surface-bg_m1 !important;
+    --color-neutral-background-medium: @surface-bg !important;
+    --color-neutral-background-strong: @surface-bg_m3 !important;
+    --color-neutral-background-hover: @state-hover !important;
+    --color-neutral-border: @border-ruler !important;
+    --color-neutral-border-medium: @border-ruler !important;
+    --color-neutral-border-weak: @border-ruler !important;
+    --color-neutral-border-strong: @surface-bg_p3 !important;
+    --color-primary: @accent !important;
+    --color-primary-hover: lighten(@accent, 10%) !important;
+    --color-primary-visited: @palette-springViolet2 !important;
+    --color-primary-background: @accent !important;
+    --color-primary-background-hover: darken(@accent, 5%) !important;
+    --color-primary-background-selected: darken(@accent, 5%) !important;
+    --color-primary-onBackground: @surface-bg !important;
+    --color-primary-onBackground-selected: @surface-bg_m3 !important;
+    --color-secondary: @text-fg_dim !important;
+    --color-secondary-hover: @text-fg_float !important;
+    --color-secondary-weak: @text-fg_dim !important;
+    --color-secondary-onBackground: @text-fg !important;
+    --color-secondary-background: @surface-bg_m1 !important;
+    --color-secondary-background-hover: @state-active !important;
+    --color-secondary-background-selected: @state-active !important;
+    --color-secondary-plain: @text-fg_dim !important;
+    --color-secondary-plain-hover: @text-fg_float !important;
+    --color-secondary-plain-weak: @text-fg_dim !important;
+    --color-danger-background: @diag-error !important;
+    --color-danger-background-disabled: fade(@diag-error, 20%) !important;
+    --color-danger-background-hover: fade(@diag-error, 98%) !important;
+    --color-danger-onBackground: @text-fg !important;
+    --color-danger-content: @diag-error !important;
+    --color-danger-content-default: @surface-bg_m3;
+    --color-danger-content-hover: darken(@diag-error, 2%) !important;
+    --color-success-content: @diag-ok !important;
+    --color-success-hover: darken(@diag-ok, 2%) !important;
+    --color-success-onBackground: @surface-bg_m3;
+    --color-success-background: @diag-ok !important;
+    --color-success-background-hover: darken(@diag-ok, 2%) !important;
+    --color-warning-content: @diag-warning !important;
+    --color-warning-content-hover: darken(@diag-warning, 2%) !important;
+    --color-warning-onBackground: @surface-bg !important;
+    --color-warning-background: @diag-warning !important;
+    --color-warning-background-hover: darken(@diag-warning, 2%) !important;
+    --color-upvote-content: @accent !important;
+    --color-upvote-disabled: @hues-gray !important;
+    --color-upvote-onBackground: @text-fg !important;
+    --color-upvote-background: @surface-bg !important;
+    --color-upvote-background-hover: darken(@accent, 5%) !important;
+    --color-upvote-background-disabled: @surface-bg !important;
+    --color-downvote-content: @text-fg !important;
+    --color-downvote-content-weak: @text-fg !important;
+    --color-downvote-disabled: @hues-gray !important;
+    --color-downvote-onBackground: @text-fg !important;
+    --color-downvote-background: @surface-bg !important;
+    --color-downvote-background-hover: darken(@hues-blue, 5%) !important;
+    --color-downvote-background-disabled: @surface-bg_m1 !important;
+    --color-tone-1: @text-fg !important;
+    --color-tone-2: @text-fg_dim !important;
+    --color-tone-3: @text-fg_dim !important;
+    --color-tone-4: @surface-bg_p1 !important;
+    --color-tone-5: @surface-bg_p2 !important;
+    --color-tone-6: @surface-bg_p3 !important;
+    --color-tone-7: @surface-bg !important;
+    --color-avatar-gradient: @accent !important;
+    --color-transparent-background-hover: fade(@surface-bg_p1, 30%) !important;
+    --color-opacity-50: fade(@surface-bg, 50%) !important;
+    --color-online: @accent !important;
+    --color-favorite: @accent !important;
+    --color-brand-background: @accent !important;
+    --color-brand-background-hover: darken(@accent, 5%) !important;
+    --color-brand-onBackground: @surface-bg_m3 !important;
+    --color-global-orangered: @accent !important;
+    --color-action-upvote: @accent !important;
+    --color-action-downvote: @hues-blue;
+    --color-banner-error-text: @surface-bg !important;
+
+    --shreddit-color-wordmark: @accent;
+    #reddit-logo {
+      circle[fill="#FF4500"] {
+        fill: @accent !important;
+      }
+      path[fill="#FFF"] {
+        fill: @surface-bg_m3 !important;
+      }
+    }
+
+    /* Trending news carousel on https://www.reddit.com/r/popular/. */
+    shreddit-gallery-carousel {
+      // Headline
+      .text-primary-onBackground {
+        color: @text-fg;
+      }
+
+      // r/... *and more*
+      .text-coolgray-350 {
+        color: @text-fg_float;
+      }
+    }
+
+    /* Community themes - post header/metadata background and text. */
+    #pdp-credit-bar {
+      --color-neutral-background: @surface-bg;
+      --color-neutral-content: @text-fg;
+      --color-neutral-content-weak: @text-fg_dim;
+      --color-primary-hover: lighten(@accent, 10%);
+    }
+
+    reddit-header-large reddit-search-large::before,
+    reddit-header-large reddit-search-large::after {
+      background:
+        linear-gradient(@surface-bg, @surface-bg) padding-box,
+        linear-gradient(90deg, @accent, @accent) border-box;
+    }
+  }
+}

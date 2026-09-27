@@ -1,0 +1,1344 @@
+/*
+ * Kanagawa Paper Ink - shared LESS role library for catppuccin/userstyles sites.
+ * Palette, derived colors, base24 terminal slots, and semantic roles mirror
+ * ~/.config/nvim/lua/kanagawa-paper-ink-extended.lua 1:1 (M.palette, M.derived,
+ * M.base24, M.roles). Keep both in sync by hand when that theme changes.
+ * Icon-recolor filter() approximations in .hues-filters() carry over from the
+ * prior catppuccin-shaped bridge (mocha row) since target hex is unchanged for
+ * 10 of 11 hues; approximation, not exact - see upstream catppuccin/userstyles
+ * lib/std. @brown has no prior equivalent and reuses @orange's filter as the
+ * nearest match.
+ * See ../../LICENSE.
+ */
+
+#lib {
+  .palette() {
+    @palette-autumnGreen: #76946a;
+    @palette-autumnRed: #c34043;
+    @palette-autumnYellow: #dca561;
+    @palette-boatYellow1: #938056;
+    @palette-boatYellow2: #c0a36e;
+    @palette-canvasAqua1: #7b958e;
+    @palette-canvasAsh1: #637263;
+    @palette-canvasBlue1: #809ba7;
+    @palette-canvasBlue2: #6b8998;
+    @palette-canvasBlue3: #577888;
+    @palette-canvasBlue4: #516e7d;
+    @palette-canvasBlue5: #3a515e;
+    @palette-canvasCyan1: #4a905d;
+    @palette-canvasGray1: #aeaea6;
+    @palette-canvasGray2: #8e8a80;
+    @palette-canvasGray3: #73787d;
+    @palette-canvasGreen1: #7e9579;
+    @palette-canvasGreen2: #7a8c6a;
+    @palette-canvasGreen3: #9ba98e;
+    @palette-canvasOrange1: #b28d77;
+    @palette-canvasOrange2: #a8826a;
+    @palette-canvasPink1: #9e7e98;
+    @palette-canvasPink2: #c1b4c1;
+    @palette-canvasPink3: #d4cdd4;
+    @palette-canvasRed1: #c27672;
+    @palette-canvasTeal1: #7e8faf;
+    @palette-canvasViolet1: #7880a5;
+    @palette-canvasViolet2: #9ba1bf;
+    @palette-canvasWhite1: #cbc8bc;
+    @palette-canvasWhite2: #d1cfc5;
+    @palette-canvasWhite3: #d8d8d2;
+    @palette-canvasWhite4: #e1e1de;
+    @palette-canvasWhite5: #e6e6e3;
+    @palette-canvasWhite6: #ecece8;
+    @palette-canvasYellow1: #a7956a;
+    @palette-canvasYellow2: #b4a88a;
+    @palette-carpYellow: #e6c384;
+    @palette-crystalBlue: #7e9cd8;
+    @palette-dragonAqua: #8ea49e;
+    @palette-dragonAsh: #737c73;
+    @palette-dragonBlack0: #0d0c0c;
+    @palette-dragonBlack1: #12120f;
+    @palette-dragonBlack2: #1d1c19;
+    @palette-dragonBlack3: #181616;
+    @palette-dragonBlack4: #282727;
+    @palette-dragonBlack5: #393836;
+    @palette-dragonBlack6: #625e5a;
+    @palette-dragonBlue: #658594;
+    @palette-dragonBlue2: #859fac;
+    @palette-dragonBlue3: #708e9e;
+    @palette-dragonBlue4: #5d7a88;
+    @palette-dragonBlue5: #435965;
+    @palette-dragonGray: #a6a69c;
+    @palette-dragonGray2: #9e9b93;
+    @palette-dragonGray3: #7a8382;
+    @palette-dragonGreen: #699469;
+    @palette-dragonGreen2: #8a9a7b;
+    @palette-dragonGreen3: #717e67;
+    @palette-dragonOrange: #b6927b;
+    @palette-dragonOrange2: #9d7665;
+    @palette-dragonPink: #a292a3;
+    @palette-dragonRed: #c4746e;
+    @palette-dragonTeal: #949fb5;
+    @palette-dragonViolet: #8992a7;
+    @palette-dragonWhite: #c5c9c5;
+    @palette-dragonYellow: #c4b28a;
+    @palette-fujiGray: #727169;
+    @palette-fujiWhite: #dcd7ba;
+    @palette-katanaGray: #717c7c;
+    @palette-lightBlue: #a3d4d5;
+    @palette-lotusAqua: #597b75;
+    @palette-lotusAqua2: #5e857a;
+    @palette-lotusBlue1: #c7d7e0;
+    @palette-lotusBlue2: #b5cbd2;
+    @palette-lotusBlue3: #9fb5c9;
+    @palette-lotusBlue4: #4d699b;
+    @palette-lotusBlue5: #5d57a3;
+    @palette-lotusCyan: #d7e3d8;
+    @palette-lotusGray: #dcd7ba;
+    @palette-lotusGray2: #716e61;
+    @palette-lotusGray3: #8a8980;
+    @palette-lotusGreen: #6f894e;
+    @palette-lotusGreen2: #6e915f;
+    @palette-lotusGreen3: #b7d0ae;
+    @palette-lotusInk0: #3d3d5e;
+    @palette-lotusInk1: #545464;
+    @palette-lotusInk2: #43436c;
+    @palette-lotusOrange: #cc6d00;
+    @palette-lotusOrange2: #e98a00;
+    @palette-lotusPink: #b35b79;
+    @palette-lotusRed: #c84053;
+    @palette-lotusRed2: #d7474b;
+    @palette-lotusRed3: #e82424;
+    @palette-lotusRed4: #d9a594;
+    @palette-lotusTeal1: #4e8ca2;
+    @palette-lotusTeal2: #6693bf;
+    @palette-lotusTeal3: #5a7785;
+    @palette-lotusViolet1: #a09cac;
+    @palette-lotusViolet2: #766b90;
+    @palette-lotusViolet3: #c9cbd1;
+    @palette-lotusViolet4: #624c83;
+    @palette-lotusWhite0: #d5cea3;
+    @palette-lotusWhite1: #dcd5ac;
+    @palette-lotusWhite2: #e5ddb0;
+    @palette-lotusWhite3: #f2ecbc;
+    @palette-lotusWhite4: #e7dba0;
+    @palette-lotusWhite5: #e4d794;
+    @palette-lotusYellow: #77713f;
+    @palette-lotusYellow2: #836f4a;
+    @palette-lotusYellow3: #de9800;
+    @palette-lotusYellow4: #f9d791;
+    @palette-oldWhite: #c8c093;
+    @palette-oniViolet: #957fb8;
+    @palette-oniViolet2: #b8b4d0;
+    @palette-peachRed: #ff5d62;
+    @palette-roninYellow: #ff9e3b;
+    @palette-sakuraPink: #d27e99;
+    @palette-samuraiRed: #e82424;
+    @palette-springBlue: #7fb4ca;
+    @palette-springGreen: #98bb6c;
+    @palette-springViolet1: #938aa9;
+    @palette-springViolet2: #9cabca;
+    @palette-sumiInk0: #16161d;
+    @palette-sumiInk1: #181820;
+    @palette-sumiInk2: #1a1a22;
+    @palette-sumiInk3: #1f1f28;
+    @palette-sumiInk4: #2a2a37;
+    @palette-sumiInk5: #363646;
+    @palette-sumiInk6: #54546d;
+    @palette-sumiInkn1: #0f0f15;
+    @palette-surimiOrange: #ffa066;
+    @palette-waveAqua1: #6a9589;
+    @palette-waveAqua2: #7aa89f;
+    @palette-waveBlue1: #223249;
+    @palette-waveBlue2: #2d4f67;
+    @palette-waveRed: #e46876;
+    @palette-winterBlue: #252535;
+    @palette-winterGreen: #2b3328;
+    @palette-winterRed: #43242b;
+    @palette-winterYellow: #49443c;
+  }
+
+  .derived() {
+    @derived-dragonGreenTint: #2c3732; // dragonGreen blended 90% toward sumiInk3 (ink)
+    @derived-dragonRedTint: #452f33; // dragonRed blended 90% toward sumiInk3 (ink)
+    @derived-dragonYellowTint: #45403a; // dragonYellow blended 90% toward sumiInk3 (ink)
+    @derived-dragonBlueTint: #2b333c; // dragonBlue blended 90% toward sumiInk3 (ink)
+    @derived-dragonGreenMist: #2a3331; // dragonGreen blended 92% toward sumiInk3 (ink)
+    @derived-dragonRedMist: #3f2c31; // dragonRed blended 92% toward sumiInk3 (ink)
+    @derived-dragonYellowMist: #3f3a37; // dragonYellow blended 92% toward sumiInk3 (ink)
+    @derived-dragonBlueMist: #293039; // dragonBlue blended 92% toward sumiInk3 (ink)
+    @derived-dragonAquaMist: #32373b; // dragonAqua blended 92% toward sumiInk3 (ink)
+    @derived-dragonBlack5Bright: #aca9a4; // dragonBlack5 brightened 0.6 (HSLuv L) (ink)
+    @derived-dragonRedBright: #cc928e; // dragonRed brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonGreenBright: #72a072; // dragonGreen brightened 0.1 (HSLuv L) (ink)
+    @derived-dragonYellowBright: #d4c196; // dragonYellow brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonBlue5Bright: #698a9b; // dragonBlue5 brightened 0.3 (HSLuv L) (ink)
+    @derived-dragonPinkBright: #b4a7b5; // dragonPink brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonAquaBright: #96ada7; // dragonAqua brightened 0.1 (HSLuv L) (ink)
+    @derived-oldWhiteBright: #d5cd9d; // oldWhite brightened 0.2 (HSLuv L) (ink)
+    @derived-dragonRedShade: #522c2a; // dragonRed darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonPinkShade: #413941; // dragonPink darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonBlueShade: #27363d; // dragonBlue darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonOrange2Shade: #412f27; // dragonOrange2 darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonGreenShade: #283b28; // dragonGreen darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonAshShade: #2e322e; // dragonAsh darkened 0.6 (HSLuv L) (ink)
+    @derived-dragonGreen3Wash: #4b5348; // dragonGreen3 blended 60% toward sumiInk3 (ink)
+    @derived-dragonBlue5Wash: #313d47; // dragonBlue5 blended 60% toward sumiInk3 (ink)
+    @derived-dragonOrange2Wash: #664e47; // dragonOrange2 blended 60% toward sumiInk3 (ink)
+    @derived-dragonRedLift: #c8837e; // dragonRed brightened 0.1 (HSLuv L) (ink)
+    @derived-dragonGreenEmph: #394c3d; // dragonGreen blended 77% toward sumiInk3
+    @derived-dragonRedEmph: #623e3f; // dragonRed blended 77% toward sumiInk3
+    @derived-dragonYellowEmph: #625a4b; // dragonYellow blended 77% toward sumiInk3
+    @derived-dragonBlueEmph: #38454f; // dragonBlue blended 77% toward sumiInk3
+    @derived-springViolet1Emph: #4c4858; // springViolet1 blended 77% toward sumiInk3
+    @derived-springViolet1Mist: #33313d; // springViolet1 blended 92% toward sumiInk3
+    @derived-fujiWhiteBright: #e8e3c5; // fujiWhite brightened 0.3 (HSLuv L)
+    @derived-dragonBlue2Bright: #96b3c1; // dragonBlue2 brightened 0.2 (HSLuv L)
+    @derived-sumiInk6Bright: #6b6b83; // sumiInk6 brightened 0.15 (HSLuv L)
+    @derived-sumiInk45: #30303f; // sumiInk5 blended 50% toward sumiInk4
+    @derived-sumiInkn1Scrim: #0f0f1599; // sumiInkn1 at 60% opacity
+    @derived-sumiInkn1Shadow: #0f0f1580; // sumiInkn1 at 50% opacity
+    @derived-dragonBlack5Dim: #2f2e2c; // dragonBlack5 darkened 0.2 (HSLuv L)
+    @derived-dragonRedDim: #9d5a55; // dragonRed darkened 0.2 (HSLuv L)
+    @derived-dragonGreenDim: #527552; // dragonGreen darkened 0.2 (HSLuv L)
+    @derived-dragonYellowDim: #9a8b6b; // dragonYellow darkened 0.2 (HSLuv L)
+    @derived-dragonBlue5Dim: #354751; // dragonBlue5 darkened 0.2 (HSLuv L)
+    @derived-dragonPinkDim: #817282; // dragonPink darkened 0.2 (HSLuv L)
+    @derived-dragonAquaDim: #6f817c; // dragonAqua darkened 0.2 (HSLuv L)
+    @derived-oldWhiteDim: #9d9672; // oldWhite darkened 0.2 (HSLuv L)
+    @derived-dragonOrangeVivid: #be7f46; // dragonOrange saturate 0.6, brighten -0.075
+    @derived-waveAqua1Vivid: #37a28b; // waveAqua1 saturate 0.75, brighten 0.05
+    @derived-oniVioletVivid: #987cc2; // oniViolet saturate 0.15
+    @derived-dragonYellowVivid: #aa8f41; // dragonYellow saturate 0.65, brighten -0.175
+    @derived-sakuraPinkVivid: #ce6c8d; // sakuraPink brighten -0.075
+    @derived-dragonGreenVivid: #528b52; // dragonGreen saturate 0.25, brighten -0.075
+    @derived-crystalBlueVivid: #6b8fd3; // crystalBlue brighten -0.075
+    @derived-dragonRedVivid: #c8726b; // dragonRed saturate 0.05
+    @derived-seqBlue1: #39527f; // crystalBlue hue at OKLCH L 0.44 / C 0.08
+    @derived-seqBlue2: #46669c; // crystalBlue hue at OKLCH L 0.51 / C 0.095
+    @derived-seqBlue3: #547aba; // crystalBlue hue at OKLCH L 0.58 / C 0.108
+    @derived-seqBlue4: #678fd4; // crystalBlue hue at OKLCH L 0.65 / C 0.113
+    @derived-seqBlue5: #86a4e1; // crystalBlue hue at OKLCH L 0.72 / C 0.096
+    @derived-seqBlue6: #a6bae9; // crystalBlue hue at OKLCH L 0.79 / C 0.07
+    @derived-seqBlue7: #c4d1ef; // crystalBlue hue at OKLCH L 0.86 / C 0.044
+    @derived-divRed1: #794d4b; // dragonRed hue at OKLCH L 0.47 / C 0.06
+    @derived-divBlue1: #495b7d; // crystalBlue hue at OKLCH L 0.47 / C 0.06
+    @derived-divRed2: #a8635d; // dragonRed hue at OKLCH L 0.575 / C 0.09
+    @derived-divBlue2: #5d78ae; // crystalBlue hue at OKLCH L 0.575 / C 0.09
+    @derived-divRed3: #d67b73; // dragonRed hue at OKLCH L 0.68 / C 0.115
+    @derived-divBlue3: #7098df; // crystalBlue hue at OKLCH L 0.68 / C 0.115
+  }
+
+  .base24() {
+    @base00: #1f1f28; // sumiInk3: default background
+    @base01: #2a2a37; // sumiInk4: lighter background (status bars)
+    @base02: #363646; // sumiInk5: selection background
+    @base03: #727169; // fujiGray: comments, invisibles
+    @base04: #9e9b93; // dragonGray2: dark foreground (status bars)
+    @base05: #dcd7ba; // fujiWhite: default foreground
+    @base06: #c8c093; // oldWhite: light foreground
+    @base07: #e1e1de; // canvasWhite4: light background (kanagawa-paper canvas)
+    @base08: #c4746e; // dragonRed: variables, tags, deleted
+    @base09: #b6927b; // dragonOrange: numbers, constants, booleans
+    @base0A: #c4b28a; // dragonYellow: classes, search, bold
+    @base0B: #8a9a7b; // dragonGreen2: strings, inserted
+    @base0C: #8ea49e; // dragonAqua: support, regex, escapes
+    @base0D: #859fac; // dragonBlue2: functions, headings
+    @base0E: #a292a3; // dragonPink: keywords, changed
+    @base0F: #9d7665; // dragonOrange2: deprecated, embedded tags
+    @base10: #16161d; // sumiInk0: darker background
+    @base11: #0f0f15; // sumiInkn1: darkest background
+    @base12: #cc928e; // dragonRedBright: bright red
+    @base13: #d4c196; // dragonYellowBright: bright yellow
+    @base14: #72a072; // dragonGreenBright: bright green
+    @base15: #96ada7; // dragonAquaBright: bright cyan
+    @base16: #96b3c1; // dragonBlue2Bright: bright blue
+    @base17: #b4a7b5; // dragonPinkBright: bright magenta
+  }
+
+  .roles() {
+    // surface
+    @surface-bg_m4: #0f0f15; // sumiInkn1
+    @surface-bg_m3: #16161d; // sumiInk0
+    @surface-bg_m2: #181820; // sumiInk1
+    @surface-bg_m1: #1a1a22; // sumiInk2
+    @surface-bg: #1f1f28; // sumiInk3
+    @surface-bg_p1: #2a2a37; // sumiInk4
+    @surface-bg_p2: #363646; // sumiInk5
+    @surface-bg_p3: #54546d; // sumiInk6
+    @surface-overlay: #0f0f1599; // sumiInkn1Scrim
+    @surface-shadow: #0f0f1580; // sumiInkn1Shadow
+    // text
+    @text-fg_bright: #e8e3c5; // fujiWhiteBright
+    @text-fg: #dcd7ba; // fujiWhite
+    @text-fg_float: #c8c093; // oldWhite
+    @text-fg_dim: #9e9b93; // dragonGray2
+    @text-fg_muted: #727169; // fujiGray
+    @text-fg_subtle: #54546d; // sumiInk6
+    @text-fg_dimmer: #393836; // dragonBlack5
+    @text-on_accent: #1f1f28; // sumiInk3
+    @text-fg_reverse: #1d1c19; // dragonBlack2
+    @text-fg_dark: #181616; // dragonBlack3
+    @text-link: #938aa9; // springViolet1 · underline
+    @text-link_visited: #a292a3; // dragonPink
+    @text-placeholder: #727169; // fujiGray
+    @text-disabled: #54546d; // sumiInk6
+    // border
+    @border-border: #625e5a; // dragonBlack6
+    @border-border_float: #363646; // sumiInk5
+    @border-border_focus: #c4b28a; // dragonYellow
+    @border-border_search: #938aa9; // springViolet1
+    @border-win_separator: #8992a7; // dragonViolet
+    @border-indent: #363646; // sumiInk5
+    @border-indent_scope: #8992a7; // dragonViolet
+    @border-ruler: #2a2a37; // sumiInk4
+    // state
+    @state-cursorline: #2a2a37; // sumiInk4
+    @state-cursorline_alt: #363646; // sumiInk5
+    @state-selection: #363646; // sumiInk5
+    @state-selection_inactive: #30303f; // sumiInk45
+    @state-hover: #2a2a37; // sumiInk4
+    @state-active: #363646; // sumiInk5
+    @state-reference: #363646; // sumiInk5
+    @state-search: #938aa9; // springViolet1
+    @state-search_current: #938aa9; // springViolet1 · bold
+    @state-search_other: #4c4858; // springViolet1Emph
+    @state-substitute: #c4746e; // dragonRed
+    @state-match_paren: #c4b28a; // dragonYellow · bold
+    @state-mark: #7aa89f; // waveAqua2
+    @state-yank: #54546d; // sumiInk6
+    @state-paste: #c8837e; // dragonRedLift
+    @state-jump_label: #c4746e; // dragonRed · bold
+    @state-jump_label_2: #b6927b; // dragonOrange
+    @state-jump_backdrop: #727169; // fujiGray
+    @state-scrollbar: #363646; // sumiInk5
+    @state-scrollbar_thumb: #54546d; // sumiInk6
+    @state-scrollbar_thumb_hover: #6b6b83; // sumiInk6Bright
+    @state-fold_bg: #181820; // sumiInk1
+    @state-fold_fg: #8ea49e; // dragonAqua
+    // modes
+    @modes-normal: #c4b28a; // dragonYellow
+    @modes-insert: #c4746e; // dragonRed
+    @modes-visual: #938aa9; // springViolet1
+    @modes-replace: #c4746e; // dragonRed
+    @modes-command: #c4b28a; // dragonYellow
+    @modes-terminal: #699469; // dragonGreen
+    @modes-select: #a292a3; // dragonPink
+    @modes-pending: #b6927b; // dragonOrange
+    @modes-cursor: #c4b28a; // dragonYellow
+    @modes-cursor_text: #1f1f28; // sumiInk3
+    @modes-cursor_insert: #c4746e; // dragonRed
+    @modes-cursor_visual: #938aa9; // springViolet1
+    // accent
+    @accent-primary: #c4b28a; // dragonYellow
+    @accent-primary_hover: #d4c196; // dragonYellowBright
+    @accent-secondary: #c4746e; // dragonRed
+    @accent-tertiary: #938aa9; // springViolet1
+    @accent-accent1: #658594; // dragonBlue
+    @accent-accent2: #b6927b; // dragonOrange
+    @accent-accent3: #6a9589; // waveAqua1
+    @accent-accent4: #7a8382; // dragonGray3
+    @accent-accent5: #c4746e; // dragonRed
+    @accent-invert: #2a2a37; // sumiInk4
+    // chrome
+    @chrome-statusline_bg: #2a2a37; // sumiInk4
+    @chrome-statusline_fg: #9e9b93; // dragonGray2
+    @chrome-statusline_section_bg: #363646; // sumiInk5
+    @chrome-statusline_inactive_bg: #0f0f15; // sumiInkn1
+    @chrome-statusline_inactive_fg: #9e9b93; // dragonGray2
+    @chrome-statusline_debug_bg: #b6927b; // dragonOrange
+    @chrome-tabline_bg: #16161d; // sumiInk0
+    @chrome-tab_active_bg: #1f1f28; // sumiInk3
+    @chrome-tab_active_fg: #c5c9c5; // dragonWhite
+    @chrome-tab_inactive_bg: #16161d; // sumiInk0
+    @chrome-tab_inactive_fg: #393836; // dragonBlack5
+    @chrome-tab_alternate_fg: #a292a3; // dragonPink
+    @chrome-tab_indicator: #658594; // dragonBlue
+    @chrome-tab_modified: #c4b28a; // dragonYellow
+    @chrome-tab_close: #c4746e; // dragonRed
+    @chrome-float_bg: #2a2a37; // sumiInk4
+    @chrome-float_fg: #c8c093; // oldWhite
+    @chrome-float_border: #363646; // sumiInk5
+    @chrome-float_title: #8ea49e; // dragonAqua · bold
+    @chrome-float_footer: #54546d; // sumiInk6
+    @chrome-pmenu_bg: #2a2a37; // sumiInk4
+    @chrome-pmenu_fg: #dcd7ba; // fujiWhite
+    @chrome-pmenu_sel_bg: #363646; // sumiInk5
+    @chrome-pmenu_match: #859fac; // dragonBlue2
+    @chrome-pmenu_kind: #7a8382; // dragonGray3
+    @chrome-pmenu_extra: #8ea49e; // dragonAqua
+    @chrome-pmenu_thumb: #54546d; // sumiInk6
+    @chrome-sidebar_bg: #2a2a37; // sumiInk4
+    @chrome-sidebar_fg: #c8c093; // oldWhite
+    @chrome-line_nr: #54546d; // sumiInk6
+    @chrome-line_nr_current: #c4b28a; // dragonYellow · bold
+    @chrome-gutter_bg: transparent; // transparent in source (nil / editor-only)
+    @chrome-nontext: #54546d; // sumiInk6
+    @chrome-whitespace: #54546d; // sumiInk6
+    @chrome-special_key: #8ea49e; // dragonAqua
+    @chrome-winbar_fg: #393836; // dragonBlack5
+    @chrome-title: #8ea49e; // dragonAqua · bold
+    @chrome-header1: #8992a7; // dragonViolet
+    @chrome-header2: #b6927b; // dragonOrange
+    @chrome-msg_fg: #9e9b93; // dragonGray2
+    @chrome-more_msg: #658594; // dragonBlue
+    @chrome-mode_msg: #c4b28a; // dragonYellow · bold
+    @chrome-error_msg: #c4746e; // dragonRed
+    @chrome-warning_msg: #c4b28a; // dragonYellow
+    // controls
+    @controls-button_bg: #c4b28a; // dragonYellow
+    @controls-button_fg: #1f1f28; // sumiInk3
+    @controls-button_hover_bg: #d4c196; // dragonYellowBright
+    @controls-button_secondary_bg: #363646; // sumiInk5
+    @controls-button_secondary_fg: #dcd7ba; // fujiWhite
+    @controls-button_secondary_hover_bg: #54546d; // sumiInk6
+    @controls-button_danger_bg: #c4746e; // dragonRed
+    @controls-input_bg: #2a2a37; // sumiInk4
+    @controls-input_fg: #dcd7ba; // fujiWhite
+    @controls-input_border: #363646; // sumiInk5
+    @controls-input_border_focus: #c4b28a; // dragonYellow
+    @controls-input_placeholder: #727169; // fujiGray
+    @controls-toggle_on: #c4b28a; // dragonYellow
+    @controls-toggle_off: #54546d; // sumiInk6
+    @controls-badge_bg: #363646; // sumiInk5
+    @controls-badge_fg: #dcd7ba; // fujiWhite
+    @controls-badge_accent_bg: #c4b28a; // dragonYellow
+    @controls-progress: #c4b28a; // dragonYellow
+    @controls-progress_track: #363646; // sumiInk5
+    @controls-kbd_bg: #2a2a37; // sumiInk4
+    @controls-kbd_border: #54546d; // sumiInk6
+    @controls-kbd_fg: #dcd7ba; // fujiWhite
+    // syntax
+    @syntax-variable: #dcd7ba; // fujiWhite
+    @syntax-comment: #727169; // fujiGray
+    @syntax-docstring: #717e67; // dragonGreen3 · italic
+    @syntax-string: #8a9a7b; // dragonGreen2
+    @syntax-character: #8a9a7b; // dragonGreen2
+    @syntax-number: #a292a3; // dragonPink
+    @syntax-float: #a292a3; // dragonPink
+    @syntax-boolean: #b6927b; // dragonOrange · bold
+    @syntax-constant: #b6927b; // dragonOrange
+    @syntax-constant_builtin: #c4b28a; // dragonYellow
+    @syntax-identifier: #c4b28a; // dragonYellow
+    @syntax-property: #c4b28a; // dragonYellow
+    @syntax-member: #c4746e; // dragonRed
+    @syntax-parameter: #a6a69c; // dragonGray
+    @syntax-variable_builtin: #b6927b; // dragonOrange · italic
+    @syntax-global: #b6927b; // dragonOrange
+    @syntax-function: #859fac; // dragonBlue2
+    @syntax-method: #859fac; // dragonBlue2
+    @syntax-function_builtin: #c4b28a; // dragonYellow
+    @syntax-constructor: #8ea49e; // dragonAqua
+    @syntax-macro: #c4746e; // dragonRed
+    @syntax-type: #8ea49e; // dragonAqua
+    @syntax-type_builtin: #c4b28a; // dragonYellow
+    @syntax-type_parameter: #8ea49e; // dragonAqua
+    @syntax-enum_member: #b6927b; // dragonOrange
+    @syntax-namespace: #a292a3; // dragonPink
+    @syntax-attribute: #c4b28a; // dragonYellow
+    @syntax-keyword: #a292a3; // dragonPink
+    @syntax-keyword_import: #c4746e; // dragonRed
+    @syntax-keyword_operator: #c4746e; // dragonRed · bold
+    @syntax-statement: #8992a7; // dragonViolet
+    @syntax-label: #8992a7; // dragonViolet
+    @syntax-preproc: #c4746e; // dragonRed
+    @syntax-operator: #c4746e; // dragonRed
+    @syntax-punctuation: #9e9b93; // dragonGray2
+    @syntax-punctuation_special: #c4746e; // dragonRed
+    @syntax-regex: #c4746e; // dragonRed
+    @syntax-escape: #c4746e; // dragonRed · bold
+    @syntax-symbol: #c4746e; // dragonRed
+    @syntax-lifetime: #c4746e; // dragonRed
+    @syntax-string_special: #c4b28a; // dragonYellow
+    @syntax-url: #938aa9; // springViolet1 · underline
+    @syntax-tag: #c4b28a; // dragonYellow
+    @syntax-tag_attribute: #c4b28a; // dragonYellow
+    @syntax-tag_delimiter: #9e9b93; // dragonGray2
+    @syntax-special1: #c4b28a; // dragonYellow
+    @syntax-special2: #c4746e; // dragonRed
+    @syntax-special3: #938aa9; // springViolet1
+    @syntax-deprecated: #717c7c; // katanaGray · strikethrough
+    @syntax-unused: #727169; // fujiGray
+    @syntax-inlay_hint: #9e9b93; // dragonGray2 · italic
+    @syntax-code_lens: #727169; // fujiGray
+    @syntax-ghost_text: #727169; // fujiGray
+    @syntax-active_parameter: #c4746e; // dragonRed · bold italic
+    // diag
+    @diag-error: #c4746e; // dragonRed
+    @diag-warning: #c4b28a; // dragonYellow
+    @diag-info: #658594; // dragonBlue
+    @diag-hint: #8ea49e; // dragonAqua
+    @diag-ok: #699469; // dragonGreen
+    @diag-error_bg: #3f2c31; // dragonRedMist
+    @diag-warning_bg: #3f3a37; // dragonYellowMist
+    @diag-info_bg: #293039; // dragonBlueMist
+    @diag-hint_bg: #32373b; // dragonAquaMist
+    @diag-ok_bg: #2a3331; // dragonGreenMist
+    @diag-spell_bad: #c4746e; // dragonRed · undercurl
+    @diag-spell_cap: #c4b28a; // dragonYellow · undercurl
+    @diag-spell_local: #c4b28a; // dragonYellow · undercurl
+    @diag-spell_rare: #c4b28a; // dragonYellow · undercurl
+    // diff
+    @diff-add: #699469; // dragonGreen
+    @diff-delete: #c4746e; // dragonRed
+    @diff-change: #c4b28a; // dragonYellow
+    @diff-text: #658594; // dragonBlue
+    @diff-add_bg: #2c3732; // dragonGreenTint
+    @diff-delete_bg: #452f33; // dragonRedTint
+    @diff-change_bg: #45403a; // dragonYellowTint
+    @diff-text_bg: #2b333c; // dragonBlueTint
+    @diff-add_emph: #394c3d; // dragonGreenEmph
+    @diff-delete_emph: #623e3f; // dragonRedEmph
+    @diff-change_emph: #625a4b; // dragonYellowEmph
+    @diff-text_emph: #38454f; // dragonBlueEmph
+    @diff-conflict_ours: #717e67; // dragonGreen3
+    @diff-conflict_theirs: #435965; // dragonBlue5
+    @diff-conflict_ancestor: #9d7665; // dragonOrange2
+    @diff-conflict_ours_bg: #4b5348; // dragonGreen3Wash
+    @diff-conflict_theirs_bg: #313d47; // dragonBlue5Wash
+    @diff-conflict_ancestor_bg: #664e47; // dragonOrange2Wash
+    @diff-file_header: #8ea49e; // dragonAqua · bold
+    @diff-hunk_header: #8992a7; // dragonViolet
+    // git
+    @git-added: #699469; // dragonGreen
+    @git-modified: #c4b28a; // dragonYellow
+    @git-deleted: #c4746e; // dragonRed
+    @git-untracked: #7aa89f; // waveAqua2
+    @git-renamed: #658594; // dragonBlue
+    @git-conflicted: #c4746e; // dragonRed · bold
+    @git-ignored: #727169; // fujiGray
+    @git-submodule: #8992a7; // dragonViolet
+    @git-sign_add: #699469; // dragonGreen
+    @git-sign_change: #c4b28a; // dragonYellow
+    @git-sign_delete: #c4746e; // dragonRed
+    @git-commit_hash: #c4b28a; // dragonYellow
+    @git-head: #8ea49e; // dragonAqua · bold
+    @git-branch_local: #699469; // dragonGreen
+    @git-branch_remote: #c4746e; // dragonRed
+    @git-tag: #b6927b; // dragonOrange
+    @git-stash: #a292a3; // dragonPink
+    @git-author: #859fac; // dragonBlue2
+    @git-date: #727169; // fujiGray
+    @git-blame: #727169; // fujiGray
+    @git-graph: transparent; // cycle roles.rainbow.rainbow1..7 — transparent in source (nil / editor-only)
+    // terminal
+    @terminal-black: #393836; // dragonBlack5
+    @terminal-red: #c4746e; // dragonRed
+    @terminal-green: #699469; // dragonGreen
+    @terminal-yellow: #c4b28a; // dragonYellow
+    @terminal-blue: #435965; // dragonBlue5
+    @terminal-magenta: #a292a3; // dragonPink
+    @terminal-cyan: #8ea49e; // dragonAqua
+    @terminal-white: #c8c093; // oldWhite
+    @terminal-bright_black: #aca9a4; // dragonBlack5Bright
+    @terminal-bright_red: #cc928e; // dragonRedBright
+    @terminal-bright_green: #72a072; // dragonGreenBright
+    @terminal-bright_yellow: #d4c196; // dragonYellowBright
+    @terminal-bright_blue: #698a9b; // dragonBlue5Bright
+    @terminal-bright_magenta: #b4a7b5; // dragonPinkBright
+    @terminal-bright_cyan: #96ada7; // dragonAquaBright
+    @terminal-bright_white: #d5cd9d; // oldWhiteBright
+    @terminal-dim_black: #2f2e2c; // dragonBlack5Dim
+    @terminal-dim_red: #9d5a55; // dragonRedDim
+    @terminal-dim_green: #527552; // dragonGreenDim
+    @terminal-dim_yellow: #9a8b6b; // dragonYellowDim
+    @terminal-dim_blue: #354751; // dragonBlue5Dim
+    @terminal-dim_magenta: #817282; // dragonPinkDim
+    @terminal-dim_cyan: #6f817c; // dragonAquaDim
+    @terminal-dim_white: #9d9672; // oldWhiteDim
+    @terminal-color16: #b6927b; // dragonOrange
+    @terminal-color17: #c4746e; // dragonRed
+    @terminal-background: #1f1f28; // sumiInk3
+    @terminal-foreground: #dcd7ba; // fujiWhite
+    @terminal-cursor: #c4b28a; // dragonYellow
+    @terminal-cursor_text: #1f1f28; // sumiInk3
+    @terminal-selection_bg: #363646; // sumiInk5
+    @terminal-selection_fg: #9e9b93; // dragonGray2
+    @terminal-url: #938aa9; // springViolet1
+    @terminal-split: #8992a7; // dragonViolet
+    @terminal-tab_bar_bg: #2a2a37; // sumiInk4
+    @terminal-tab_active_bg: #1f1f28; // sumiInk3
+    @terminal-tab_active_fg: #c4b28a; // dragonYellow
+    @terminal-tab_inactive_bg: #2a2a37; // sumiInk4
+    @terminal-tab_inactive_fg: #9e9b93; // dragonGray2
+    @terminal-border_active: #c4b28a; // dragonYellow
+    @terminal-border_inactive: #625e5a; // dragonBlack6
+    @terminal-border_bell: #c4746e; // dragonRed
+    @terminal-search_match_bg: #4c4858; // springViolet1Emph
+    @terminal-search_focused_bg: #938aa9; // springViolet1
+    @terminal-hint_start_bg: #c4746e; // dragonRed
+    @terminal-hint_end_bg: #363646; // sumiInk5
+    @terminal-footer_bg: #2a2a37; // sumiInk4
+    @terminal-footer_fg: #9e9b93; // dragonGray2
+    @terminal-vi_cursor: #938aa9; // springViolet1
+    @terminal-visual_bell: #363646; // sumiInk5
+    @terminal-scrollbar_thumb: #54546d; // sumiInk6
+    @terminal-compose_cursor: #b6927b; // dragonOrange
+    @terminal-mark1: #7aa89f; // waveAqua2
+    @terminal-mark2: #a292a3; // dragonPink
+    @terminal-mark3: #b6927b; // dragonOrange
+    // rainbow
+    @rainbow-rainbow1: #c4746e; // dragonRed
+    @rainbow-rainbow2: #a292a3; // dragonPink
+    @rainbow-rainbow3: #658594; // dragonBlue
+    @rainbow-rainbow4: #9d7665; // dragonOrange2
+    @rainbow-rainbow5: #699469; // dragonGreen
+    @rainbow-rainbow6: #737c73; // dragonAsh
+    @rainbow-rainbow7: #949fb5; // dragonTeal
+    // markup
+    @markup-h1: #c4746e; // dragonRed
+    @markup-h2: #a292a3; // dragonPink
+    @markup-h3: #658594; // dragonBlue
+    @markup-h4: #9d7665; // dragonOrange2
+    @markup-h5: #699469; // dragonGreen
+    @markup-h6: #737c73; // dragonAsh
+    @markup-h1_bg: #522c2a; // dragonRedShade
+    @markup-h2_bg: #413941; // dragonPinkShade
+    @markup-h3_bg: #27363d; // dragonBlueShade
+    @markup-h4_bg: #412f27; // dragonOrange2Shade
+    @markup-h5_bg: #283b28; // dragonGreenShade
+    @markup-h6_bg: #2e322e; // dragonAshShade
+    @markup-link_text: #938aa9; // springViolet1
+    @markup-link_url: #938aa9; // springViolet1 · underline
+    @markup-code: #8a9a7b; // dragonGreen2
+    @markup-code_bg: #2a2a37; // sumiInk4
+    @markup-quote: #9e9b93; // dragonGray2
+    @markup-quote_bar: #54546d; // sumiInk6
+    @markup-list_marker: #c4b28a; // dragonYellow
+    @markup-checkbox_done: #699469; // dragonGreen
+    @markup-checkbox_todo: #9e9b93; // dragonGray2
+    @markup-table_border: #54546d; // sumiInk6
+    @markup-table_header: #8992a7; // dragonViolet · bold
+    @markup-rule: #54546d; // sumiInk6
+    @markup-math: #b6927b; // dragonOrange
+    @markup-environment: #a292a3; // dragonPink
+    @markup-highlight_bg: #49443c; // winterYellow
+    @markup-footnote: #938aa9; // springViolet1
+    @markup-note: #658594; // dragonBlue
+    @markup-note_bg: #293039; // dragonBlueMist
+    @markup-tip: #699469; // dragonGreen
+    @markup-tip_bg: #2a3331; // dragonGreenMist
+    @markup-important: #938aa9; // springViolet1
+    @markup-important_bg: #33313d; // springViolet1Mist
+    @markup-warning: #c4b28a; // dragonYellow
+    @markup-warning_bg: #3f3a37; // dragonYellowMist
+    @markup-caution: #c4746e; // dragonRed
+    @markup-caution_bg: #3f2c31; // dragonRedMist
+    // tags
+    @tags-todo: #658594; // dragonBlue
+    @tags-fix: #c4746e; // dragonRed
+    @tags-hack: #c4b28a; // dragonYellow
+    @tags-note: #8ea49e; // dragonAqua
+    @tags-perf: #957fb8; // oniViolet
+    @tags-test: #a292a3; // dragonPink
+    // debug
+    @debug-breakpoint: #c4746e; // dragonRed
+    @debug-breakpoint_condition: #b6927b; // dragonOrange
+    @debug-breakpoint_rejected: #727169; // fujiGray
+    @debug-logpoint: #658594; // dragonBlue
+    @debug-stopped: #c4b28a; // dragonYellow
+    @debug-stopped_line_bg: #49443c; // winterYellow
+    @debug-continue: #8a9a7b; // dragonGreen2
+    @debug-stop: #c4746e; // dragonRed
+    @debug-step: #c4b28a; // dragonYellow
+    @debug-modified_value: #c4b28a; // dragonYellow · bold
+    @debug-value: #c4b28a; // dragonYellow
+    @debug-source: #c4746e; // dragonRed
+    @debug-unavailable: #727169; // fujiGray
+    // test
+    @test-passed: #699469; // dragonGreen
+    @test-failed: #c4746e; // dragonRed
+    @test-running: #c4b28a; // dragonYellow
+    @test-skipped: #8ea49e; // dragonAqua
+    @test-queued: #658594; // dragonBlue
+    @test-unknown: #717c7c; // katanaGray
+    @test-marked: #c4b28a; // dragonYellow · italic
+    @test-adapter: #938aa9; // springViolet1
+    // log
+    @log-error: #c4746e; // dragonRed
+    @log-warn: #c4b28a; // dragonYellow
+    @log-info: #658594; // dragonBlue
+    @log-debug: #7a8382; // dragonGray3
+    @log-trace: #a292a3; // dragonPink
+    @log-success: #699469; // dragonGreen
+    // kinds
+    @kinds-Text: #dcd7ba; // fujiWhite
+    @kinds-Method: #859fac; // dragonBlue2
+    @kinds-Function: #859fac; // dragonBlue2
+    @kinds-Constructor: #8ea49e; // dragonAqua
+    @kinds-Field: #c4746e; // dragonRed
+    @kinds-Variable: #dcd7ba; // fujiWhite
+    @kinds-Class: #8ea49e; // dragonAqua
+    @kinds-Interface: #8ea49e; // dragonAqua
+    @kinds-Module: #a292a3; // dragonPink
+    @kinds-Property: #c4b28a; // dragonYellow
+    @kinds-Unit: #a292a3; // dragonPink
+    @kinds-Value: #8a9a7b; // dragonGreen2
+    @kinds-Enum: #8ea49e; // dragonAqua
+    @kinds-Keyword: #a292a3; // dragonPink
+    @kinds-Snippet: #c4b28a; // dragonYellow
+    @kinds-Color: #c4b28a; // dragonYellow
+    @kinds-File: #859fac; // dragonBlue2
+    @kinds-Reference: #c4b28a; // dragonYellow
+    @kinds-Folder: #859fac; // dragonBlue2
+    @kinds-EnumMember: #b6927b; // dragonOrange
+    @kinds-Constant: #b6927b; // dragonOrange
+    @kinds-Struct: #8ea49e; // dragonAqua
+    @kinds-Event: #8ea49e; // dragonAqua
+    @kinds-Operator: #c4746e; // dragonRed
+    @kinds-TypeParameter: #8ea49e; // dragonAqua
+    @kinds-Namespace: #a292a3; // dragonPink
+    @kinds-Package: #a292a3; // dragonPink
+    @kinds-Object: #8ea49e; // dragonAqua
+    @kinds-Array: #9e9b93; // dragonGray2
+    @kinds-Key: #c4b28a; // dragonYellow
+    @kinds-String: #8a9a7b; // dragonGreen2
+    @kinds-Number: #a292a3; // dragonPink
+    @kinds-Boolean: #b6927b; // dragonOrange
+    @kinds-Null: #c4b28a; // dragonYellow
+    @kinds-AI: #8a9a7b; // dragonGreen2
+    // files
+    @files-directory: #859fac; // dragonBlue2
+    @files-directory_open: #658594; // dragonBlue
+    @files-root: #c4746e; // dragonRed · bold
+    @files-file: #dcd7ba; // fujiWhite
+    @files-file_opened: #8ea49e; // dragonAqua · italic
+    @files-file_modified: #c4b28a; // dragonYellow
+    @files-symlink: #8ea49e; // dragonAqua
+    @files-symlink_broken: #c4746e; // dragonRed
+    @files-hidden: #727169; // fujiGray
+    @files-special_file: #c4b28a; // dragonYellow
+    @files-executable: #cc928e; // dragonRedBright · bold
+    @files-source: #699469; // dragonGreen
+    @files-build_tooling: #72a072; // dragonGreenBright
+    @files-config: #c4b28a; // dragonYellow
+    @files-document: #c4b28a; // dragonYellow
+    @files-office: #8ea49e; // dragonAqua
+    @files-media: #a292a3; // dragonPink
+    @files-archive: #96ada7; // dragonAquaBright · underline
+    @files-unimportant: #54546d; // sumiInk6
+    // prompt
+    @prompt-prompt_ok: #699469; // dragonGreen
+    @prompt-prompt_err: #c4746e; // dragonRed
+    @prompt-path: #859fac; // dragonBlue2
+    @prompt-git_branch: #a292a3; // dragonPink
+    @prompt-git_status: #c4b28a; // dragonYellow
+    @prompt-duration: #b6927b; // dragonOrange
+    @prompt-user: #8ea49e; // dragonAqua
+    @prompt-root: #c4746e; // dragonRed · bold
+    @prompt-host: #949fb5; // dragonTeal
+    @prompt-context: #938aa9; // springViolet1
+    @prompt-jobs: #658594; // dragonBlue
+    @prompt-time: #727169; // fujiGray
+    // hues
+    @hues-red: #c4746e; // dragonRed
+    @hues-orange: #b6927b; // dragonOrange
+    @hues-yellow: #c4b28a; // dragonYellow
+    @hues-green: #699469; // dragonGreen
+    @hues-teal: #7aa89f; // waveAqua2
+    @hues-cyan: #8ea49e; // dragonAqua
+    @hues-blue: #859fac; // dragonBlue2
+    @hues-purple: #938aa9; // springViolet1
+    @hues-pink: #a292a3; // dragonPink
+    @hues-brown: #9d7665; // dragonOrange2
+    @hues-gray: #9e9b93; // dragonGray2
+    // charts
+    @charts-series1: #be7f46; // dragonOrangeVivid
+    @charts-series2: #37a28b; // waveAqua1Vivid
+    @charts-series3: #987cc2; // oniVioletVivid
+    @charts-series4: #aa8f41; // dragonYellowVivid
+    @charts-series5: #ce6c8d; // sakuraPinkVivid
+    @charts-series6: #528b52; // dragonGreenVivid
+    @charts-series7: #6b8fd3; // crystalBlueVivid
+    @charts-series8: #c8726b; // dragonRedVivid
+    @charts-seq1: #39527f; // seqBlue1
+    @charts-seq2: #46669c; // seqBlue2
+    @charts-seq3: #547aba; // seqBlue3
+    @charts-seq4: #678fd4; // seqBlue4
+    @charts-seq5: #86a4e1; // seqBlue5
+    @charts-seq6: #a6bae9; // seqBlue6
+    @charts-seq7: #c4d1ef; // seqBlue7
+    @charts-div_neg3: #d67b73; // divRed3
+    @charts-div_neg2: #a8635d; // divRed2
+    @charts-div_neg1: #794d4b; // divRed1
+    @charts-div_mid: #393836; // dragonBlack5
+    @charts-div_pos1: #495b7d; // divBlue1
+    @charts-div_pos2: #5d78ae; // divBlue2
+    @charts-div_pos3: #7098df; // divBlue3
+    @charts-good: #699469; // dragonGreen
+    @charts-warning: #c4b28a; // dragonYellow
+    @charts-serious: #b6927b; // dragonOrange
+    @charts-critical: #c4746e; // dragonRed
+    @charts-surface: #1f1f28; // sumiInk3
+    @charts-grid: #363646; // sumiInk5
+    @charts-axis: #54546d; // sumiInk6
+    @charts-label: #9e9b93; // dragonGray2
+    @charts-title: #dcd7ba; // fujiWhite
+    @charts-tooltip_bg: #2a2a37; // sumiInk4
+    @charts-tooltip_border: #363646; // sumiInk5
+  }
+
+  // Exposes every role leaf as a CSS custom property (--kanagawa-<category>-<key>).
+  // Call after .roles(); consumed by rules that need a var() handle instead of a LESS @var.
+  .css-variables() {
+    --kanagawa-surface-bg_m4: @surface-bg_m4;
+    --kanagawa-surface-bg_m3: @surface-bg_m3;
+    --kanagawa-surface-bg_m2: @surface-bg_m2;
+    --kanagawa-surface-bg_m1: @surface-bg_m1;
+    --kanagawa-surface-bg: @surface-bg;
+    --kanagawa-surface-bg_p1: @surface-bg_p1;
+    --kanagawa-surface-bg_p2: @surface-bg_p2;
+    --kanagawa-surface-bg_p3: @surface-bg_p3;
+    --kanagawa-surface-overlay: @surface-overlay;
+    --kanagawa-surface-shadow: @surface-shadow;
+    --kanagawa-text-fg_bright: @text-fg_bright;
+    --kanagawa-text-fg: @text-fg;
+    --kanagawa-text-fg_float: @text-fg_float;
+    --kanagawa-text-fg_dim: @text-fg_dim;
+    --kanagawa-text-fg_muted: @text-fg_muted;
+    --kanagawa-text-fg_subtle: @text-fg_subtle;
+    --kanagawa-text-fg_dimmer: @text-fg_dimmer;
+    --kanagawa-text-on_accent: @text-on_accent;
+    --kanagawa-text-fg_reverse: @text-fg_reverse;
+    --kanagawa-text-fg_dark: @text-fg_dark;
+    --kanagawa-text-link: @text-link;
+    --kanagawa-text-link_visited: @text-link_visited;
+    --kanagawa-text-placeholder: @text-placeholder;
+    --kanagawa-text-disabled: @text-disabled;
+    --kanagawa-border-border: @border-border;
+    --kanagawa-border-border_float: @border-border_float;
+    --kanagawa-border-border_focus: @border-border_focus;
+    --kanagawa-border-border_search: @border-border_search;
+    --kanagawa-border-win_separator: @border-win_separator;
+    --kanagawa-border-indent: @border-indent;
+    --kanagawa-border-indent_scope: @border-indent_scope;
+    --kanagawa-border-ruler: @border-ruler;
+    --kanagawa-state-cursorline: @state-cursorline;
+    --kanagawa-state-cursorline_alt: @state-cursorline_alt;
+    --kanagawa-state-selection: @state-selection;
+    --kanagawa-state-selection_inactive: @state-selection_inactive;
+    --kanagawa-state-hover: @state-hover;
+    --kanagawa-state-active: @state-active;
+    --kanagawa-state-reference: @state-reference;
+    --kanagawa-state-search: @state-search;
+    --kanagawa-state-search_current: @state-search_current;
+    --kanagawa-state-search_other: @state-search_other;
+    --kanagawa-state-substitute: @state-substitute;
+    --kanagawa-state-match_paren: @state-match_paren;
+    --kanagawa-state-mark: @state-mark;
+    --kanagawa-state-yank: @state-yank;
+    --kanagawa-state-paste: @state-paste;
+    --kanagawa-state-jump_label: @state-jump_label;
+    --kanagawa-state-jump_label_2: @state-jump_label_2;
+    --kanagawa-state-jump_backdrop: @state-jump_backdrop;
+    --kanagawa-state-scrollbar: @state-scrollbar;
+    --kanagawa-state-scrollbar_thumb: @state-scrollbar_thumb;
+    --kanagawa-state-scrollbar_thumb_hover: @state-scrollbar_thumb_hover;
+    --kanagawa-state-fold_bg: @state-fold_bg;
+    --kanagawa-state-fold_fg: @state-fold_fg;
+    --kanagawa-modes-normal: @modes-normal;
+    --kanagawa-modes-insert: @modes-insert;
+    --kanagawa-modes-visual: @modes-visual;
+    --kanagawa-modes-replace: @modes-replace;
+    --kanagawa-modes-command: @modes-command;
+    --kanagawa-modes-terminal: @modes-terminal;
+    --kanagawa-modes-select: @modes-select;
+    --kanagawa-modes-pending: @modes-pending;
+    --kanagawa-modes-cursor: @modes-cursor;
+    --kanagawa-modes-cursor_text: @modes-cursor_text;
+    --kanagawa-modes-cursor_insert: @modes-cursor_insert;
+    --kanagawa-modes-cursor_visual: @modes-cursor_visual;
+    --kanagawa-accent-primary: @accent-primary;
+    --kanagawa-accent-primary_hover: @accent-primary_hover;
+    --kanagawa-accent-secondary: @accent-secondary;
+    --kanagawa-accent-tertiary: @accent-tertiary;
+    --kanagawa-accent-accent1: @accent-accent1;
+    --kanagawa-accent-accent2: @accent-accent2;
+    --kanagawa-accent-accent3: @accent-accent3;
+    --kanagawa-accent-accent4: @accent-accent4;
+    --kanagawa-accent-accent5: @accent-accent5;
+    --kanagawa-accent-invert: @accent-invert;
+    --kanagawa-chrome-statusline_bg: @chrome-statusline_bg;
+    --kanagawa-chrome-statusline_fg: @chrome-statusline_fg;
+    --kanagawa-chrome-statusline_section_bg: @chrome-statusline_section_bg;
+    --kanagawa-chrome-statusline_inactive_bg: @chrome-statusline_inactive_bg;
+    --kanagawa-chrome-statusline_inactive_fg: @chrome-statusline_inactive_fg;
+    --kanagawa-chrome-statusline_debug_bg: @chrome-statusline_debug_bg;
+    --kanagawa-chrome-tabline_bg: @chrome-tabline_bg;
+    --kanagawa-chrome-tab_active_bg: @chrome-tab_active_bg;
+    --kanagawa-chrome-tab_active_fg: @chrome-tab_active_fg;
+    --kanagawa-chrome-tab_inactive_bg: @chrome-tab_inactive_bg;
+    --kanagawa-chrome-tab_inactive_fg: @chrome-tab_inactive_fg;
+    --kanagawa-chrome-tab_alternate_fg: @chrome-tab_alternate_fg;
+    --kanagawa-chrome-tab_indicator: @chrome-tab_indicator;
+    --kanagawa-chrome-tab_modified: @chrome-tab_modified;
+    --kanagawa-chrome-tab_close: @chrome-tab_close;
+    --kanagawa-chrome-float_bg: @chrome-float_bg;
+    --kanagawa-chrome-float_fg: @chrome-float_fg;
+    --kanagawa-chrome-float_border: @chrome-float_border;
+    --kanagawa-chrome-float_title: @chrome-float_title;
+    --kanagawa-chrome-float_footer: @chrome-float_footer;
+    --kanagawa-chrome-pmenu_bg: @chrome-pmenu_bg;
+    --kanagawa-chrome-pmenu_fg: @chrome-pmenu_fg;
+    --kanagawa-chrome-pmenu_sel_bg: @chrome-pmenu_sel_bg;
+    --kanagawa-chrome-pmenu_match: @chrome-pmenu_match;
+    --kanagawa-chrome-pmenu_kind: @chrome-pmenu_kind;
+    --kanagawa-chrome-pmenu_extra: @chrome-pmenu_extra;
+    --kanagawa-chrome-pmenu_thumb: @chrome-pmenu_thumb;
+    --kanagawa-chrome-sidebar_bg: @chrome-sidebar_bg;
+    --kanagawa-chrome-sidebar_fg: @chrome-sidebar_fg;
+    --kanagawa-chrome-line_nr: @chrome-line_nr;
+    --kanagawa-chrome-line_nr_current: @chrome-line_nr_current;
+    --kanagawa-chrome-nontext: @chrome-nontext;
+    --kanagawa-chrome-whitespace: @chrome-whitespace;
+    --kanagawa-chrome-special_key: @chrome-special_key;
+    --kanagawa-chrome-winbar_fg: @chrome-winbar_fg;
+    --kanagawa-chrome-title: @chrome-title;
+    --kanagawa-chrome-header1: @chrome-header1;
+    --kanagawa-chrome-header2: @chrome-header2;
+    --kanagawa-chrome-msg_fg: @chrome-msg_fg;
+    --kanagawa-chrome-more_msg: @chrome-more_msg;
+    --kanagawa-chrome-mode_msg: @chrome-mode_msg;
+    --kanagawa-chrome-error_msg: @chrome-error_msg;
+    --kanagawa-chrome-warning_msg: @chrome-warning_msg;
+    --kanagawa-controls-button_bg: @controls-button_bg;
+    --kanagawa-controls-button_fg: @controls-button_fg;
+    --kanagawa-controls-button_hover_bg: @controls-button_hover_bg;
+    --kanagawa-controls-button_secondary_bg: @controls-button_secondary_bg;
+    --kanagawa-controls-button_secondary_fg: @controls-button_secondary_fg;
+    --kanagawa-controls-button_secondary_hover_bg: @controls-button_secondary_hover_bg;
+    --kanagawa-controls-button_danger_bg: @controls-button_danger_bg;
+    --kanagawa-controls-input_bg: @controls-input_bg;
+    --kanagawa-controls-input_fg: @controls-input_fg;
+    --kanagawa-controls-input_border: @controls-input_border;
+    --kanagawa-controls-input_border_focus: @controls-input_border_focus;
+    --kanagawa-controls-input_placeholder: @controls-input_placeholder;
+    --kanagawa-controls-toggle_on: @controls-toggle_on;
+    --kanagawa-controls-toggle_off: @controls-toggle_off;
+    --kanagawa-controls-badge_bg: @controls-badge_bg;
+    --kanagawa-controls-badge_fg: @controls-badge_fg;
+    --kanagawa-controls-badge_accent_bg: @controls-badge_accent_bg;
+    --kanagawa-controls-progress: @controls-progress;
+    --kanagawa-controls-progress_track: @controls-progress_track;
+    --kanagawa-controls-kbd_bg: @controls-kbd_bg;
+    --kanagawa-controls-kbd_border: @controls-kbd_border;
+    --kanagawa-controls-kbd_fg: @controls-kbd_fg;
+    --kanagawa-syntax-variable: @syntax-variable;
+    --kanagawa-syntax-comment: @syntax-comment;
+    --kanagawa-syntax-docstring: @syntax-docstring;
+    --kanagawa-syntax-string: @syntax-string;
+    --kanagawa-syntax-character: @syntax-character;
+    --kanagawa-syntax-number: @syntax-number;
+    --kanagawa-syntax-float: @syntax-float;
+    --kanagawa-syntax-boolean: @syntax-boolean;
+    --kanagawa-syntax-constant: @syntax-constant;
+    --kanagawa-syntax-constant_builtin: @syntax-constant_builtin;
+    --kanagawa-syntax-identifier: @syntax-identifier;
+    --kanagawa-syntax-property: @syntax-property;
+    --kanagawa-syntax-member: @syntax-member;
+    --kanagawa-syntax-parameter: @syntax-parameter;
+    --kanagawa-syntax-variable_builtin: @syntax-variable_builtin;
+    --kanagawa-syntax-global: @syntax-global;
+    --kanagawa-syntax-function: @syntax-function;
+    --kanagawa-syntax-method: @syntax-method;
+    --kanagawa-syntax-function_builtin: @syntax-function_builtin;
+    --kanagawa-syntax-constructor: @syntax-constructor;
+    --kanagawa-syntax-macro: @syntax-macro;
+    --kanagawa-syntax-type: @syntax-type;
+    --kanagawa-syntax-type_builtin: @syntax-type_builtin;
+    --kanagawa-syntax-type_parameter: @syntax-type_parameter;
+    --kanagawa-syntax-enum_member: @syntax-enum_member;
+    --kanagawa-syntax-namespace: @syntax-namespace;
+    --kanagawa-syntax-attribute: @syntax-attribute;
+    --kanagawa-syntax-keyword: @syntax-keyword;
+    --kanagawa-syntax-keyword_import: @syntax-keyword_import;
+    --kanagawa-syntax-keyword_operator: @syntax-keyword_operator;
+    --kanagawa-syntax-statement: @syntax-statement;
+    --kanagawa-syntax-label: @syntax-label;
+    --kanagawa-syntax-preproc: @syntax-preproc;
+    --kanagawa-syntax-operator: @syntax-operator;
+    --kanagawa-syntax-punctuation: @syntax-punctuation;
+    --kanagawa-syntax-punctuation_special: @syntax-punctuation_special;
+    --kanagawa-syntax-regex: @syntax-regex;
+    --kanagawa-syntax-escape: @syntax-escape;
+    --kanagawa-syntax-symbol: @syntax-symbol;
+    --kanagawa-syntax-lifetime: @syntax-lifetime;
+    --kanagawa-syntax-string_special: @syntax-string_special;
+    --kanagawa-syntax-url: @syntax-url;
+    --kanagawa-syntax-tag: @syntax-tag;
+    --kanagawa-syntax-tag_attribute: @syntax-tag_attribute;
+    --kanagawa-syntax-tag_delimiter: @syntax-tag_delimiter;
+    --kanagawa-syntax-special1: @syntax-special1;
+    --kanagawa-syntax-special2: @syntax-special2;
+    --kanagawa-syntax-special3: @syntax-special3;
+    --kanagawa-syntax-deprecated: @syntax-deprecated;
+    --kanagawa-syntax-unused: @syntax-unused;
+    --kanagawa-syntax-inlay_hint: @syntax-inlay_hint;
+    --kanagawa-syntax-code_lens: @syntax-code_lens;
+    --kanagawa-syntax-ghost_text: @syntax-ghost_text;
+    --kanagawa-syntax-active_parameter: @syntax-active_parameter;
+    --kanagawa-diag-error: @diag-error;
+    --kanagawa-diag-warning: @diag-warning;
+    --kanagawa-diag-info: @diag-info;
+    --kanagawa-diag-hint: @diag-hint;
+    --kanagawa-diag-ok: @diag-ok;
+    --kanagawa-diag-error_bg: @diag-error_bg;
+    --kanagawa-diag-warning_bg: @diag-warning_bg;
+    --kanagawa-diag-info_bg: @diag-info_bg;
+    --kanagawa-diag-hint_bg: @diag-hint_bg;
+    --kanagawa-diag-ok_bg: @diag-ok_bg;
+    --kanagawa-diag-spell_bad: @diag-spell_bad;
+    --kanagawa-diag-spell_cap: @diag-spell_cap;
+    --kanagawa-diag-spell_local: @diag-spell_local;
+    --kanagawa-diag-spell_rare: @diag-spell_rare;
+    --kanagawa-diff-add: @diff-add;
+    --kanagawa-diff-delete: @diff-delete;
+    --kanagawa-diff-change: @diff-change;
+    --kanagawa-diff-text: @diff-text;
+    --kanagawa-diff-add_bg: @diff-add_bg;
+    --kanagawa-diff-delete_bg: @diff-delete_bg;
+    --kanagawa-diff-change_bg: @diff-change_bg;
+    --kanagawa-diff-text_bg: @diff-text_bg;
+    --kanagawa-diff-add_emph: @diff-add_emph;
+    --kanagawa-diff-delete_emph: @diff-delete_emph;
+    --kanagawa-diff-change_emph: @diff-change_emph;
+    --kanagawa-diff-text_emph: @diff-text_emph;
+    --kanagawa-diff-conflict_ours: @diff-conflict_ours;
+    --kanagawa-diff-conflict_theirs: @diff-conflict_theirs;
+    --kanagawa-diff-conflict_ancestor: @diff-conflict_ancestor;
+    --kanagawa-diff-conflict_ours_bg: @diff-conflict_ours_bg;
+    --kanagawa-diff-conflict_theirs_bg: @diff-conflict_theirs_bg;
+    --kanagawa-diff-conflict_ancestor_bg: @diff-conflict_ancestor_bg;
+    --kanagawa-diff-file_header: @diff-file_header;
+    --kanagawa-diff-hunk_header: @diff-hunk_header;
+    --kanagawa-git-added: @git-added;
+    --kanagawa-git-modified: @git-modified;
+    --kanagawa-git-deleted: @git-deleted;
+    --kanagawa-git-untracked: @git-untracked;
+    --kanagawa-git-renamed: @git-renamed;
+    --kanagawa-git-conflicted: @git-conflicted;
+    --kanagawa-git-ignored: @git-ignored;
+    --kanagawa-git-submodule: @git-submodule;
+    --kanagawa-git-sign_add: @git-sign_add;
+    --kanagawa-git-sign_change: @git-sign_change;
+    --kanagawa-git-sign_delete: @git-sign_delete;
+    --kanagawa-git-commit_hash: @git-commit_hash;
+    --kanagawa-git-head: @git-head;
+    --kanagawa-git-branch_local: @git-branch_local;
+    --kanagawa-git-branch_remote: @git-branch_remote;
+    --kanagawa-git-tag: @git-tag;
+    --kanagawa-git-stash: @git-stash;
+    --kanagawa-git-author: @git-author;
+    --kanagawa-git-date: @git-date;
+    --kanagawa-git-blame: @git-blame;
+    --kanagawa-terminal-black: @terminal-black;
+    --kanagawa-terminal-red: @terminal-red;
+    --kanagawa-terminal-green: @terminal-green;
+    --kanagawa-terminal-yellow: @terminal-yellow;
+    --kanagawa-terminal-blue: @terminal-blue;
+    --kanagawa-terminal-magenta: @terminal-magenta;
+    --kanagawa-terminal-cyan: @terminal-cyan;
+    --kanagawa-terminal-white: @terminal-white;
+    --kanagawa-terminal-bright_black: @terminal-bright_black;
+    --kanagawa-terminal-bright_red: @terminal-bright_red;
+    --kanagawa-terminal-bright_green: @terminal-bright_green;
+    --kanagawa-terminal-bright_yellow: @terminal-bright_yellow;
+    --kanagawa-terminal-bright_blue: @terminal-bright_blue;
+    --kanagawa-terminal-bright_magenta: @terminal-bright_magenta;
+    --kanagawa-terminal-bright_cyan: @terminal-bright_cyan;
+    --kanagawa-terminal-bright_white: @terminal-bright_white;
+    --kanagawa-terminal-dim_black: @terminal-dim_black;
+    --kanagawa-terminal-dim_red: @terminal-dim_red;
+    --kanagawa-terminal-dim_green: @terminal-dim_green;
+    --kanagawa-terminal-dim_yellow: @terminal-dim_yellow;
+    --kanagawa-terminal-dim_blue: @terminal-dim_blue;
+    --kanagawa-terminal-dim_magenta: @terminal-dim_magenta;
+    --kanagawa-terminal-dim_cyan: @terminal-dim_cyan;
+    --kanagawa-terminal-dim_white: @terminal-dim_white;
+    --kanagawa-terminal-color16: @terminal-color16;
+    --kanagawa-terminal-color17: @terminal-color17;
+    --kanagawa-terminal-background: @terminal-background;
+    --kanagawa-terminal-foreground: @terminal-foreground;
+    --kanagawa-terminal-cursor: @terminal-cursor;
+    --kanagawa-terminal-cursor_text: @terminal-cursor_text;
+    --kanagawa-terminal-selection_bg: @terminal-selection_bg;
+    --kanagawa-terminal-selection_fg: @terminal-selection_fg;
+    --kanagawa-terminal-url: @terminal-url;
+    --kanagawa-terminal-split: @terminal-split;
+    --kanagawa-terminal-tab_bar_bg: @terminal-tab_bar_bg;
+    --kanagawa-terminal-tab_active_bg: @terminal-tab_active_bg;
+    --kanagawa-terminal-tab_active_fg: @terminal-tab_active_fg;
+    --kanagawa-terminal-tab_inactive_bg: @terminal-tab_inactive_bg;
+    --kanagawa-terminal-tab_inactive_fg: @terminal-tab_inactive_fg;
+    --kanagawa-terminal-border_active: @terminal-border_active;
+    --kanagawa-terminal-border_inactive: @terminal-border_inactive;
+    --kanagawa-terminal-border_bell: @terminal-border_bell;
+    --kanagawa-terminal-search_match_bg: @terminal-search_match_bg;
+    --kanagawa-terminal-search_focused_bg: @terminal-search_focused_bg;
+    --kanagawa-terminal-hint_start_bg: @terminal-hint_start_bg;
+    --kanagawa-terminal-hint_end_bg: @terminal-hint_end_bg;
+    --kanagawa-terminal-footer_bg: @terminal-footer_bg;
+    --kanagawa-terminal-footer_fg: @terminal-footer_fg;
+    --kanagawa-terminal-vi_cursor: @terminal-vi_cursor;
+    --kanagawa-terminal-visual_bell: @terminal-visual_bell;
+    --kanagawa-terminal-scrollbar_thumb: @terminal-scrollbar_thumb;
+    --kanagawa-terminal-compose_cursor: @terminal-compose_cursor;
+    --kanagawa-terminal-mark1: @terminal-mark1;
+    --kanagawa-terminal-mark2: @terminal-mark2;
+    --kanagawa-terminal-mark3: @terminal-mark3;
+    --kanagawa-rainbow-rainbow1: @rainbow-rainbow1;
+    --kanagawa-rainbow-rainbow2: @rainbow-rainbow2;
+    --kanagawa-rainbow-rainbow3: @rainbow-rainbow3;
+    --kanagawa-rainbow-rainbow4: @rainbow-rainbow4;
+    --kanagawa-rainbow-rainbow5: @rainbow-rainbow5;
+    --kanagawa-rainbow-rainbow6: @rainbow-rainbow6;
+    --kanagawa-rainbow-rainbow7: @rainbow-rainbow7;
+    --kanagawa-markup-h1: @markup-h1;
+    --kanagawa-markup-h2: @markup-h2;
+    --kanagawa-markup-h3: @markup-h3;
+    --kanagawa-markup-h4: @markup-h4;
+    --kanagawa-markup-h5: @markup-h5;
+    --kanagawa-markup-h6: @markup-h6;
+    --kanagawa-markup-h1_bg: @markup-h1_bg;
+    --kanagawa-markup-h2_bg: @markup-h2_bg;
+    --kanagawa-markup-h3_bg: @markup-h3_bg;
+    --kanagawa-markup-h4_bg: @markup-h4_bg;
+    --kanagawa-markup-h5_bg: @markup-h5_bg;
+    --kanagawa-markup-h6_bg: @markup-h6_bg;
+    --kanagawa-markup-link_text: @markup-link_text;
+    --kanagawa-markup-link_url: @markup-link_url;
+    --kanagawa-markup-code: @markup-code;
+    --kanagawa-markup-code_bg: @markup-code_bg;
+    --kanagawa-markup-quote: @markup-quote;
+    --kanagawa-markup-quote_bar: @markup-quote_bar;
+    --kanagawa-markup-list_marker: @markup-list_marker;
+    --kanagawa-markup-checkbox_done: @markup-checkbox_done;
+    --kanagawa-markup-checkbox_todo: @markup-checkbox_todo;
+    --kanagawa-markup-table_border: @markup-table_border;
+    --kanagawa-markup-table_header: @markup-table_header;
+    --kanagawa-markup-rule: @markup-rule;
+    --kanagawa-markup-math: @markup-math;
+    --kanagawa-markup-environment: @markup-environment;
+    --kanagawa-markup-highlight_bg: @markup-highlight_bg;
+    --kanagawa-markup-footnote: @markup-footnote;
+    --kanagawa-markup-note: @markup-note;
+    --kanagawa-markup-note_bg: @markup-note_bg;
+    --kanagawa-markup-tip: @markup-tip;
+    --kanagawa-markup-tip_bg: @markup-tip_bg;
+    --kanagawa-markup-important: @markup-important;
+    --kanagawa-markup-important_bg: @markup-important_bg;
+    --kanagawa-markup-warning: @markup-warning;
+    --kanagawa-markup-warning_bg: @markup-warning_bg;
+    --kanagawa-markup-caution: @markup-caution;
+    --kanagawa-markup-caution_bg: @markup-caution_bg;
+    --kanagawa-tags-todo: @tags-todo;
+    --kanagawa-tags-fix: @tags-fix;
+    --kanagawa-tags-hack: @tags-hack;
+    --kanagawa-tags-note: @tags-note;
+    --kanagawa-tags-perf: @tags-perf;
+    --kanagawa-tags-test: @tags-test;
+    --kanagawa-debug-breakpoint: @debug-breakpoint;
+    --kanagawa-debug-breakpoint_condition: @debug-breakpoint_condition;
+    --kanagawa-debug-breakpoint_rejected: @debug-breakpoint_rejected;
+    --kanagawa-debug-logpoint: @debug-logpoint;
+    --kanagawa-debug-stopped: @debug-stopped;
+    --kanagawa-debug-stopped_line_bg: @debug-stopped_line_bg;
+    --kanagawa-debug-continue: @debug-continue;
+    --kanagawa-debug-stop: @debug-stop;
+    --kanagawa-debug-step: @debug-step;
+    --kanagawa-debug-modified_value: @debug-modified_value;
+    --kanagawa-debug-value: @debug-value;
+    --kanagawa-debug-source: @debug-source;
+    --kanagawa-debug-unavailable: @debug-unavailable;
+    --kanagawa-test-passed: @test-passed;
+    --kanagawa-test-failed: @test-failed;
+    --kanagawa-test-running: @test-running;
+    --kanagawa-test-skipped: @test-skipped;
+    --kanagawa-test-queued: @test-queued;
+    --kanagawa-test-unknown: @test-unknown;
+    --kanagawa-test-marked: @test-marked;
+    --kanagawa-test-adapter: @test-adapter;
+    --kanagawa-log-error: @log-error;
+    --kanagawa-log-warn: @log-warn;
+    --kanagawa-log-info: @log-info;
+    --kanagawa-log-debug: @log-debug;
+    --kanagawa-log-trace: @log-trace;
+    --kanagawa-log-success: @log-success;
+    --kanagawa-kinds-Text: @kinds-Text;
+    --kanagawa-kinds-Method: @kinds-Method;
+    --kanagawa-kinds-Function: @kinds-Function;
+    --kanagawa-kinds-Constructor: @kinds-Constructor;
+    --kanagawa-kinds-Field: @kinds-Field;
+    --kanagawa-kinds-Variable: @kinds-Variable;
+    --kanagawa-kinds-Class: @kinds-Class;
+    --kanagawa-kinds-Interface: @kinds-Interface;
+    --kanagawa-kinds-Module: @kinds-Module;
+    --kanagawa-kinds-Property: @kinds-Property;
+    --kanagawa-kinds-Unit: @kinds-Unit;
+    --kanagawa-kinds-Value: @kinds-Value;
+    --kanagawa-kinds-Enum: @kinds-Enum;
+    --kanagawa-kinds-Keyword: @kinds-Keyword;
+    --kanagawa-kinds-Snippet: @kinds-Snippet;
+    --kanagawa-kinds-Color: @kinds-Color;
+    --kanagawa-kinds-File: @kinds-File;
+    --kanagawa-kinds-Reference: @kinds-Reference;
+    --kanagawa-kinds-Folder: @kinds-Folder;
+    --kanagawa-kinds-EnumMember: @kinds-EnumMember;
+    --kanagawa-kinds-Constant: @kinds-Constant;
+    --kanagawa-kinds-Struct: @kinds-Struct;
+    --kanagawa-kinds-Event: @kinds-Event;
+    --kanagawa-kinds-Operator: @kinds-Operator;
+    --kanagawa-kinds-TypeParameter: @kinds-TypeParameter;
+    --kanagawa-kinds-Namespace: @kinds-Namespace;
+    --kanagawa-kinds-Package: @kinds-Package;
+    --kanagawa-kinds-Object: @kinds-Object;
+    --kanagawa-kinds-Array: @kinds-Array;
+    --kanagawa-kinds-Key: @kinds-Key;
+    --kanagawa-kinds-String: @kinds-String;
+    --kanagawa-kinds-Number: @kinds-Number;
+    --kanagawa-kinds-Boolean: @kinds-Boolean;
+    --kanagawa-kinds-Null: @kinds-Null;
+    --kanagawa-kinds-AI: @kinds-AI;
+    --kanagawa-files-directory: @files-directory;
+    --kanagawa-files-directory_open: @files-directory_open;
+    --kanagawa-files-root: @files-root;
+    --kanagawa-files-file: @files-file;
+    --kanagawa-files-file_opened: @files-file_opened;
+    --kanagawa-files-file_modified: @files-file_modified;
+    --kanagawa-files-symlink: @files-symlink;
+    --kanagawa-files-symlink_broken: @files-symlink_broken;
+    --kanagawa-files-hidden: @files-hidden;
+    --kanagawa-files-special_file: @files-special_file;
+    --kanagawa-files-executable: @files-executable;
+    --kanagawa-files-source: @files-source;
+    --kanagawa-files-build_tooling: @files-build_tooling;
+    --kanagawa-files-config: @files-config;
+    --kanagawa-files-document: @files-document;
+    --kanagawa-files-office: @files-office;
+    --kanagawa-files-media: @files-media;
+    --kanagawa-files-archive: @files-archive;
+    --kanagawa-files-unimportant: @files-unimportant;
+    --kanagawa-prompt-prompt_ok: @prompt-prompt_ok;
+    --kanagawa-prompt-prompt_err: @prompt-prompt_err;
+    --kanagawa-prompt-path: @prompt-path;
+    --kanagawa-prompt-git_branch: @prompt-git_branch;
+    --kanagawa-prompt-git_status: @prompt-git_status;
+    --kanagawa-prompt-duration: @prompt-duration;
+    --kanagawa-prompt-user: @prompt-user;
+    --kanagawa-prompt-root: @prompt-root;
+    --kanagawa-prompt-host: @prompt-host;
+    --kanagawa-prompt-context: @prompt-context;
+    --kanagawa-prompt-jobs: @prompt-jobs;
+    --kanagawa-prompt-time: @prompt-time;
+    --kanagawa-hues-red: @hues-red;
+    --kanagawa-hues-orange: @hues-orange;
+    --kanagawa-hues-yellow: @hues-yellow;
+    --kanagawa-hues-green: @hues-green;
+    --kanagawa-hues-teal: @hues-teal;
+    --kanagawa-hues-cyan: @hues-cyan;
+    --kanagawa-hues-blue: @hues-blue;
+    --kanagawa-hues-purple: @hues-purple;
+    --kanagawa-hues-pink: @hues-pink;
+    --kanagawa-hues-brown: @hues-brown;
+    --kanagawa-hues-gray: @hues-gray;
+    --kanagawa-charts-series1: @charts-series1;
+    --kanagawa-charts-series2: @charts-series2;
+    --kanagawa-charts-series3: @charts-series3;
+    --kanagawa-charts-series4: @charts-series4;
+    --kanagawa-charts-series5: @charts-series5;
+    --kanagawa-charts-series6: @charts-series6;
+    --kanagawa-charts-series7: @charts-series7;
+    --kanagawa-charts-series8: @charts-series8;
+    --kanagawa-charts-seq1: @charts-seq1;
+    --kanagawa-charts-seq2: @charts-seq2;
+    --kanagawa-charts-seq3: @charts-seq3;
+    --kanagawa-charts-seq4: @charts-seq4;
+    --kanagawa-charts-seq5: @charts-seq5;
+    --kanagawa-charts-seq6: @charts-seq6;
+    --kanagawa-charts-seq7: @charts-seq7;
+    --kanagawa-charts-div_neg3: @charts-div_neg3;
+    --kanagawa-charts-div_neg2: @charts-div_neg2;
+    --kanagawa-charts-div_neg1: @charts-div_neg1;
+    --kanagawa-charts-div_mid: @charts-div_mid;
+    --kanagawa-charts-div_pos1: @charts-div_pos1;
+    --kanagawa-charts-div_pos2: @charts-div_pos2;
+    --kanagawa-charts-div_pos3: @charts-div_pos3;
+    --kanagawa-charts-good: @charts-good;
+    --kanagawa-charts-warning: @charts-warning;
+    --kanagawa-charts-serious: @charts-serious;
+    --kanagawa-charts-critical: @charts-critical;
+    --kanagawa-charts-surface: @charts-surface;
+    --kanagawa-charts-grid: @charts-grid;
+    --kanagawa-charts-axis: @charts-axis;
+    --kanagawa-charts-label: @charts-label;
+    --kanagawa-charts-title: @charts-title;
+    --kanagawa-charts-tooltip_bg: @charts-tooltip_bg;
+    --kanagawa-charts-tooltip_border: @charts-tooltip_border;
+  }
+
+  // Curated named hues (roles.hues) as a dereferenceable map, for the user-facing accent picker.
+  // Usage: @accent: @hues[@@accentColor];
+  .hues() {
+    @hues: {
+      @red: #c4746e; // dragonRed
+      @orange: #b6927b; // dragonOrange
+      @yellow: #c4b28a; // dragonYellow
+      @green: #699469; // dragonGreen
+      @teal: #7aa89f; // waveAqua2
+      @cyan: #8ea49e; // dragonAqua
+      @blue: #859fac; // dragonBlue2
+      @purple: #938aa9; // springViolet1
+      @pink: #a292a3; // dragonPink
+      @brown: #9d7665; // dragonOrange2
+      @gray: #9e9b93; // dragonGray2
+    };
+  }
+
+  .hues-filters() {
+    @hues-filters: {
+      @red: brightness(0) saturate(100%) invert(61%) sepia(33%) saturate(540%) hue-rotate(293deg) brightness(101%) contrast(90%);
+      @orange: brightness(0) saturate(100%) invert(73%) sepia(36%) saturate(519%) hue-rotate(332deg) brightness(100%) contrast(93%);
+      @yellow: brightness(0) saturate(100%) invert(85%) sepia(27%) saturate(512%) hue-rotate(336deg) brightness(108%) contrast(96%);
+      @green: brightness(0) saturate(100%) invert(86%) sepia(22%) saturate(538%) hue-rotate(63deg) brightness(97%) contrast(88%);
+      @teal: brightness(0) saturate(100%) invert(90%) sepia(24%) saturate(532%) hue-rotate(105deg) brightness(95%) contrast(85%);
+      @cyan: brightness(0) saturate(100%) invert(81%) sepia(27%) saturate(522%) hue-rotate(141deg) brightness(99%) contrast(86%);
+      @blue: brightness(0) saturate(100%) invert(57%) sepia(66%) saturate(1020%) hue-rotate(195deg) brightness(115%) contrast(96%);
+      @purple: brightness(0) saturate(100%) invert(63%) sepia(71%) saturate(1021%) hue-rotate(208deg) brightness(110%) contrast(94%);
+      @pink: brightness(0) saturate(100%) invert(76%) sepia(28%) saturate(508%) hue-rotate(290deg) brightness(112%) contrast(92%);
+      @brown: brightness(0) saturate(100%) invert(73%) sepia(36%) saturate(519%) hue-rotate(332deg) brightness(100%) contrast(93%); // approximation, borrows @orange's filter
+      @gray: brightness(0) saturate(100%) invert(79%) sepia(13%) saturate(517%) hue-rotate(191deg) brightness(93%) contrast(71%);
+    };
+  }
+
+  // Resolves the user's @accentColor choice (see each userstyle's @var select)
+  // against .hues() / .hues-filters(). Requires @accentColor in scope.
+  .accent() {
+    .hues();
+    .hues-filters();
+    @accent: @hues[@@accentColor];
+    @accent-filter: @hues-filters[@@accentColor];
+  }
+
+  // color-scheme + selection/placeholder defaults. Call after .roles() and .accent().
+  .defaults() {
+    color-scheme: dark;
+
+    ::selection {
+      background-color: fade(@accent, 30%);
+    }
+
+    input,
+    textarea {
+      &::placeholder {
+        color: @text-placeholder !important;
+      }
+    }
+  }
+
+  .rgbify(@color) {
+    @rgb: red(@color), green(@color), blue(@color);
+  }
+
+  .hslify(@color) {
+    @raw: e(
+      %("%s, %s%, %s%", hue(@color), saturation(@color), lightness(@color))
+    );
+  }
+}

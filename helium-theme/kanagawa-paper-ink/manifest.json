@@ -7,8 +7,8 @@
     "colors": {
       "frame": [22, 22, 29],
       "frame_inactive": [31, 31, 40],
-      "frame_incognito": [15, 15, 20],
-      "frame_incognito_inactive": [24, 24, 31],
+      "frame_incognito": [15, 15, 21],
+      "frame_incognito_inactive": [24, 24, 32],
       "tab_background_text": [158, 155, 147],
       "tab_background_text_inactive": [137, 146, 167],
       "tab_background_text_incognito": [158, 155, 147],

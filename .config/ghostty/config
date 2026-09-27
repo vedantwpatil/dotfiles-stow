@@ -24,6 +24,7 @@ window-padding-x = 12
 window-padding-y = 8
 window-padding-balance = true
 window-colorspace = display-p3
+bell-features = attention
 
 # Legibility
 minimum-contrast = 1.1
