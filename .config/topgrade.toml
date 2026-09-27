@@ -90,6 +90,8 @@ cleanup = true
 # Commands to run after anything
 [post_commands]
 # "Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
+# App updates replace bundles and drop custom icons; reapply the kanagawa set.
+"Reapply App Icons" = "~/.config/icons/apply.sh"
 
 
 # Custom commands
@@ -282,6 +284,8 @@ autoremove = true
 [containers]
 # Specify the containers to ignore while updating (Wildcard supported)
 # ignored_containers = ["ghcr.io/rancher-sandbox/rancher-desktop/rdx-proxy:latest", "docker.io*"]
+# Locally built images, no registry to pull from
+ignored_containers = ["bookbot:*", "go-server:*", "helloworld:*"]
 # Specify the runtime to use for containers (default: "docker", allowed values: "docker", "podman")
 # runtime = "podman"
 

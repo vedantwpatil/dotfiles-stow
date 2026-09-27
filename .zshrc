@@ -62,8 +62,11 @@ zinit ice as"program" from"gh-r" mv"bat* -> bat" pick"bat/bat" wait lucid \
 zinit load sharkdp/bat
 
 # --- EZA (ls replacement) ---
-zinit ice wait lucid as"program" from"gh-r" pick"eza" \
-    atclone"./eza --completions zsh > _eza" \
+# eza publishes no macOS release binary (gh-r only has Linux/Windows), so build
+# from source. Needs a rust toolchain. Binary + completion are kept, build dir dropped.
+# Eager (no `wait`): the ls/ll/la aliases below are gated on eza being in PATH at source time.
+zinit ice as"program" pick"eza" \
+    atclone"cargo build --release --locked && mv target/release/eza . && command rm -rf target && cp completions/zsh/_eza _eza" \
     atpull"%atclone"
 zinit load eza-community/eza
 
@@ -247,6 +250,10 @@ zconf()  { _edit "${ZDOTDIR:-$HOME}/.zshrc" }
 zlocal() { _edit "${ZDOTDIR:-$HOME}/.zshrc.local" }
 alias reload='exec zsh'
 
+# --- Claude ---
+alias cc='claude'
+alias ccomp='/usr/bin/cc'
+
 # --- Git ---
 alias g='git'
 alias ga='git add'
@@ -311,8 +318,8 @@ alias catp='bat'
 alias h='tldr'
 alias hup='tldr --update'
 alias du='dust'
-alias top='btm'
-alias htop='btm'
+alias top='btop'
+alias htop='btop'
 alias watch='viddy'
 alias bench='hyperfine'
 # rg, procs, gping, choose, delta — use directly; aliasing breaks scripts
@@ -350,7 +357,7 @@ ros_dev() {
   while (( $# >= 2 )); do
     local ROS_DEV_CONTAINER_NAME=$1
     local ROS_DEV_PROJECT_PATH=$2
-    local SCRIPT_DIR="$HOME/Documents/cs/research/ros2-docker-dev"
+    local SCRIPT_DIR="$HOME/development/research/ros2-docker-dev"
     shift 2
     if [ -d "$SCRIPT_DIR" ]; then
         (cd "$SCRIPT_DIR" && \
@@ -495,4 +502,4 @@ fi
 
 
 # Added by Antigravity CLI installer
-export PATH="/Users/vedantpatil/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

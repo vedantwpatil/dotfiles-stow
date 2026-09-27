@@ -1,0 +1,15 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "bitwarden",
+  "description": "Access your Bitwarden vault directly from Raycast",
+  "author": {
+    "name": "jomifepe"
+  },
+  "license": "MIT",
+  "keywords": [
+    "bitwarden",
+    "secrets",
+    "security",
+    "passwords"
+  ]
+}

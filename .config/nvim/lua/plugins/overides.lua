@@ -57,7 +57,13 @@ return {
   },
   { "akinsho/bufferline.nvim", enabled = false },
   { "folke/flash.nvim", enabled = false },
-  { "lervag/vimtex", ft = { "tex", "bib" } },
+  {
+    "lervag/vimtex",
+    ft = { "tex", "bib" },
+    init = function()
+      vim.g.vimtex_compiler_method = "tectonic"
+    end,
+  },
   { "folke/noice.nvim", enabled = true },
   {
     "nvim-neo-tree/neo-tree.nvim",
