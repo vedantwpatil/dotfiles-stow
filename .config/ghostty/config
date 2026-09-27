@@ -6,7 +6,7 @@ font-feature = +calt
 # font-thicken = true
 
 # Transparency
-background-opacity = 0.72
+background-opacity = 0.60
 background-blur = macos-glass-regular
 
 # Theme
@@ -28,6 +28,10 @@ window-colorspace = display-p3
 # Legibility
 minimum-contrast = 1.1
 adjust-cell-height = 8%
+
+# Icon (regenerate with icon/build.py)
+macos-icon = custom
+macos-custom-icon = /Users/vedantpatil/.config/ghostty/icon/Ghostty.icns
 
 # Cursor
 cursor-style = block
