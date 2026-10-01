@@ -10,7 +10,7 @@ return {
     workspaces = {
       {
         name = "Second Brain",
-        path = "/Users/vedantpatil/Documents/second-brain/",
+        path = "/Users/vedantpatil/notes/second-brain/",
       },
     },
 
@@ -23,7 +23,7 @@ return {
     end,
 
     templates = {
-      folder = "/Users/vedantpatil/Documents/second-brain/06 - Archive/",
+      folder = "/Users/vedantpatil/notes/second-brain/06 - Archive/",
       date_format = "%Y-%m-%d-%a",
       time_format = "%H:%M",
     },

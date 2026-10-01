@@ -21,6 +21,7 @@ export EZA_CONFIG_DIR="$HOME/.config/eza"
 export AWS_REGION=us-east-1
 export OPENSSL_ROOT_DIR="/opt/homebrew/opt/openssl@3"
 export CMAKE_PREFIX_PATH="/opt/homebrew/opt/qt@5"
+export DATABASE_URL="sqlite:$HOME/.local/share/triptych/todo.db"
 
 typeset -U path fpath
 path=(

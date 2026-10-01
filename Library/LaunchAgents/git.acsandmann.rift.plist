@@ -1,0 +1,38 @@
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+<plist version=\"1.0\">
+<dict>
+    <key>Label</key>
+    <string>git.acsandmann.rift</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/vedantpatil/.cargo/bin/rift</string>
+    </array>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/vedantpatil/.local/share/zinit/plugins/tealdeer-rs---tealdeer:/Users/vedantpatil/.local/share/zinit/plugins/BurntSushi---ripgrep/ripgrep:/Users/vedantpatil/.local/share/zinit/plugins/junegunn---fzf:/Users/vedantpatil/.local/share/zinit/plugins/sharkdp---fd/fd:/Users/vedantpatil/.local/share/zinit/plugins/sharkdp---bat/bat:/Users/vedantpatil/.local/share/mise/installs/ruby/3.3/bin:/Users/vedantpatil/.local/share/mise/shims:/Users/vedantpatil/.local/bin:/Users/vedantpatil/.local/share/zinit/plugins/ajeetdsouza---zoxide:/Users/vedantpatil/.local/share/zinit/plugins/eza-community---eza:/Users/vedantpatil/.local/share/zinit/plugins/starship---starship:/Users/vedantpatil/.pixi/bin:/Users/vedantpatil/go/bin:/Users/vedantpatil/.cargo/bin:/Users/vedantpatil/.spicetify:/opt/homebrew/opt/qt@5/bin:/usr/local/opt/postgresql@15/bin:/opt/homebrew/lib/pkgconfig:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/X11/bin:/Library/Apple/usr/bin:/usr/local/go/bin:/Users/vedantpatil/.gem/bin:/Users/vedantpatil/development/flutter/bin:/Users/vedantpatil/miniconda3/bin:/Users/vedantpatil/miniconda3/condabin:/Library/TeX/texbin:/Users/vedantpatil/CS/flutter/bin:/Applications/iTerm.app/Contents/Resources/utilities:/Applications/Ghostty.app/Contents/MacOS:/Users/vedantpatil/.docker/bin:/Users/vedantpatil/.orbstack/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Applications/Obsidian.app/Contents/MacOS</string>
+        <key>RUST_LOG</key>
+        <string>error,warn,info</string>
+    </dict>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <dict>
+        <key>SuccessfulExit</key>
+        <false/>
+        <key>Crashed</key>
+        <true/>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/tmp/rift_vedantpatil.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/rift_vedantpatil.err.log</string>
+    <key>ProcessType</key>
+    <string>Interactive</string>
+    <key>LimitLoadToSessionType</key>
+    <string>Aqua</string>
+    <key>Nice</key>
+    <integer>-20</integer>
+</dict>
+</plist>

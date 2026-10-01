@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "remove-paywall",
+  "description": "Remove the paywall from the selected or clipboard URL.",
+  "author": {
+    "name": "tegola"
+  },
+  "license": "MIT"
+}

@@ -22,6 +22,7 @@ return {
                 "clippy",
                 "--workspace",
                 "--all-targets",
+                "--all-features",
                 "--message-format=json",
                 "--",
                 "-D",

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Kanagawa Paper Ink theme (see ../sketchybar/colors.sh).
+# active_color mirrors the old yabairc borders line. inactive_color is the
+# part that was missing: without it, JankyBorders only outlines the
+# focused window — this makes every window's border visible.
+borders active_color=0xffDCD7BA inactive_color=0xff727169

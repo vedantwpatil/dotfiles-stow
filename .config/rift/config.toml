@@ -1,0 +1,256 @@
+# rift config — ported from yabai/skhd
+# Runtime path: ~/.config/rift/config.toml (stowed from this repo file)
+# See ../../docs/rift.md for the usage guide and a full yabai -> rift command map.
+
+[settings]
+# timing modeled on Hyprland's defaults (windows/workspaces land 0.15-0.5s;
+# see docs/rift.md for the full hyprland.lua speed table)
+animate = true
+animation_duration = 0.2
+animation_fps = 120.0
+
+focus_follows_mouse = false
+mouse_follows_focus = false
+
+# rift defaults to spaces starting deactivated (must Alt+Z each space to
+# manage it). yabai managed everything by default — match that.
+default_disable = false
+
+auto_focus_blacklist = []
+
+# bridges rift's workspace_changed event to sketchybar's spaces-rift item
+# (see ../sketchybar/plugins/space-rift.sh and ../../docs/rift.md#sketchybar)
+#
+# layout_changed bridges to the layout-rift item (../sketchybar/plugins/
+# layout-rift.sh); that script re-queries rift itself for the mode rather
+# than trusting this event's own payload fields, so no env vars are forwarded
+# here — the trigger alone is enough to make it refresh.
+run_on_start = [
+  "rift-cli subscribe cli --event workspace_changed --command sh --args -c --args 'sketchybar --trigger rift_workspace_changed RIFT_WORKSPACE_NAME=\"$RIFT_WORKSPACE_NAME\"'",
+  "rift-cli subscribe cli --event layout_changed --command sh --args -c --args 'sketchybar --trigger rift_layout_changed'",
+]
+
+hot_reload = true
+
+[settings.layout]
+# yabai: layout bsp
+mode = "bsp"
+# yabai: window_placement second_child
+window_insertion_point = "next_to_selection"
+
+[settings.layout.traditional]
+# yabai: auto_balance off
+equalize_nodes = true
+
+[settings.layout.gaps.outer]
+# rift has no external_bar concept, so sketchybar's footprint is folded into
+# the outer top gap. Formula:
+#   top = bar_bottom + gap - rift_inset
+#   bar_bottom = sketchybar y_offset + height = 7 + 39 = 46
+#     (y_offset=7.5 in sketchybarrc is truncated to 7; check with
+#      `sketchybar --query bar`)
+#   gap        = 8 (matches the other outer gaps)
+#   rift_inset = how far rift already pushes the frame down. With the menu
+#                bar auto-hidden this is 0 on plain displays and the notch
+#                height (32) on the notched built-in panel. Check with
+#                `rift-cli query displays`: inset = full screen height minus
+#                frame.size.height.
+# Base value = displays with no inset (external monitors): 46 + 8 - 0 = 54.
+top = 54
+left = 8
+bottom = 8
+right = 8
+
+# Built-in notched display: 46 + 8 - 32 = 22.
+# Override replaces the whole outer block, so all four sides must be set
+# (omitted sides default to 0). Key is the display UUID from
+# `rift-cli query displays`.
+[settings.layout.gaps.per_display."37D8832A-2D66-02CA-B9F7-8F30A301B230".outer]
+top = 22
+left = 8
+bottom = 8
+right = 8
+
+[settings.layout.gaps.inner]
+# yabai: window_gap 8
+horizontal = 8
+vertical = 8
+
+[settings.ui.menu_bar]
+enabled = false
+
+[settings.drag_drop]
+enabled = true
+# yabai: mouse_modifier fn
+modifier = "fn"
+# yabai: mouse_action1 move (rift has no action2/resize-click equivalent —
+# resize by dragging a tile's own border instead, no modifier needed)
+action1 = "move"
+# yabai: mouse_drop_action swap
+drop_action = "swap"
+preview = true
+
+[settings.gestures]
+# native macOS 3-finger swipe now switches rift virtual workspaces instead of
+# real Spaces (yabai/skhd had no equivalent — Mission Control handled this)
+enabled = true
+consume_dock_swipe = true
+invert_horizontal_swipe = false
+skip_empty = false
+fingers = 3
+haptics_enabled = true
+
+[virtual_workspaces]
+enabled = true
+# lazy start: only 5 pre-created: Alt+6..9 / comb1+6..9 target indices 5-8,
+# which don't exist yet at boot -- UNTESTED whether switch_to_workspace /
+# move_window_to_workspace auto-create a missing target index or no-op.
+# workspace_names below still lists all 9 so names 6-9 are ready once those
+# get created (by the keybinds above, Alt+Shift+C, or the `>` sketchybar
+# separator).
+default_workspace_count = 5
+auto_assign_windows = true
+preserve_focus_per_workspace = true
+workspace_auto_back_and_forth = false
+prevent_wrapping = false
+reapply_app_rules_on_title_change = false
+
+default_workspace = 0
+
+# index 0 = "1" ... index 8 = "9", matching yabai's space numbers
+workspace_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+# yabai -m rule --add ... manage=off / space=N
+app_rules = [
+  { app_name = "System Settings", manage = false },
+  { app_name = "Archive Utility", manage = false },
+  { app_name = "Creative Cloud", manage = false },
+  { app_name = "Logi Options", manage = false },
+  { app_name = "Raycast", manage = false },
+  { app_name = "Music", manage = false },
+  { app_name = "Discord", manage = false },
+  # yabai: space=5 -> rift workspace index 4 (0-based; "5" in workspace_names)
+  { app_name = "Microsoft Outlook", workspace = 4 },
+  { app_name = "Messages", workspace = 4 },
+  { app_name = "Spotify", workspace = 4 },
+]
+
+[modifier_combinations]
+comb1 = "Alt + Shift"
+
+[keys]
+# --- focus window (skhd: alt - hjkl) ---
+"Alt + H" = { move_focus = "left" }
+"Alt + J" = { move_focus = "down" }
+"Alt + K" = { move_focus = "up" }
+"Alt + L" = { move_focus = "right" }
+
+# --- swap managed window (skhd: shift+alt - hjkl -> yabai --swap) ---
+"comb1 + H" = { move_node = "left" }
+"comb1 + J" = { move_node = "down" }
+"comb1 + K" = { move_node = "up" }
+"comb1 + L" = { move_node = "right" }
+
+# --- move/warp managed window (skhd: shift+alt+ctrl - hjkl -> yabai --warp) ---
+# closest rift analog: consume_or_expel_window (sway-style boundary move)
+"Alt + Shift + Ctrl + H" = { consume_or_expel_window = "left" }
+"Alt + Shift + Ctrl + J" = { consume_or_expel_window = "down" }
+"Alt + Shift + Ctrl + K" = { consume_or_expel_window = "up" }
+"Alt + Shift + Ctrl + L" = { consume_or_expel_window = "right" }
+
+# --- rotate tree / toggle split (skhd: alt - r, alt - e) ---
+# no direct 90-degree rotate command in rift; toggle_orientation is closest
+"Alt + R" = "toggle_orientation"
+"Alt + E" = "toggle_orientation"
+
+# --- fullscreen zoom (skhd: alt - f) ---
+"Alt + F" = "toggle_fullscreen"
+
+# --- float / unfloat + center (skhd: alt - t) ---
+"Alt + T" = { toggle_window_floating = { center = true } }
+"Alt + Shift + Space" = "toggle_window_floating"
+
+# --- switch to workspace (skhd had no direct equivalent bound; yabai spaces
+# were switched by macOS Mission Control shortcuts) ---
+"Alt + 1" = { switch_to_workspace = 0 }
+"Alt + 2" = { switch_to_workspace = 1 }
+"Alt + 3" = { switch_to_workspace = 2 }
+"Alt + 4" = { switch_to_workspace = 3 }
+"Alt + 5" = { switch_to_workspace = 4 }
+"Alt + 6" = { switch_to_workspace = 5 }
+"Alt + 7" = { switch_to_workspace = 6 }
+"Alt + 8" = { switch_to_workspace = 7 }
+"Alt + 9" = { switch_to_workspace = 8 }
+
+# --- move window to space + follow focus (skhd: shift+alt - 1..9) ---
+"comb1 + 1" = { move_window_to_workspace = { workspace = 0, follow = true } }
+"comb1 + 2" = { move_window_to_workspace = { workspace = 1, follow = true } }
+"comb1 + 3" = { move_window_to_workspace = { workspace = 2, follow = true } }
+"comb1 + 4" = { move_window_to_workspace = { workspace = 3, follow = true } }
+"comb1 + 5" = { move_window_to_workspace = { workspace = 4, follow = true } }
+"comb1 + 6" = { move_window_to_workspace = { workspace = 5, follow = true } }
+"comb1 + 7" = { move_window_to_workspace = { workspace = 6, follow = true } }
+"comb1 + 8" = { move_window_to_workspace = { workspace = 7, follow = true } }
+"comb1 + 9" = { move_window_to_workspace = { workspace = 8, follow = true } }
+
+# --- switch layout engine of active workspace (no yabai equivalent —
+# yabai was bsp-only; rift supports several) ---
+"Alt + Ctrl + 1" = { set_workspace_layout = { mode = "traditional" } }
+"Alt + Ctrl + 2" = { set_workspace_layout = { mode = "bsp" } }
+"Alt + Ctrl + 3" = { set_workspace_layout = { mode = "stack" } }
+"Alt + Ctrl + 4" = { set_workspace_layout = { mode = "master_stack" } }
+"Alt + Ctrl + 5" = { set_workspace_layout = { mode = "scrolling" } }
+"Alt + Ctrl + 6" = { set_workspace_layout = { mode = "floating" } }
+
+# --- fast focus recent desktop (skhd: alt - tab -> yabai space --focus recent) ---
+"Alt + Tab" = "switch_to_last_workspace"
+
+# --- create new workspace (skhd: shift+alt - n, was dead code in the old
+# skhdrc -- shadowed by a second shift+alt-n binding further down) ---
+"Alt + Shift + C" = "create_workspace"
+
+# --- send window to display + approximate follow (skhd: shift+alt - n / p) ---
+# rift addresses displays by direction/index/uuid, not "next"/"previous" by
+# index like yabai. "right"/"left" approximates next/previous on a 2-display
+# setup; revisit if you add a 3rd display.
+"Alt + Shift + N" = { move_window_to_display = { selector = "right" } }
+"Alt + Shift + P" = { move_window_to_display = { selector = "left" } }
+
+# --- launch apps (skhd: alt - i / s / b) ---
+"Alt + I" = { exec = [
+  "open",
+  "-a",
+  "/Applications/Ghostty.app/Contents/MacOS/ghostty",
+] }
+"Alt + S" = { exec = [
+  "open",
+  "-a",
+  "/Applications/Spotify.app/Contents/MacOS/Spotify",
+] }
+"Alt + B" = { exec = [
+  "open",
+  "-A",
+  "/Applications/Helium.app/Contents/MacOS/Helium",
+] }
+
+# --- misc rift-native extras kept from default config ---
+"Alt + Z" = "toggle_space_activated"
+"Alt + Comma" = "toggle_stack"
+"Alt + Shift + F" = "toggle_fullscreen_within_gaps"
+"Alt + Shift + Equal" = "resize_window_grow"
+"Alt + Shift + Minus" = "resize_window_shrink"
+"Alt + Enter" = { "exec" = [
+  "/bin/bash",
+  "-c",
+  "open -a \"/System/Applications/Utilities/Terminal.app\"",
+] }
+"Alt + Ctrl + S" = "serialize"
+"Alt + Ctrl + Q" = "save_and_exit"
+
+# --- NOT ported, no rift equivalent exists ---
+# yabai: window_opacity / active_window_opacity / normal_window_opacity -> rift has no window opacity control
+# yabai: window_shadow float -> rift does not touch native window shadows
+# yabai: split_ratio 0.50 default -> no global default-ratio setting exposed
+# yabai: alt - g (toggle padding/gap at runtime) -> no runtime gap-toggle command
+# yabai: shift+alt - 0 (space --balance) -> no manual balance command (equalize_nodes handles it on insert only)
+# borders (JankyBorders) -> unrelated to yabai/rift, keep running via `brew services start borders`

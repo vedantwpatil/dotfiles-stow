@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "google-maps-search",
+  "description": "Quickly search Google Maps or get directions.",
+  "author": {
+    "name": "ratoru"
+  },
+  "license": "MIT",
+  "keywords": [
+    "directions",
+    "maps",
+    "navigation"
+  ]
+}

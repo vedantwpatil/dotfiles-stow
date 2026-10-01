@@ -127,6 +127,7 @@ brew "zsh"
 brew "zsh-autosuggestions"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
+brew "acsandmann/tap/rift"
 brew "felixkratz/formulae/borders"
 brew "felixkratz/formulae/fyabai", args: ["HEAD"]
 brew "felixkratz/formulae/sketchybar"

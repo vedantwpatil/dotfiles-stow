@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "perplexity",
+  "description": "Query Perplexity from within Raycast",
+  "author": {
+    "name": "third774"
+  },
+  "license": "MIT"
+}
