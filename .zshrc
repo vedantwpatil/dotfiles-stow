@@ -50,9 +50,11 @@ zinit load starship/starship
 # =============================================================================
 
 # --- Core OMZ Utilities ---
+# sudo binds Esc Esc in every keymap. In vi insert mode that steals a quick
+# double Esc meant for normal mode, so keep it in vicmd only (Esc Esc from normal mode).
 zinit wait lucid for \
     OMZP::extract \
-    OMZP::sudo \
+    atload'bindkey -M viins -r "\e\e"' OMZP::sudo \
     OMZP::web-search \
     MichaelAquilina/zsh-you-should-use
 
@@ -78,6 +80,13 @@ zinit ice as"program" from"gh-r" mv"fd* -> fd" pick"fd/fd" wait lucid \
 zinit load sharkdp/fd
 
 # --- FZF (fuzzy finder) ---
+# fzf loads in turbo mode, after section 10b, so its key bindings would win.
+# An empty value tells fzf's init.zsh to skip that binding:
+#   Ctrl-R: atuin owns it (fzf would also clobber vicmd ^R redo).
+#   Alt-C:  Ghostty sends Option-c as "ç", so this only fires as Esc then c,
+#           which hijacks a fast Esc + c/cc/cw in vi insert mode. Use `cdi`.
+(( $+commands[atuin] )) && FZF_CTRL_R_COMMAND=""
+FZF_ALT_C_COMMAND=""
 zinit ice as"program" from"gh-r" wait lucid \
     atclone"./fzf --zsh > init.zsh" \
     atpull"%atclone" \
@@ -212,8 +221,8 @@ setopt AUTO_CD
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
 # Colored completion list
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-# Arrow-key menu navigation
-zstyle ':completion:*:*:*:*:*' menu select
+# No zsh menu: fzf-tab owns Tab and needs this to capture the unambiguous prefix
+zstyle ':completion:*' menu no
 # Group results by category
 zstyle ':completion:*' group-name ''
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate
@@ -396,7 +405,12 @@ bindkey '^ ' forward-char
 # Fix backspace
 bindkey '^?' backward-delete-char
 
-# Arrow keys + j/k in both modes
+# Arrow keys + j/k in both modes. terminfo gives the application-mode form (^[OA);
+# zle doesn't enable that mode, so terminals send ^[[A. Bind both forms.
+bindkey -M viins '^[[A' up-line-or-search
+bindkey -M viins '^[[B' down-line-or-search
+bindkey -M vicmd '^[[A' up-line-or-search
+bindkey -M vicmd '^[[B' down-line-or-search
 bindkey -M viins "${terminfo[kcuu1]}" up-line-or-search
 bindkey -M viins "${terminfo[kcud1]}" down-line-or-search
 bindkey -M viins '^P' up-line-or-search
@@ -504,3 +518,10 @@ fi
 
 # Added by Antigravity CLI installer
 export PATH="$HOME/.local/bin:$PATH"
+
+# bun completions
+[ -s "/Users/vedantpatil/.oh-my-zsh/completions/_bun" ] && source "/Users/vedantpatil/.oh-my-zsh/completions/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

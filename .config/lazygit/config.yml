@@ -22,6 +22,6 @@ gui:
       - "#DCD7BA"
     searchingActiveBorderColor:
       - "#C4B28A"
-  authorColors:
-    "*": "#A292A3"
+    authorColors:
+      "*": "#A292A3"
   nerdFontsVersion: "3"

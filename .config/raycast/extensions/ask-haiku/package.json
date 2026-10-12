@@ -1,0 +1,46 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "ask-haiku",
+  "title": "Ask Haiku",
+  "description": "Web-search chat powered by Claude Haiku through the local Claude Code CLI.",
+  "icon": "icon.png",
+  "author": "vedant",
+  "platforms": [
+    "macOS"
+  ],
+  "categories": [
+    "Productivity"
+  ],
+  "license": "MIT",
+  "private": true,
+  "commands": [
+    {
+      "name": "ask",
+      "title": "Ask Haiku",
+      "description": "Ask a question; Haiku searches the web and answers.",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "query",
+          "type": "text",
+          "placeholder": "Ask anything",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^2.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "typescript": "^7.0.2"
+  },
+  "scripts": {
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "typecheck": "tsc --noEmit",
+    "eval": "bun scripts/eval.ts"
+  }
+}

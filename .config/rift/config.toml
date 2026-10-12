@@ -233,6 +233,14 @@ comb1 = "Alt + Shift"
   "/Applications/Helium.app/Contents/MacOS/Helium",
 ] }
 
+# --- rebalance tiles on the focused display (skhd: shift+alt - 0 ->
+# yabai space --balance). Script usage/side effects: ./rebalance.sh ---
+"comb1 + 0" = { exec = [
+  "/bin/bash",
+  "-c",
+  "\"$HOME/.config/rift/rebalance.sh\"",
+] }
+
 # --- misc rift-native extras kept from default config ---
 "Alt + Z" = "toggle_space_activated"
 "Alt + Comma" = "toggle_stack"
@@ -252,5 +260,5 @@ comb1 = "Alt + Shift"
 # yabai: window_shadow float -> rift does not touch native window shadows
 # yabai: split_ratio 0.50 default -> no global default-ratio setting exposed
 # yabai: alt - g (toggle padding/gap at runtime) -> no runtime gap-toggle command
-# yabai: shift+alt - 0 (space --balance) -> no manual balance command (equalize_nodes handles it on insert only)
+# yabai: shift+alt - 0 (space --balance) -> no native balance command (equalize_nodes handles it on insert only); emulated by rebalance.sh, bound to comb1 + 0
 # borders (JankyBorders) -> unrelated to yabai/rift, keep running via `brew services start borders`

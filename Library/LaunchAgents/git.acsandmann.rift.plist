@@ -6,7 +6,7 @@
     <string>git.acsandmann.rift</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/vedantpatil/.cargo/bin/rift</string>
+        <string>/opt/homebrew/bin/rift</string>
     </array>
     <key>EnvironmentVariables</key>
     <dict>

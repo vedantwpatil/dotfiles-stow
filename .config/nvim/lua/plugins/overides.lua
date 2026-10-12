@@ -62,7 +62,7 @@ return {
     "lervag/vimtex",
     ft = { "tex", "bib" },
     init = function()
-      vim.g.vimtex_compiler_method = "tectonic"
+      vim.g.vimtex_compiler_method = "latexmk"
     end,
   },
   { "folke/noice.nvim", enabled = true },
