@@ -1,5 +1,24 @@
 # Roadmap / decision log
 
+## Back to yabai (2026-10-13)
+
+Rift trial ([rift.md](rift.md)) dropped: too buggy. yabai + skhd live again.
+
+- `rift service stop` + `rift service uninstall`; removed
+  `Library/LaunchAgents/git.acsandmann.rift.plist` from the repo (otherwise
+  the stow hook re-links it and rift autostarts next login).
+- `launchctl enable gui/$UID/com.asmvik.yabai` — the label had been left
+  disabled, so `yabai --start-service` alone could not bootstrap it.
+- `sketchybarrc` sources `spaces.sh` again; `spaces-rift.sh` /
+  `layout-rift.sh` kept in the tree, unsourced.
+- Rift binary, `.config/rift/`, Brewfile entry untouched.
+
+**Open:** `/private/etc/sudoers.d/yabai` pins the sha256 of an older yabai
+binary, so `sudo yabai --load-sa` in `yabairc` fails until it is
+regenerated (needed after every yabai upgrade). Without the scripting
+addition `space --focus/--create`, `window --space` and the `space=5` rules
+do not work.
+
 ## Stow auto-symlink hook (2026-07-30)
 
 `.githooks/{post-commit,post-merge,post-checkout}` all run `stow -R -t ~ .`

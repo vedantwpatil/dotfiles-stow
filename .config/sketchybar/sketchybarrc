@@ -63,11 +63,9 @@ sketchybar --default "${defaults[@]}"
 
 # Left
 source "$ITEM_DIR/apple.sh"
-# spaces.sh is the yabai/real-Spaces version (kept for `rift service stop` +
-# yabai --start-service switch-back, see ../../docs/rift.md#sketchybar).
-# spaces-rift.sh is the active one while rift is the live WM.
-source "$ITEM_DIR/spaces-rift.sh"
-source "$ITEM_DIR/layout-rift.sh"
+# spaces.sh is the yabai/real-Spaces version. spaces-rift.sh + layout-rift.sh
+# are the rift variants (inactive, kept for reference: ../../docs/rift.md).
+source "$ITEM_DIR/spaces.sh"
 source "$ITEM_DIR/front_app.sh"
 
 # Right
